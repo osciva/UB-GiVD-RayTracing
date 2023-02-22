@@ -35,7 +35,7 @@ MaterialFactory::MATERIAL_TYPES MaterialFactory::getIndexType(shared_ptr<Materia
 MaterialFactory::MATERIAL_TYPES MaterialFactory::getMaterialType( QString name) {
     if (name=="LAMBERTIAN") return MATERIAL_TYPES::LAMBERTIAN;
     else if (name=="METAL") return MATERIAL_TYPES::METAL;
-    else if (name=="TRANSPARENT") return MATERIAL_TYPES::TRANSPARENT;
+    else if (name=="TRANSPARENT") return MATERIAL_TYPES::TRANSP;
     else if (name=="MATERIALTEXTURA") return MATERIAL_TYPES::MATERIALTEXTURA;
     else return  MATERIAL_TYPES::LAMBERTIAN;
 }
@@ -49,7 +49,7 @@ QString MaterialFactory::getNameType(MATERIAL_TYPES t)
     case METAL:
         return(QString("METAL"));
         break;
-    case TRANSPARENT:
+    case TRANSP:
         return(QString("TRANSPARENT"));
         break;
     case MATERIALTEXTURA:

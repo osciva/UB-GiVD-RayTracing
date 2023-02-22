@@ -71,7 +71,8 @@ vec3 RayTracer::RayPixel(Ray &ray) {
 
     if (setup->getBackground()) {
         vec3 ray2 = normalize(ray.getDirection());
-        color = 0.5f * vec3(ray2.x+1, ray2.y+1, ray2.z+1);
+        float t = 0.5f*ray2.y+1;
+        color = (1-t)*setup->getDownBackground() + t*setup->getTopBackground();
     } else {
         color = vec3(0,0,0);
     }
