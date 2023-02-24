@@ -32,7 +32,7 @@ bool Controller::createScene(vec3 position, float radius) {
     // Create a single Sphere
     scene = make_shared<Scene>();
     auto sphere = make_shared<Sphere>(position, radius, 1.0);
-    sphere->setMaterial(make_shared<Lambertian>(vec3(0.5, 0.2, 0.7)));
+    sphere->setMaterial(make_shared<Lambertian>(vec3(0.309804, 0.184314, 0.309804)));
     scene->objects.push_back(sphere);
     return true;
 
