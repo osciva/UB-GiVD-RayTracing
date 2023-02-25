@@ -65,7 +65,6 @@ vec3 RayTracer::RayPixel(Ray &ray) {
     vec3 color = vec3(0);
     vec3 unit_direction;
     HitInfo info;
-    bool test = false;
 
     if (setup->getBackground()) {
         vec3 ray2 = normalize(ray.getDirection());
