@@ -39,17 +39,17 @@ ShadingFactory::SHADING_TYPES ShadingFactory::getIndexType(shared_ptr<ShadingStr
     } else if (dynamic_pointer_cast<ColorShadow>(m) != nullptr) {
         return SHADING_TYPES::COLORSHADOW;
     } else
-        return SHADING_TYPES::COLOR;
+        return SHADING_TYPES::NORMAL;
 }
 
 shared_ptr<ShadingStrategy> ShadingFactory::switchShading(shared_ptr<ShadingStrategy> m, bool shadow) {
     shared_ptr<ShadingStrategy> m_out = nullptr;
     if (shadow) {
-        if (dynamic_pointer_cast<ColorShading>(m) != nullptr) {
+        if (dynamic_pointer_cast<ColorShadow>(m) != nullptr) {
              m_out = createShading(COLORSHADOW);
         }
     } else {
-        if (dynamic_pointer_cast<ColorShadow>(m) != nullptr) {
+        if (dynamic_pointer_cast<ColorShading>(m) != nullptr) {
              m_out = createShading(COLOR);
         }
     }
