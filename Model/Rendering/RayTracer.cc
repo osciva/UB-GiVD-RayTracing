@@ -75,14 +75,18 @@ vec3 RayTracer::RayPixel(Ray &ray) {
         color = (1-t)*setup->getDownBackground() + t*setup->getTopBackground();
     }
 
+    auto shading_strategy = setup->getShadingStrategy();
+
     /* Crida al mètode hit de l'Scene per veure si el raig intersecta amb algun objecte. */
     /* 0.001 com a mínim valor de t per evitar el cas en que el punt d'intersecció és massa a prop
-       del raig d'origen.
+    del raig d'origen.
 
-       infinity() com a màxim valor de t per assegurar que la intersecció cobreix tot el rang possible
-       de valors de t en la direcció del raig */
+    infinity() com a màxim valor de t per assegurar que la intersecció cobreix tot el rang possible
+    de valors de t en la direcció del raig */
     if(scene->hit(ray, 0.001, numeric_limits<float>::infinity(), info)){
-        color = info.mat_ptr->Kd; /* Intersecció trobada, calculem el color de l'objecte. */
+        /* L'expressió ray.getOrigin() + info.t * ray.getDirection() calcula el punt de l'espai 3D on el raig
+           talla amb un objecte de l'escena */
+        color = shading_strategy->shading(scene, info, ray.getOrigin() + info.t * ray.getDirection());
     }
 
     return color;

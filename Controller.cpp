@@ -78,7 +78,6 @@ void Controller::rendering(QImage *image) {
 bool Controller::createShading(ShadingFactory::SHADING_TYPES t) {
     visualSetup->setShadingStrategy(ShadingFactory::getInstance().createShading(t));
     return visualSetup->getShadingStrategy()!=nullptr;
-
 }
 
 void Controller::update(int i) {
