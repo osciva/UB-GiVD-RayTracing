@@ -10,7 +10,7 @@ shared_ptr<ShadingStrategy> ShadingFactory::createShading(SHADING_TYPES t) {
         s= make_shared<NormalShading>();
         break;
     case DEPTH:
-        s= make_shared<ColorShading>();
+        s= make_shared<DepthShading>();
         break;
     case COLORSHADOW:
         s = make_shared<ColorShadow>();
@@ -49,6 +49,8 @@ ShadingFactory::SHADING_TYPES ShadingFactory::getIndexType(shared_ptr<ShadingStr
         return SHADING_TYPES::COLORSHADOW;
     } else if (dynamic_pointer_cast<NormalShading>(m) != nullptr){
         return SHADING_TYPES::NORMAL;
+    } else if (dynamic_pointer_cast<DepthShading>(m) != nullptr){
+        return SHADING_TYPES::DEPTH;
     } else
         return SHADING_TYPES::NOSHADING;
 }
