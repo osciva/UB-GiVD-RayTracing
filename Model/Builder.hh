@@ -17,6 +17,7 @@ public slots:
     void loadSettings();
     void activaColorShading();
     void activaNormalShading();
+    void activaDepthShading();
 
 signals:
      void settingsChanged();
