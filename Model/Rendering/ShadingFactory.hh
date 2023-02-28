@@ -2,6 +2,7 @@
 
 #include "ShadingFactory.hh"
 #include "ColorShading.hh"
+#include "NormalShading.hh"
 #include "ColorShadow.hh"
 
 class ShadingFactory
@@ -9,6 +10,7 @@ class ShadingFactory
 public:
     ShadingFactory() {};
     typedef enum  SHADING_TYPES{
+        NOSHADING,
         COLOR,
         COLORSHADOW,
         NORMAL,

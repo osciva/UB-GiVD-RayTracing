@@ -32,11 +32,12 @@ bool Controller::createScene(vec3 position, float radius) {
     // Create a single Sphere
     scene = make_shared<Scene>();
     auto sphere = make_shared<Sphere>(position, radius, 1.0);
-    sphere->setMaterial(make_shared<Lambertian>(vec3(0.5, 0.2, 0.7)));
+    sphere->setMaterial(make_shared<Lambertian>(vec3(0.5, 0, 0.5))); /* Color lila en RGB */
     scene->objects.push_back(sphere);
     return true;
 
 }
+
 bool Controller::createScene() {
     //TODO: Pots posar codi per a fer una escena amb multiples esferes
 
@@ -77,7 +78,6 @@ void Controller::rendering(QImage *image) {
 bool Controller::createShading(ShadingFactory::SHADING_TYPES t) {
     visualSetup->setShadingStrategy(ShadingFactory::getInstance().createShading(t));
     return visualSetup->getShadingStrategy()!=nullptr;
-
 }
 
 void Controller::update(int i) {

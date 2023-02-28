@@ -11,7 +11,7 @@ public:
     typedef enum  MATERIAL_TYPES{
         LAMBERTIAN,
         METAL,
-        TRANSPARENT,
+        TRANSP,
         MATERIALTEXTURA,
     } MATERIAL_TYPES;
 

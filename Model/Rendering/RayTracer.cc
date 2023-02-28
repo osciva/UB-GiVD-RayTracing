@@ -1,13 +1,11 @@
 #include "RayTracer.hh"
 
-
 RayTracer::RayTracer(QImage *i):
     image(i) {
 
     setup = Controller::getInstance()->getSetUp();
     scene = Controller::getInstance()->getScene();
 }
-
 
 void RayTracer::run() {
 
@@ -37,7 +35,6 @@ void RayTracer::run() {
         }
     }
 }
-
 
 void RayTracer::setPixel(int x, int y, vec3 color) {
 
@@ -71,9 +68,49 @@ vec3 RayTracer::RayPixel(Ray &ray) {
 
     if (setup->getBackground()) {
         vec3 ray2 = normalize(ray.getDirection());
-        color = 0.5f * vec3(ray2.x+1, ray2.y+1, ray2.z+1);
-    } else {
-        color = vec3(0,0,0);
+        float t = 0.5f*(ray2.y+1);
+        color = (1-t)*setup->getDownBackground() + t*setup->getTopBackground();
+    }
+
+    auto s = setup->getShadingStrategy();
+    auto shading_type = ShadingFactory::getInstance().getIndexType(s);
+
+    if(shading_type == ShadingFactory::SHADING_TYPES::COLOR){
+        /* Crida al mètode hit de l'Scene per veure si el raig intersecta amb algun objecte. */
+        /* 0.001 com a mínim valor de t per evitar el cas en que el punt d'intersecció és massa a prop
+        del raig d'origen.
+
+        infinity() com a màxim valor de t per assegurar que la intersecció cobreix tot el rang possible
+        de valors de t en la direcció del raig */
+        if(scene->hit(ray, 0.001, numeric_limits<float>::infinity(), info)){
+            /* L'expressió ray.getOrigin() + info.t * ray.getDirection() calcula el punt de l'espai 3D on el raig
+               talla amb un objecte de l'escena */
+            color = s->shading(scene, info, ray.getOrigin() + info.t * ray.getDirection());
+        }
+    }else if(shading_type == ShadingFactory::SHADING_TYPES::NORMAL){
+        /* Crida al mètode hit de l'Scene per veure si el raig intersecta amb algun objecte. */
+        /* 0.001 com a mínim valor de t per evitar el cas en que el punt d'intersecció és massa a prop
+        del raig d'origen.
+
+        infinity() com a màxim valor de t per assegurar que la intersecció cobreix tot el rang possible
+        de valors de t en la direcció del raig */
+        if(scene->hit(ray, 0.001, numeric_limits<float>::infinity(), info)){
+            /* L'expressió ray.getOrigin() + info.t * ray.getDirection() calcula el punt de l'espai 3D on el raig
+               talla amb un objecte de l'escena */
+            color = s->shading(scene, info, ray.getOrigin() + info.t * ray.getDirection());
+        }
+    }else if(shading_type == ShadingFactory::SHADING_TYPES::DEPTH){
+        /* Crida al mètode hit de l'Scene per veure si el raig intersecta amb algun objecte. */
+        /* 0.001 com a mínim valor de t per evitar el cas en que el punt d'intersecció és massa a prop
+        del raig d'origen.
+
+        infinity() com a màxim valor de t per assegurar que la intersecció cobreix tot el rang possible
+        de valors de t en la direcció del raig */
+        if(scene->hit(ray, 0.001, numeric_limits<float>::infinity(), info)){
+            /* L'expressió ray.getOrigin() + info.t * ray.getDirection() calcula el punt de l'espai 3D on el raig
+               talla amb un objecte de l'escena */
+            color = s->shading(scene, info, ray.getOrigin() + info.t * ray.getDirection());
+        }
     }
 
     return color;
