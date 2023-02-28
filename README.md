@@ -63,22 +63,22 @@ En aquest fitxer cal que feu l'informe de la pràctica 1.
 * **Fase 0**: 
 - Background amb degradat:
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/47271218/221958233-e1d4bcdb-23bb-4fcf-a511-369e302b3d86.png" alt="Background amb degradat" width="40%">
+  <img src="https://user-images.githubusercontent.com/47271218/221958233-e1d4bcdb-23bb-4fcf-a511-369e302b3d86.png" alt="Background amb degradat" width="45%">
 </p>
 
 - Color Shading:
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/47271218/221958361-d3091823-5032-49d4-914a-ad36a31261c1.png" alt="Color Shading" width="40%">
+  <img src="https://user-images.githubusercontent.com/47271218/221958361-d3091823-5032-49d4-914a-ad36a31261c1.png" alt="Color Shading" width="45%">
 </p>
 
 - Normal Shading:
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/47271218/221958503-21b42fcd-b882-40bb-8b63-c62a2ffdcea3.png" alt="Normal Shading" width="40%">
+  <img src="https://user-images.githubusercontent.com/47271218/221958503-21b42fcd-b882-40bb-8b63-c62a2ffdcea3.png" alt="Normal Shading" width="45%">
 </p>
 
 - Depth Shading:
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/47271218/221958612-c048ac76-1860-4ed9-8852-8bbd48b6ba00.png" alt="Depth Shading" width="40%">
+  <img src="https://user-images.githubusercontent.com/47271218/221958612-c048ac76-1860-4ed9-8852-8bbd48b6ba00.png" alt="Depth Shading" width="45%">
 </p>
 
 - Intersecció amb l'escena:
@@ -89,7 +89,7 @@ En aquest fitxer cal que feu l'informe de la pràctica 1.
 
 - Apartat (m) --> Fitxer .json amb més esferes:
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/47271218/221971858-210c0063-c5d1-4870-af7e-5e5d67dfc15d.png" alt="Depth Shading" width="40%">
+  <img src="https://user-images.githubusercontent.com/47271218/221971858-210c0063-c5d1-4870-af7e-5e5d67dfc15d.png" alt="Depth Shading" width="45%">
 </p>
 
 
