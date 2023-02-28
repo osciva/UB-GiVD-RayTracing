@@ -67,3 +67,11 @@ void Builder::activaColorShading() {
     } else msgBox.setText("Error creating shading");
     msgBox.exec();
 }
+
+void Builder::activaNormalShading() {
+    QMessageBox msgBox;
+    if (Controller::getInstance()->createShading(ShadingFactory::SHADING_TYPES::NORMAL)) {
+        msgBox.setText("Normal Shading created.");
+    } else msgBox.setText("Error creating shading");
+    msgBox.exec();
+}

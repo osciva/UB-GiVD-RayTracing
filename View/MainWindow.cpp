@@ -42,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // TO DO Fase 0: Connectar els menús ja existents amb els nous shadings
     QObject::connect(ui->actionColor_Shading, SIGNAL(triggered()), builder, SLOT(activaColorShading()));
     //QObject::connect(ui->actionDepth_Shading, SIGNAL(triggered()), this, SLOT(activaDepthShader()));
-    //QObject::connect(ui->actionNormal_Shading, SIGNAL(triggered()), this, SLOT(activaNormalShader()));
+    QObject::connect(ui->actionNormal_Shading, SIGNAL(triggered()), builder, SLOT(activaNormalShading()));
 
     // TO DO Fase 2: connectar els shadings d'il·luminació Phong, Bling-Phong i d'altres
     //    QObject::connect(ui->actionPhong_Shading, SIGNAL(triggered()), this, SLOT(activaPhongShader()));

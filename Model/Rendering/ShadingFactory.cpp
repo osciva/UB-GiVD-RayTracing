@@ -7,6 +7,12 @@ shared_ptr<ShadingStrategy> ShadingFactory::createShading(SHADING_TYPES t) {
     case COLOR:
         s= make_shared<ColorShading>();
         break;
+    case NORMAL:
+        s= make_shared<NormalShading>();
+        break;
+    case DEPTH:
+        s= make_shared<ColorShading>();
+        break;
     case COLORSHADOW:
         s = make_shared<ColorShadow>();
         break;
