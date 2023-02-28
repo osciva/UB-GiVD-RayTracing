@@ -10,6 +10,7 @@ class ShadingFactory
 public:
     ShadingFactory() {};
     typedef enum  SHADING_TYPES{
+        NOSHADING,
         COLOR,
         COLORSHADOW,
         NORMAL,
