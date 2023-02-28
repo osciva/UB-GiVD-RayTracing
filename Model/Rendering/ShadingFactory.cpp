@@ -25,6 +25,7 @@ ShadingFactory::SHADING_TYPES ShadingFactory::getShadingType(QString name) {
     if (name=="COLOR") return SHADING_TYPES::COLOR;
     else if (name == "COLORSHADOW") return SHADING_TYPES::COLORSHADOW;
     else if (name == "NORMAL") return SHADING_TYPES::NORMAL;
+    else if (name =="DEPTH") return SHADING_TYPES::DEPTH;
 }
 
 QString ShadingFactory::getNameType(SHADING_TYPES t) {
@@ -37,6 +38,9 @@ QString ShadingFactory::getNameType(SHADING_TYPES t) {
         break;
     case NORMAL:
         return (QString("NORMAL"));
+        break;
+    case DEPTH:
+        return (QString("DEPTH"));
         break;
     default:
         return(QString(""));
@@ -66,6 +70,8 @@ shared_ptr<ShadingStrategy> ShadingFactory::switchShading(shared_ptr<ShadingStra
              m_out = createShading(COLOR);
         } else if (dynamic_pointer_cast<NormalShading>(m) != nullptr) {
             m_out = createShading(NORMAL);
+        } else if (dynamic_pointer_cast<DepthShading>(m) != nullptr) {
+            m_out = createShading(DEPTH);
         }
     }
     return m_out;
