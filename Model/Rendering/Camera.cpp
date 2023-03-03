@@ -7,9 +7,9 @@ Camera::Camera() {
     auto vup = vec3(0,1,0);
     auto lookat = vec3(0,0,0);
     auto lookfrom = vec3(0,0,2);
+    defocus_blur = false;
     computeAtributes(lookfrom, lookat, vup, vfov, viewportX/viewportY, viewportX, false, 1.0);
 }
-
 
 Camera::Camera(
             vec3 lookfrom,
@@ -24,7 +24,7 @@ Camera::Camera(
 void Camera::changeAttributeMappings(vec3 lookfrom,
                               vec3 lookat,
                               double vfov) {
-    computeAtributes(lookfrom, lookat, this->v, vfov, viewportX/viewportY, viewportX, false, 1.0);
+    computeAtributes(lookfrom, lookat, vup, vfov, viewportX/viewportY, viewportX, false, 1.0);
 }
 
 void Camera::computeAtributes(vec3 lookfrom,
@@ -35,6 +35,7 @@ void Camera::computeAtributes(vec3 lookfrom,
                                bool defocus_blur, double lensRadius)
 {
     this->vfov = vfov;
+    this->vup = vup;
     auto theta = (vfov)*M_PI/180.0;
     auto h = tan(theta/2);
     float window_height = 2.0 * h;
@@ -80,7 +81,6 @@ Ray Camera::getBlurRay(float s, float t) {
     n_origin = n_origin + u*random_in_disk.x + v*random_in_disk.y;
     return Ray(n_origin, lower_left_corner + s*horizontal + t*vertical - n_origin);
 }
-
 
 //! [0]
 void Camera::read (const QJsonObject &json)
