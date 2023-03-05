@@ -12,6 +12,9 @@ shared_ptr<Object> ObjectFactory::createObject(OBJECT_TYPES t)
     case PLANE:
         o = make_shared<Plane>();
         break;
+    case TRIANGLE:
+        o = make_shared<Triangle>();
+        break;
     default:
         break;
     }
@@ -25,7 +28,9 @@ shared_ptr<Object> ObjectFactory::createObject( QString s, float data, OBJECT_TY
     case SPHERE:
         o = make_shared<Sphere>(data);
         break;
-
+    case TRIANGLE:
+        o = make_shared<Triangle>(data);
+        break;
     default:
         break;
     }
@@ -39,6 +44,8 @@ ObjectFactory::OBJECT_TYPES ObjectFactory::getIndexType(shared_ptr<Object> l) {
 
     } else if (dynamic_pointer_cast<Plane>(l) != nullptr) {
         return OBJECT_TYPES::PLANE;
+    } else if(dynamic_pointer_cast<Triangle>(l) != nullptr){
+        return OBJECT_TYPES::TRIANGLE;
     }
     return OBJECT_TYPES::SPHERE;
 }
