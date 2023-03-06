@@ -1,8 +1,11 @@
 #include "Box.hh"
+#include <glm/glm.hpp>
+
+const float EPSILON = 0.0001f;
 
 Box::Box() {
-    punt_min=vec3(0.0,0.0,0.0);
-    punt_max=vec3(0.0,0.0,0.0);
+    punt_min = vec3(-2,-2,2);
+    punt_max = vec3(-5,-1,5);
 }
 
 Box::Box(vec3 min, vec3 max, float data) :Object(data) {
@@ -11,51 +14,69 @@ Box::Box(vec3 min, vec3 max, float data) :Object(data) {
 }
 
 Box::Box(float data) :Object(data) {
-    punt_min = vec3(0,0,0);
-    punt_max = vec3(1,1,1);
+    punt_min = vec3(-2,-2,2);
+    punt_max = vec3(-5,-1,5);
 }
 
-bool Box::hit(Ray &raig, float tmin, float tmax, HitInfo& info) const {
-    vec3 oc = raig.getOrigin() - center;
-    float a = dot(raig.getDirection(), raig.getDirection());
-    float b = dot(oc, raig.getDirection());
-    float c = dot(oc, oc) - radius*radius;
-    float discriminant = b*b - a*c;
-    if (discriminant > 0) {
-        float temp = (-b - sqrt(discriminant))/a;
-        if (temp < tmax && temp > tmin) {
-            info.t = temp;
-            info.p = raig.pointAtParameter(info.t);
-            info.normal = (info.p - center) / radius;
-            info.mat_ptr = material.get();
-            // TODO Fase 3: Cal calcular les coordenades de textura
+bool Box::hit(Ray& ray, float tmin, float tmax, HitInfo& info) const {
+    // Calculate inverse direction of the ray to avoid division by zero
+    vec3 invDir = 1.0f / ray.getDirection();
 
-            return true;
-        }
-        temp = (-b + sqrt(discriminant)) / a;
-        if (temp < tmax && temp > tmin) {
-            info.t = temp;
-            info.p = raig.pointAtParameter(info.t);
-            info.normal = (info.p - center) / radius;
-            info.mat_ptr = material.get();
-            // TODO Fase 3: Cal calcular les coordenades de textura
+    vec3 tMin = (punt_min - ray.getOrigin()) * invDir;
+    vec3 tMax = (punt_max - ray.getOrigin()) * invDir;
 
-            return true;
-        }
+    vec3 t1 = glm::min(tMin, tMax);
+    vec3 t2 = glm::max(tMin, tMax);
+
+    float tNear = glm::max(glm::max(t1.x, t1.y), t1.z);
+    float tFar = glm::min(glm::min(t2.x, t2.y), t2.z);
+
+    if (tNear > tFar || tFar < tmin || tNear > tmax) {
+        return false;
     }
-    return false;
+
+    // Calculate intersection point and normal
+    info.t = tNear;
+    info.normal = getNormal(ray.pointAtParameter(info.t));
+    info.mat_ptr = material.get();
+    info.p = ray.pointAtParameter(info.t);
+
+    return true;
 }
+
+
+// Calculate normal at intersection point
+vec3 Box::getNormal(const vec3& point) const {
+    // Find which face the intersection point is on
+    if (abs(point.x - punt_min.x) < EPSILON) {
+        return vec3(-1, 0, 0);
+    }
+    if (abs(point.x - punt_max.x) < EPSILON) {
+        return vec3(1, 0, 0);
+    }
+    if (abs(point.y - punt_min.y) < EPSILON) {
+        return vec3(0, -1, 0);
+    }
+    if (abs(point.y - punt_max.y) < EPSILON) {
+        return vec3(0, 1, 0);
+    }
+    if (abs(point.z - punt_min.z) < EPSILON) {
+        return vec3(0, 0, -1);
+    }
+    return vec3(0, 0, 1);
+}
+
 
 
 void Box::aplicaTG(shared_ptr<TG> t) {
-    if (dynamic_pointer_cast<TranslateTG>(t)) {
+    /*if (dynamic_pointer_cast<TranslateTG>(t)) {
         // Per ara només es fan les translacions
         vec4 c(center, 1.0);
         c = t->getTG() * c;
         center.x = c.x; center.y = c.y; center.z = c.z;
     }
     //TODO: Cal ampliar-lo per a acceptar Escalats
-
+    */
 }
 
 void Box::read (const QJsonObject &json)
