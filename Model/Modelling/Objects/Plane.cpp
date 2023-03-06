@@ -46,10 +46,10 @@ bool Plane::hit(Ray &raig, float tmin, float tmax, HitInfo &info) const{
 
     temp/= normal[0]*vp[0] + normal[1]*vp[1] + normal[2]*vp[2];
 
-    // Retornem false si no estem en el rang demanat
-    if (temp < tmax && temp > tmin) {
-        return false;
+    if (temp > tmax || temp < tmin) {
+            return false;
     }
+
 
     // Omplim el camp de info:
     info.t = temp;
