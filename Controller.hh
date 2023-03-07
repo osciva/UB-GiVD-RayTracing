@@ -61,6 +61,7 @@ public:
 
     bool createScene(SceneFactory::SCENE_TYPES currentType, QString name);
     bool createScene(vec3 position, float radius);
+    bool createScene(vec3 center, float radius, float height);
     bool createScene();
     bool createScene(int nFrames);
 

@@ -3,6 +3,7 @@
 #include "Object.hh"
 #include "Sphere.hh"
 #include "Plane.hh"
+#include "Cylinder.hh"
 
 #include "Mesh.hh"
 
