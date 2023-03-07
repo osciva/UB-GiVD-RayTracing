@@ -10,9 +10,7 @@ Triangle::Triangle() {
     vertexs.push_back(B);
     vertexs.push_back(C);
 
-    normal = normalize(cross(B - A, C - A));
-
-    setPlane();
+    //setPlane();
 }
 
 /* Crear un triangle a partir de 3 punts */
@@ -45,6 +43,7 @@ Triangle::Triangle(float data) : Object(data){
 }
 
 bool Triangle::hit(Ray &r, float t_min, float t_max, HitInfo &info) const {
+
     float prod = dot(r.getDirection(), normal);
 
     /* Comprovem si el raig intersecta amb el pla que conté el triangle */
@@ -66,16 +65,19 @@ bool Triangle::hit(Ray &r, float t_min, float t_max, HitInfo &info) const {
         float v2 = dot(cross((vertexs[2] - vertexs[1]), intersection - vertexs[1]), normal);
         float v3 = dot(cross((vertexs[0] - vertexs[2]), intersection - vertexs[2]), normal);
 
-        /* Mirem si les arestes tenen el mateix signe per saber si la intersecció estpa dins del triangle */
+        /* Mirem si les arestes tenen el mateix signe per saber si la intersecció està dins del triangle */
         if((v1 < 0 && v2 < 0 && v3 < 0) || (v1 > 0 && v2 > 0 && v3 > 0)){
             /* Si la distància t calculada estpa dins del rang del raig -> actualitzem la info */
             if(t_min < t_dist && t_dist < t_max){
                 info.t = t_dist;
                 info.p = intersection;
 
+                /* Si el raig incideix a la cara anterior */
                 if(prod < 0){
                     info.normal = normal;
-                } else{
+                }
+                /* Si el raig incideix a la cara posterior */
+                else {
                     info.normal = -normal;
                 }
 
@@ -125,6 +127,30 @@ void Triangle::aplicaTG(shared_ptr<TG> tg){
 
 void Triangle::read(const QJsonObject &json){
     Object::read(json);
+
+    if(json.contains("p1") && json["p1"].isArray()){
+        QJsonArray auxVec = json["p1"].toArray();
+        this->vertexs[0].x = auxVec[0].toDouble();
+        this->vertexs[0].y = auxVec[1].toDouble();
+        this->vertexs[0].z = auxVec[2].toDouble();
+    }
+
+    if(json.contains("p2") && json["p2"].isArray()){
+        QJsonArray auxVec = json["p2"].toArray();
+        this->vertexs[1].x = auxVec[0].toDouble();
+        this->vertexs[1].y = auxVec[1].toDouble();
+        this->vertexs[1].z = auxVec[2].toDouble();
+    }
+
+    if(json.contains("p3") && json["p3"].isArray()){
+        QJsonArray auxVec = json["p3"].toArray();
+        this->vertexs[2].x = auxVec[0].toDouble();
+        this->vertexs[2].y = auxVec[1].toDouble();
+        this->vertexs[2].z = auxVec[2].toDouble();
+    }
+
+    this->normal = normalize(cross(vertexs[1] - vertexs[0], vertexs[2] - vertexs[0]));
+    setPlane();
 }
 
 void Triangle::write(QJsonObject &json) const {
@@ -133,6 +159,12 @@ void Triangle::write(QJsonObject &json) const {
 
 void Triangle::print(int indentation) const {
     Object::print(indentation);
+
+    const QString indent(indentation * 2, ' ');
+
+    QTextStream(stdout) << indent << "p1:\t" << vertexs[0].x << ", "<< vertexs[0].y << ", "<< vertexs[0].z << "\n";
+    QTextStream(stdout) << indent << "p2:\t" << vertexs[1].x << ", "<< vertexs[1].y << ", "<< vertexs[1].z << "\n";
+    QTextStream(stdout) << indent << "p3:\t" << vertexs[2].x << ", "<< vertexs[2].y << ", "<< vertexs[2].z << "\n";
 }
 
 void Triangle::setPlane() {
