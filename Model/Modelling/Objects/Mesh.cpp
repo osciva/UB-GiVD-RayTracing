@@ -2,6 +2,8 @@
 #include <QVector3D>
 
 #include "Mesh.hh"
+#include "Triangle.hh"
+#include "Object.hh"
 
 Mesh::Mesh(const QString &fileName): Object()
 {
@@ -22,15 +24,23 @@ Mesh::~Mesh() {
 }
 
 void Mesh::makeTriangles() {
-    // TO DO Fase 1: A implementar
+
 }
 
 
-bool Mesh::hit(Ray &raig, float tmin, float tmax, HitInfo& info) const {
+bool Mesh::hit(Ray &r, float t_min, float t_max, HitInfo &info) const {
+    bool hit_anything = false;
+    float closest_so_far = t_max;
 
-    // TODO Fase 1: A implementar
-    return false;
-
+    for (const auto& triangle : triangles) {
+        HitInfo triangle_info;
+        if (triangle.hit(r, t_min, closest_so_far, triangle_info)) {
+            hit_anything = true;
+            closest_so_far = triangle_info.t;
+            info = triangle_info;
+        }
+    }
+    return hit_anything;
 }
 
 
