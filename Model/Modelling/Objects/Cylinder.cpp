@@ -32,6 +32,7 @@ Cylinder::~Cylinder(){
 
 bool Cylinder::cylinderHit(Ray& r, float t_min, float t_max, HitInfo& info) const {
     /* Comprovem si hit amb el cos principal del cilindre */
+    /* Instruccions i procediment de: https://is.gd/nLCSkZ */
     /* Calculem x² + z² = 1, on x = p0x + vx*t z = x = p0z + vz*t components del raig */
     /* Resolent per t podem obtenir una equacio de 2n grau format at² + bt + c = 0 on:
      * a = vx² + vz² */
@@ -107,26 +108,29 @@ bool Cylinder::hit(Ray& r, float t_min, float t_max, HitInfo& info) const {
     float t_top1(std::numeric_limits<float>::infinity());
     float t_top2(std::numeric_limits<float>::infinity());
 
-    //CALCUL INTERSECCIÓ AMB CILINDRE (t_cilindre)
+    /* Càlcul de la intersecció amb el cilindre */
     if(cylinderHit(r,t_min,t_max,info)){
         t_top1 = info.t;
         hasHit = true;
     }
 
-    //CALCUL INTERSECCIÓ AMB TOP1 (t_top1)
+    /* Càlcul de la intersecció amb top1 */
     if(top1->hit(r,t_min,t_max,info)){
         t_top1 = info.t;
         hasHit = true;
     }
 
-    //CALCUL INTERSECCIÓ AMB TOP2 (t_top2)
+    /* Càlcul de la intersecció amb top2 */
     if(top2->hit(r,t_min,t_max,info)){
         t_top2 = info.t;
         hasHit = true;
     }
+
+    /* Si hi ha hagut hit */
     if(hasHit){
         float temp(std::numeric_limits<float>::infinity());
-        if(t_cilindre < temp){//trobem quina es la intersecció minima
+        /* Trobem quina és la intersecció mínima */
+        if(t_cilindre < temp){
             temp = t_cilindre;
         }
         if(t_top1 < temp){
@@ -135,7 +139,7 @@ bool Cylinder::hit(Ray& r, float t_min, float t_max, HitInfo& info) const {
         if(t_top2 < temp){
             temp = t_top2;
         }
-        //omplim info
+        /* Omplim la informació */
         info.t = temp;
         info.p = r.pointAtParameter(info.t);
         info.normal = vec3(info.p.x,0,info.p.z);
@@ -145,7 +149,37 @@ bool Cylinder::hit(Ray& r, float t_min, float t_max, HitInfo& info) const {
 }
 
 void Cylinder::read(const QJsonObject &json){
-     Object::read(json);
+    Object::read(json);
+
+    if(json.contains("radious") && json["radious"].isDouble()){
+        this->radi = json["radious"].toDouble();
+    }
+
+    if(json.contains("h") && json["h"].isDouble()){
+        this->height = json["h"].toDouble();
+    }
+
+    if (json.contains("center") && json["center"].isArray()) {
+        QJsonArray auxVec = json["center"].toArray();
+        this->center[0] = auxVec[0].toDouble();
+        this->center[1] = auxVec[1].toDouble();
+        this->center[2] = auxVec[2].toDouble();
+    }
+
+    /* Calcular dos punts que pertanyin al pla del cercle */
+    vec3 point1(center.x + radi, center.y, center.z + height/2.0f);
+    vec3 point2(center.x - radi, center.y, center.z + height/2.0f);
+
+    /* Calcular dos vectors que pertanyin al pla del cercle */
+    vec3 vector1 = point1 - center;
+    vec3 vector2 = point2 - center;
+
+    /* Calcular la normal com el producte vectorial dels dos vectors */
+    vec3 normal = cross(vector1, vector2);
+
+    /* Crear els dos cercles del cilindre */
+    this->top1 = new Circle(normal,this->center.y+vec3(0,height,0), 1);
+    this->top2 = new Circle(-normal,this->center,1);
  }
 
  void Cylinder::write(QJsonObject &json) const {
@@ -153,18 +187,27 @@ void Cylinder::read(const QJsonObject &json){
  }
 
  void Cylinder::print(int indentation) const {
-     Object::print(indentation);
- }
+    Object::print(indentation);
+
+    const QString indent(indentation * 2, ' ');
+
+    QTextStream(stdout) << indent << "radius:\t" << radi << "\n";
+    QTextStream(stdout) << indent << "height:\t" << height << "\n";
+    QTextStream(stdout) << indent << "center:\t" << center[0] << ", "<< center[1] << ", "<< center[2] << "\n";
+}
 
  void Cylinder::aplicaTG(shared_ptr<TG> tg) {
      vec4 c(center, 1.0);
 
-     if (dynamic_pointer_cast<TranslateTG>(tg)) {//desplacem el centre
+     /* Desplacem el centre */
+     if (dynamic_pointer_cast<TranslateTG>(tg)) {
          vec4 c(center, 1.0);
          c = tg->getTG() * c;
          center.x = c.x; center.y = c.y; center.z = c.z;
      }
-     if (dynamic_pointer_cast<TranslateTG>(tg)){//augmentem l'altura
+
+     /* Augmentem l'altura */
+     if (dynamic_pointer_cast<TranslateTG>(tg)){
          vec4 c(1.0,1.0,1.0,1.0);
          c = tg->getTG() * c;
          this->height = c.x*height;
