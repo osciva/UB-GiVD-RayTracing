@@ -29,14 +29,16 @@ public:
     virtual void write(QJsonObject &json) const override;
     virtual void print(int indentation) const override;
 
+
     //vec3 getA() {return A;}
     //vec3 getB() {return B;}
     //vec3 getC() {return C;}
-    //vector<vec3> getVertexs() {return vertexs;}
+    //vector<vec3> getVertexs() const {return vertexs;}
 
-private:
     /* Vector de vertexs del triangle */
     vector<vec3> vertexs;
+
+private:
 
     /* Punts dels vertexs del triangle */
     vec3 A, B, C;
