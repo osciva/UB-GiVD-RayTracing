@@ -39,7 +39,7 @@ private:
 
     QString nom;
     vector<Face> cares; // facees o cares de l'objecte
-    vector<vec4> vertexs; // vertexs de l'objecte sense repetits
+    vector<vec3> vertexs; // vertexs de l'objecte sense repetits
     vector<Triangle> triangles;
 
     void load(QString filename);

@@ -25,9 +25,17 @@ Mesh::~Mesh() {
 }
 
 void Mesh::makeTriangles() {
+    if (vertexs.size() % 3 != 0) {
+        // el nombre de vèrtexs no és divisible per 3, no es poden crear triangles
+        return;
+    }
 
+    for (int i = 0; i < vertexs.size(); i += 3) {
+        // creem un triangle amb els vèrtexs següents
+        Triangle t(vertexs[i], vertexs[i+1], vertexs[i+2], 0.f);
+        triangles.push_back(t);
+    }
 }
-
 
 bool Mesh::hit(Ray &r, float t_min, float t_max, HitInfo &info) const {
     bool hit_anything = false;
