@@ -6,8 +6,6 @@
 #include "Triangle.hh"
 #include "Mesh.hh"
 
-
-
 class ObjectFactory
 {
     ObjectFactory(){};

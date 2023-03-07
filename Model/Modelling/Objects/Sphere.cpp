@@ -55,7 +55,6 @@ void Sphere::aplicaTG(shared_ptr<TG> t) {
         center.x = c.x; center.y = c.y; center.z = c.z;
     }
     //TODO: Cal ampliar-lo per a acceptar Escalats
-
 }
 
 void Sphere::read (const QJsonObject &json)
@@ -96,4 +95,3 @@ void Sphere::print(int indentation) const
     QTextStream(stdout) << indent << "center:\t" << center[0] << ", "<< center[1] << ", "<< center[2] << "\n";
     QTextStream(stdout) << indent << "radius:\t" << radius<< "\n";
 }
-
