@@ -3,10 +3,8 @@
 #include "Object.hh"
 #include "Sphere.hh"
 #include "Plane.hh"
-
+#include "Triangle.hh"
 #include "Mesh.hh"
-
-
 
 class ObjectFactory
 {
