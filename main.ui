@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>500</width>
-    <height>359</height>
+    <height>419</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -174,7 +174,7 @@
      <x>0</x>
      <y>0</y>
      <width>500</width>
-     <height>22</height>
+     <height>32</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -183,6 +183,7 @@
     </property>
     <addaction name="actionNew_Sphere"/>
     <addaction name="actionNew_Triangle"/>
+    <addaction name="actionNew_Mesh"/>
     <addaction name="actionGenerate_Scene"/>
     <addaction name="actionTracing_Settings"/>
     <addaction name="actionOpen_Virtual_Scene"/>
@@ -300,6 +301,14 @@
   <action name="actionNew_Triangle">
    <property name="text">
     <string>New Triangle</string>
+   </property>
+  </action>
+  <action name="actionNew_Mesh">
+   <property name="text">
+    <string>New Mesh</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;New Mesh&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </action>
  </widget>
