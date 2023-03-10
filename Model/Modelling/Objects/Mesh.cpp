@@ -45,7 +45,8 @@ void Mesh::makeTriangles(float data) {
         c.y= (vertexs[idxVertices[2]].y);
         c.z= (vertexs[idxVertices[2]].z);
 
-        Triangle newTriangle = Triangle(a,b, c, data);
+        Triangle newTriangle = Triangle(a,b,c,data);
+        newTriangle.setMaterial(make_shared<Lambertian>(vec3(0.5, 0.2, 0.7)));
         triangles.push_back(newTriangle);
     }
 }

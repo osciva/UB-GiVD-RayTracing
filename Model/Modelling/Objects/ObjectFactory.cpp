@@ -31,8 +31,14 @@ shared_ptr<Object> ObjectFactory::createObject( QString s, float data, OBJECT_TY
     case SPHERE:
         o = make_shared<Sphere>(data);
         break;
+    case PLANE:
+        o = make_shared<Plane>();
+        break;
     case TRIANGLE:
         o = make_shared<Triangle>(data);
+        break;
+    case MESH:
+        o = make_shared<Mesh>("cube.obj",data);
         break;
     default:
         break;
