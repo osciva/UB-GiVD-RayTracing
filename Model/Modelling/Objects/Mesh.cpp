@@ -15,25 +15,38 @@ Mesh::Mesh(const QString &fileName): Object()
 Mesh::Mesh(const QString &fileName, float data): Object(data)
 {
     nom = fileName;
-    load(fileName);
+    load(nom);
+    makeTriangles(data);
 }
 
 Mesh::~Mesh() {
     if (cares.size() > 0) cares.clear();
     if (vertexs.size() > 0) vertexs.clear();
-
 }
 
-void Mesh::makeTriangles() {
-    if (vertexs.size() % 3 != 0) {
-        // el nombre de vèrtexs no és divisible per 3, no es poden crear triangles
-        return;
-    }
+void Mesh::makeTriangles(float data) {
 
-    for (int i = 0; i < vertexs.size(); i += 3) {
-        // creem un triangle amb els vèrtexs següents
-        Triangle t(vertexs[i], vertexs[i+1], vertexs[i+2], 0.f);
-        triangles.push_back(t);
+    vec3 a;
+    vec3 b;
+    vec3 c;
+
+    for (Face face : cares) {
+        vector<int> idxVertices = face.getIdxVertices();
+
+        a.x= (vertexs[idxVertices[0]].x);
+        a.y= (vertexs[idxVertices[0]].y);
+        a.z= (vertexs[idxVertices[0]].z);
+
+        b.x= (vertexs[idxVertices[1]].x);
+        b.y= (vertexs[idxVertices[1]].y);
+        b.z= (vertexs[idxVertices[1]].z);
+
+        c.x= (vertexs[idxVertices[2]].x);
+        c.y= (vertexs[idxVertices[2]].y);
+        c.z= (vertexs[idxVertices[2]].z);
+
+        Triangle newTriangle = Triangle(a,b, c, data);
+        triangles.push_back(newTriangle);
     }
 }
 
@@ -104,7 +117,7 @@ void Mesh::load (QString fileName) {
                     {
                         vertexs.push_back(vec4(lineParts.at(1).toFloat(),
                                                lineParts.at(2).toFloat(),
-                                               lineParts.at(3).toFloat(), 1.0f));
+                                               lineParts.at(3).toFloat(),1.0f));
                     }
 
                     // if it’s a normal (vn)

@@ -17,6 +17,7 @@ class Face
     Face(int i1, int i2, int i3, int i4=-1);
 
     vector<int> idxVertices;  // vector amb els indexs dels vertexs de la cara
+    virtual vector<int> getIdxVertices();
 };
 
 

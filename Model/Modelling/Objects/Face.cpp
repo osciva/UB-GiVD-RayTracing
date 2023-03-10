@@ -13,3 +13,10 @@ Face::Face(int i1, int i2, int i3, int i4)
     if (i4!=-1) idxVertices.push_back(i4);
 }
 
+vector<int> Face::getIdxVertices(){
+    return idxVertices;
+
+}
+
+
+
