@@ -12,6 +12,18 @@ void Builder::newSphere()
     msgBox.exec();
 }
 
+void Builder::newCylinder()
+{
+    vec3 center(0.0, 0.0, 0.0);
+    float radius = 1.0;
+    float height = 1.0;
+    QMessageBox msgBox;
+    if (Controller::getInstance()->createScene(center, radius, height))
+            msgBox.setText("One Cylinder is created.");
+    else msgBox.setText("Not enough memory. Error.");
+    msgBox.exec();
+}
+
 void Builder::newTriangle(){
     vec3 A = vec3(1,0,0);
     vec3 B = vec3(0,1,0);

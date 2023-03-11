@@ -37,6 +37,15 @@ bool Controller::createScene(vec3 position, float radius) {
     return true;
 }
 
+bool Controller::createScene(vec3 center, float radius, float height) {
+    // Create a single Sphere
+    scene = make_shared<Scene>();
+    auto cylinder = make_shared<Cylinder>(center, radius, height, 1.0);
+    cylinder->setMaterial(make_shared<Lambertian>(vec3(0.5, 0, 0.5))); /* Color lila en RGB */
+    scene->objects.push_back(cylinder);
+    return true;
+}
+
 bool Controller::createScene(vec3 a, vec3 b, vec3 c) {
     /* Create a single Triangle */
     scene = make_shared<Scene>();
