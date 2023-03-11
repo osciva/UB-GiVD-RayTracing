@@ -305,7 +305,7 @@
   </action>
   <action name="actionNew_Mesh">
    <property name="text">
-    <string>New Mesh</string>
+    <string>Load Mesh</string>
    </property>
    <property name="toolTip">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;New Mesh&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

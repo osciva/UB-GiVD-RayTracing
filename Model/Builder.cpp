@@ -24,19 +24,6 @@ void Builder::newTriangle(){
     msgBox.exec();
 }
 
-void Builder::newMesh(){
-    //completar
-    vec3 ka = vec3(0.2, 0.2, 0.2);
-    vec3 kd = vec3(0.7,0.6,0.5);
-    vec3 ks = vec3(0.7, 0.7, 0.7);
-
-    QMessageBox msgBox;
-    if (Controller::getInstance()->createscene(ka,kd,ks))
-            msgBox.setText("One Mesh is created.");
-    else msgBox.setText("Not enough memory. Error.");
-    msgBox.exec();
-}
-
 void Builder::newSimulatedScene()
 {
    QMessageBox msgBox;

@@ -47,16 +47,6 @@ bool Controller::createScene(vec3 a, vec3 b, vec3 c) {
     return true;
 }
 
-bool Controller::createscene(vec3 ka,vec3 kd,vec3 ks) {
-    /* Create a single Mesh */
-    scene = make_shared<Scene>();
-    auto mesh = make_shared<Mesh>();
-    mesh->setMaterial(make_shared<Lambertian>(ka,kd,ks, 250, 0.5f));
-    scene->objects.push_back(mesh);
-
-    return true;
-}
-
 bool Controller::createScene() {
     //TODO: Pots posar codi per a fer una escena amb multiples esferes
 

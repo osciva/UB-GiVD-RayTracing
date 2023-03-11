@@ -38,7 +38,7 @@ shared_ptr<Object> ObjectFactory::createObject( QString s, float data, OBJECT_TY
         o = make_shared<Triangle>(data);
         break;
     case MESH:
-        o = make_shared<Mesh>("cube.obj",data);
+        o = make_shared<Mesh>(s);
         break;
     default:
         break;
@@ -50,11 +50,12 @@ shared_ptr<Object> ObjectFactory::createObject( QString s, float data, OBJECT_TY
 ObjectFactory::OBJECT_TYPES ObjectFactory::getIndexType(shared_ptr<Object> l) {
     if (dynamic_pointer_cast<Sphere>(l) != nullptr) {
         return OBJECT_TYPES::SPHERE;
-
     } else if (dynamic_pointer_cast<Plane>(l) != nullptr) {
         return OBJECT_TYPES::PLANE;
     } else if(dynamic_pointer_cast<Triangle>(l) != nullptr){
         return OBJECT_TYPES::TRIANGLE;
+    } else if(dynamic_pointer_cast<Mesh>(l) != nullptr){
+        return OBJECT_TYPES::MESH;
     }
     return OBJECT_TYPES::SPHERE;
 }
