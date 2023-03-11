@@ -46,6 +46,15 @@ bool Controller::createScene(vec3 center, float radius, float height) {
     return true;
 }
 
+bool Controller::createScene(vec3 a, vec3 b, vec3 c) {
+    /* Create a single Triangle */
+    scene = make_shared<Scene>();
+    auto triangle = make_shared<Triangle>(a, b, c, 1.0);
+    triangle->setMaterial(make_shared<Lambertian>(vec3(0.5, 0, 0.5))); /* Color lila en RGB */
+    scene->objects.push_back(triangle);
+
+    return true;
+}
 bool Controller::createScene() {
     //TODO: Pots posar codi per a fer una escena amb multiples esferes
 
