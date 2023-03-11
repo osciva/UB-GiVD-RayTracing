@@ -16,8 +16,6 @@ public:
 
     Triangle(vec3 A, vec3 B, vec3 C, float data);
 
-
-
     /* Crea un triangle unitari */
     Triangle(float data);
 
@@ -31,16 +29,14 @@ public:
     virtual void write(QJsonObject &json) const override;
     virtual void print(int indentation) const override;
 
-
     //vec3 getA() {return A;}
     //vec3 getB() {return B;}
     //vec3 getC() {return C;}
-    //vector<vec3> getVertexs() const {return vertexs;}
-
-    /* Vector de vertexs del triangle */
-    vector<vec3> vertexs;
+    //vector<vec3> getVertexs() {return vertexs;}
 
 private:
+    /* Vector de vertexs del triangle */
+    vector<vec3> vertexs;
 
     /* Punts dels vertexs del triangle */
     vec3 A, B, C;
