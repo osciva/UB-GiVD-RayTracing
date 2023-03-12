@@ -4,6 +4,7 @@
 #include "Hitable.hh"
 #include "Animation.hh"
 #include "Objects/Object.hh"
+#include "Objects/FittedPlane.hh"
 #include "Objects/Sphere.hh"
 
 #include "Materials/Material.hh"
@@ -46,6 +47,9 @@ public:
     // una esfera base
     Scene(shared_ptr<Object> base);
 
+    /* Terra de l'escena */
+    shared_ptr<Object> ground;
+
     virtual ~Scene() {};
 
     // Funcio que calcula la interseccio del raig r amb l'escena. Guarda la informacio
@@ -58,6 +62,8 @@ public:
     //    virtual bool allHits(const Ray& r, vector<shared_ptr<HitInfo> infos) const = 0;
 
     void update(int nframe);
+
+    void setGround(shared_ptr<Object> ground) {this->ground = ground;}
 
     void setDimensions(vec3 p1, vec3 p2);
 

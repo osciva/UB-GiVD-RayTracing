@@ -75,36 +75,10 @@ bool Mesh::hit(Ray &r, float t_min, float t_max, HitInfo &info) const {
     return hit_anything;
 }
 
-
+/* CHECK THIS METHOD FOR BOUNDARY OBJECTS */
 void Mesh::aplicaTG(shared_ptr<TG> tg) {
     for (auto&& t : triangles) {
-        vec4 v1(t.vertexs[0], 1.0);
-        vec4 v2(t.vertexs[1], 1.0);
-        vec4 v3(t.vertexs[2], 1.0);
-
-        if (dynamic_pointer_cast<TranslateTG>(tg)) {
-            v1 = tg->getTG() * v1;
-            v2 = tg->getTG() * v2;
-            v3 = tg->getTG() * v3;
-
-            t.vertexs[0].x = t.vertexs[0].x; t.vertexs[0].y = v1.y; t.vertexs[0].z = v1.z;
-            t.vertexs[1].x = t.vertexs[1].x; t.vertexs[1].y = t.vertexs[1].y; t.vertexs[1].z = v2.z;
-            t.vertexs[2].x = t.vertexs[2].x; t.vertexs[2].y = t.vertexs[2].y; t.vertexs[2].z = v3.z;
-        }
-
-         if (dynamic_pointer_cast<TranslateTG>(tg)) {
-            v1 = tg->getTG() * v1;
-            v2 = tg->getTG() * v2;
-            v3 = tg->getTG() * v3;
-
-            float factorA = t.vertexs[0].x/v1.x;
-            float factorB = t.vertexs[1].x/v2.x;
-            float factorC = t.vertexs[2].x/v3.x;
-
-            t.vertexs[0].x *= factorA; t.vertexs[0].y *= factorA; t.vertexs[0].z *= factorA;
-            t.vertexs[1].x *= factorB; t.vertexs[1].y *= factorB; t.vertexs[1].z *= factorB;
-            t.vertexs[2].x *= factorC; t.vertexs[2].y *= factorC; t.vertexs[2].z *= factorC;
-        }
+        t.aplicaTG(tg);
     }
 }
 

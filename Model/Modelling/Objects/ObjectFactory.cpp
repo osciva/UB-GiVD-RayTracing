@@ -12,6 +12,9 @@ shared_ptr<Object> ObjectFactory::createObject(OBJECT_TYPES t)
     case PLANE:
         o = make_shared<Plane>();
         break;
+    case FITTEDPLANE:
+        o = make_shared<FittedPlane>();
+        break;
     case TRIANGLE:
         o = make_shared<Triangle>();
         break;
@@ -34,6 +37,9 @@ shared_ptr<Object> ObjectFactory::createObject( QString s, float data, OBJECT_TY
     case PLANE:
         o = make_shared<Plane>();
         break;
+    case FITTEDPLANE:
+        o = make_shared<FittedPlane>();
+        break;
     case TRIANGLE:
         o = make_shared<Triangle>(data);
         break;
@@ -54,6 +60,8 @@ ObjectFactory::OBJECT_TYPES ObjectFactory::getIndexType(shared_ptr<Object> l) {
         return OBJECT_TYPES::PLANE;
     } else if(dynamic_pointer_cast<Triangle>(l) != nullptr){
         return OBJECT_TYPES::TRIANGLE;
+    } else if(dynamic_pointer_cast<FittedPlane>(l) != nullptr) {
+        return OBJECT_TYPES::FITTEDPLANE;
     } else if(dynamic_pointer_cast<Mesh>(l) != nullptr){
         return OBJECT_TYPES::MESH;
     }
@@ -63,6 +71,7 @@ ObjectFactory::OBJECT_TYPES ObjectFactory::getIndexType(shared_ptr<Object> l) {
 ObjectFactory::OBJECT_TYPES ObjectFactory::getObjectType( QString name) {
     if (name=="SPHERE") return OBJECT_TYPES::SPHERE;
     else if (name=="PLANE") return OBJECT_TYPES::PLANE;
+    else if (name=="FITTEDPLANE") return OBJECT_TYPES::FITTEDPLANE;
     else if (name=="TRIANGLE") return OBJECT_TYPES::TRIANGLE;
     else if (name=="MESH") return OBJECT_TYPES::MESH;
     else if (name=="BOX") return OBJECT_TYPES::BOX;

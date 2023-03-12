@@ -84,8 +84,10 @@ void SceneFactoryData::read(const QJsonObject &json)
 
             // TO DO: Fase 1: PAS 5: Afegeix l'objecte base a l'escena.
             // En aquestes linies es crea però no s'afegeix
-            // o = ObjectFactory::getInstance().createObject(ObjectFactory::getInstance().getObjectType(objStr));
-            // o->read(jbase);
+            o = ObjectFactory::getInstance().createObject(ObjectFactory::getInstance().getObjectType(objStr));
+            o->read(jbase);
+            scene->objects.push_back(o);
+            scene->setGround(o);
 
         }
     }

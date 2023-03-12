@@ -3,11 +3,15 @@
 
 #include "TG.hh"
 
+using namespace glm;
+
 class ScaleTG : public TG
 {
 public:
-    glm::vec3 scale;
-    ScaleTG(glm::vec3 s);
+    ScaleTG(vec3 scale);
+    ScaleTG(float esc);
+    vec3 scalation;
+    float escala;
     virtual ~ScaleTG();
 };
 

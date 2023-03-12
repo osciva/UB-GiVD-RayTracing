@@ -23,8 +23,10 @@ SOURCES += \
     Model/Modelling/Materials/Lambertian.cpp \
     Model/Modelling/Materials/Material.cpp \
     Model/Modelling/Materials/MaterialFactory.cpp \
+    Model/Modelling/Materials/MaterialTextura.cpp \
     Model/Modelling/Materials/Texture.cpp \
     Model/Modelling/Objects/Face.cpp \
+    Model/Modelling/Objects/FittedPlane.cpp \
     Model/Modelling/Objects/Mesh.cpp \
     Model/Modelling/Objects/Object.cpp \
     Model/Modelling/Objects/ObjectFactory.cpp \
@@ -68,8 +70,10 @@ HEADERS += \
     Model/Modelling/Materials/Lambertian.hh \
     Model/Modelling/Materials/Material.hh \
     Model/Modelling/Materials/MaterialFactory.h \
+    Model/Modelling/Materials/MaterialTextura.hh \
     Model/Modelling/Materials/Texture.hh \
     Model/Modelling/Objects/Face.hh \
+    Model/Modelling/Objects/FittedPlane.hh \
     Model/Modelling/Objects/Mesh.hh \
     Model/Modelling/Objects/Object.hh \
     Model/Modelling/Objects/ObjectFactory.hh \
