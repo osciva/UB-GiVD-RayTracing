@@ -20,7 +20,7 @@ bool Scene::hit(Ray &raig, float tmin, float tmax, HitInfo& info) const {
     float closest_so_far = tmax;
     HitInfo temp_info;
 
-    /* Hit del pla base o el "terra"
+    /* Hit del pla base o el "terra" */
     if(ground->hit(raig, tmin, tmax, temp_info)) {
         hit_sth = true;
 
@@ -30,7 +30,6 @@ bool Scene::hit(Ray &raig, float tmin, float tmax, HitInfo& info) const {
         }
     }
 
-    */
     for(const auto& object: objects){
 
         /* Crida al mètode hit de cada objecte. Si hi ha hit entre els valors de tmin y tmax, i

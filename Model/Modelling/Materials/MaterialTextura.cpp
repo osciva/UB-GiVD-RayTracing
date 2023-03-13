@@ -28,3 +28,11 @@ MaterialTextura::MaterialTextura(vec3 a, vec3 d, vec3 s, float o, int sh) : Mate
 vec3 MaterialTextura::getDiffuse(vec2 point) const {
     return this->Kd;
 }
+
+void MaterialTextura::read(const QJsonObject &json) {
+    Material::read(json);
+
+    if (json.contains("textureFile") && json["textureFile"].isString()) {
+        this->image = new Texture(json["textureFile"].toString());
+    }
+}
