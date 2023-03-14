@@ -106,9 +106,9 @@ void Triangle::aplicaTG(shared_ptr<TG> tg){
         v2 = tg->getTG() * v2;
         v3 = tg->getTG() * v3;
 
-        vertexs[0].x = vertexs[0].x; vertexs[0].y = v1.y; vertexs[0].z = v1.z;
-        vertexs[1].x = vertexs[1].x; vertexs[1].y = vertexs[1].y; vertexs[1].z = v2.z;
-        vertexs[2].x = vertexs[2].x; vertexs[2].y = vertexs[2].y; vertexs[2].z = v3.z;
+        vertexs[0].x = v1.x; vertexs[0].y = v1.y; vertexs[0].z = v1.z;
+        vertexs[1].x = v2.x; vertexs[1].y = v2.y; vertexs[1].z = v2.z;
+        vertexs[2].x = v3.x; vertexs[2].y = v3.y; vertexs[2].z = v3.z;
     }
 
     /* Escalem els vertexs */
@@ -121,9 +121,9 @@ void Triangle::aplicaTG(shared_ptr<TG> tg){
         float factorB = vertexs[1].x/v2.x;
         float factorC = vertexs[2].x/v3.x;
 
-        vertexs[0].x * factorA; vertexs[0].y * factorA; vertexs[0].z * factorA;
-        vertexs[1].x * factorB; vertexs[1].y * factorB; vertexs[1].z * factorB;
-        vertexs[2].x * factorC; vertexs[2].y * factorC; vertexs[2].z * factorC;
+        vertexs[0] *= factorA; vertexs[0].y *= factorA; vertexs[0].z *= factorA;
+        vertexs[1].x *= factorB; vertexs[1].y *= factorB; vertexs[1].z *= factorB;
+        vertexs[2].x *= factorC; vertexs[2].y *= factorC; vertexs[2].z *= factorC;
     }
 }
 

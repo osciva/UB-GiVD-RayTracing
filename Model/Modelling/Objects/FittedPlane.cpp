@@ -57,3 +57,21 @@ void FittedPlane::read (const QJsonObject &json)
         maxpoint.y = auxVec[1].toDouble();
     }
 }
+
+void FittedPlane::write(QJsonObject &json) const
+{
+    Plane::write(json);
+
+    QJsonArray min, max;
+    min.append(this->minpoint[0]); min.append(this->minpoint[1]);
+    max.append(this->maxpoint[0]); max.append(this->maxpoint[1]);
+
+    json["pmin"] = min;
+    json["pmax"] = max;
+}
+
+
+void FittedPlane::print(int indentation) const
+{
+    Plane::print(indentation);
+}

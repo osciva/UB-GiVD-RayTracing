@@ -86,8 +86,9 @@ void SceneFactoryData::read(const QJsonObject &json)
             // En aquestes linies es crea però no s'afegeix
             o = ObjectFactory::getInstance().createObject(ObjectFactory::getInstance().getObjectType(objStr));
             o->read(jbase);
+
+            /* Afegim l'objecte base a l'escena */
             scene->basePlane = o;
-            scene->objects.push_back(o);
         }
     }
 
