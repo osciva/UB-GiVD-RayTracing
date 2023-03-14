@@ -114,12 +114,13 @@ Creació de nous objectes i interseccions (VIRTUALWORLD):
     <img src="https://user-images.githubusercontent.com/47271218/225109807-a1d36b94-88f0-41d5-9eb8-3e6e7215e410.png" alt="Hit Mesh" width="45%">
     </p>
 
+
 Creació de REAL DATA:
-
-    - Fitted Plane:
+    - Fitted Plane & Transformacions (Translació i Escalat amb gizmos esferes):
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/225163352-b813e93e-e98c-47c8-bd73-d05727760105.png" alt="Hit Mesh" width="45%">
+    </p>
     
-    - Transformacions Translació i Escalat amb gizmos esferes:
-
     - Gizmo de Box:
     
     - Noves dades:
