@@ -25,12 +25,15 @@ SOURCES += \
     Model/Modelling/Materials/MaterialFactory.cpp \
     Model/Modelling/Materials/Texture.cpp \
     Model/Modelling/Objects/Box.cpp \
+    Model/Modelling/Objects/Circle.cpp \
+    Model/Modelling/Objects/Cylinder.cpp \
     Model/Modelling/Objects/Face.cpp \
     Model/Modelling/Objects/Mesh.cpp \
     Model/Modelling/Objects/Object.cpp \
     Model/Modelling/Objects/ObjectFactory.cpp \
     Model/Modelling/Objects/Plane.cpp \
     Model/Modelling/Objects/Sphere.cpp \
+    Model/Modelling/Objects/Triangle.cpp \
     Model/Modelling/Scene.cpp \
     Model/Modelling/SceneFactory.cpp \
     Model/Modelling/SceneFactoryData.cpp \
@@ -69,12 +72,15 @@ HEADERS += \
     Model/Modelling/Materials/MaterialFactory.h \
     Model/Modelling/Materials/Texture.hh \
     Model/Modelling/Objects/Box.hh \
+    Model/Modelling/Objects/Circle.hh \
+    Model/Modelling/Objects/Cylinder.hh \
     Model/Modelling/Objects/Face.hh \
     Model/Modelling/Objects/Mesh.hh \
     Model/Modelling/Objects/Object.hh \
     Model/Modelling/Objects/ObjectFactory.hh \
     Model/Modelling/Objects/Plane.hh \
     Model/Modelling/Objects/Sphere.hh \
+    Model/Modelling/Objects/Triangle.hh \
     Model/Modelling/Ray.hh \
     Model/Modelling/Scene.hh \
     Model/Modelling/SceneFactory.hh \

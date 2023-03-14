@@ -183,6 +183,8 @@
     </property>
     <addaction name="actionNew_Sphere"/>
     <addaction name="actionNew_Box"/>
+    <addaction name="actionNew_Cylinder"/>
+    <addaction name="actionNew_Triangle"/>
     <addaction name="actionGenerate_Scene"/>
     <addaction name="actionTracing_Settings"/>
     <addaction name="actionOpen_Virtual_Scene"/>
@@ -301,8 +303,15 @@
    <property name="text">
     <string>New Box</string>
    </property>
-   <property name="toolTip">
-    <string>New Box</string>
+  </action>
+  <action name="actionNew_Cylinder">
+   <property name="text">
+    <string>New Cylinder</string>
+   </property>
+  </action>
+  <action name="actionNew_Triangle">
+   <property name="text">
+    <string>New Triangle</string>
    </property>
   </action>
  </widget>

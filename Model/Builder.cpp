@@ -22,6 +22,30 @@ void Builder::newBox()
     else msgBox.setText("Not enough memory. Error.");
     msgBox.exec();
 }
+            
+void Builder::newCylinder()
+{
+    vec3 center(0.0, 0.0, 0.0);
+    float radius = 1.0;
+    float height = 1.0;
+    QMessageBox msgBox;
+    if (Controller::getInstance()->createScene(center, radius, height))
+            msgBox.setText("One Cylinder is created.");
+    else msgBox.setText("Not enough memory. Error.");
+    msgBox.exec();
+}
+
+void Builder::newTriangle(){
+    vec3 A = vec3(1,0,0);
+    vec3 B = vec3(0,1,0);
+    vec3 C = vec3(0,0,1);
+
+    QMessageBox msgBox;
+    if (Controller::getInstance()->createScene(A, B, C))
+            msgBox.setText("One Triangle is created.");
+    else msgBox.setText("Not enough memory. Error.");
+    msgBox.exec();
+}
 
 void Builder::newSimulatedScene()
 {
@@ -31,7 +55,6 @@ void Builder::newSimulatedScene()
    else msgBox.setText("Not enough memory. Error.");
    msgBox.exec();
 }
-
 
 void Builder::newVirtualScene()
 {
@@ -44,7 +67,6 @@ void Builder::newVirtualScene()
         msgBox.exec();
     }
 }
-
 
 void Builder::newDataScene()
 {
