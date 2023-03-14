@@ -207,8 +207,8 @@ shared_ptr<Scene> SceneFactoryData::visualMaps() {
             auto o = objectMaps(i, j);
             o->setMaterial(materialMaps(i, j));
 
-             // Afegir objecte a l'escena virtual ja amb el seu material corresponent
-             scene->objects.push_back(o);
+            // Afegir objecte a l'escena virtual ja amb el seu material corresponent
+            scene->objects.push_back(o);
          }
     }
     return scene;
@@ -221,8 +221,11 @@ shared_ptr<Object> SceneFactoryData::objectMaps(int i, int j) {
 
     shared_ptr<Object> o;
     // Crea Objecte unitari
-    o = ObjectFactory::getInstance().createObject(mapping->attributeMapping[i]->gyzmo);
+    QString s = ObjectFactory::getInstance().getNameType(mapping->attributeMapping[i]->gyzmo);
 
+    o = ObjectFactory::getInstance().createObject(s, dades[i].second[j][2], mapping->attributeMapping[i]->gyzmo);
+
+    vec3 y_plaBase = dynamic_pointer_cast<Plane>(scene->basePlane)->point;
     // TODO: Fase 1. Cal situar l'objecte unitari creat al (0,0,0) a escala proporcional
     // monReal-monVirtual (valors de mapping) i el valor de la dada, i a la posició corresponent segons
     // les coordenades donades a la dada (corresponen a x, z de mon virtual)
@@ -239,6 +242,7 @@ shared_ptr<Object> SceneFactoryData::objectMaps(int i, int j) {
     shared_ptr<ScaleTG> sg;
 
     if(dynamic_pointer_cast<Sphere>(o) != nullptr) {
+        dynamic_pointer_cast<Sphere>(o)->center.y = y_plaBase.y;
         float minVirtual = 0.1f, maxVirtual = (mapping->Vymax - mapping->Vymin) / 2;
         float minReal = attributeMapping->minValue, maxReal = attributeMapping->maxValue;
 

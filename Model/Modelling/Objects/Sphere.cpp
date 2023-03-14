@@ -1,8 +1,6 @@
 #include "Sphere.hh"
 
 Sphere::Sphere() {
-    center=vec3(0.0,0.0,0.0);
-    radius = 1.0;
 }
 
 Sphere::Sphere(vec3 cen, float r, float data) :Object(data) {

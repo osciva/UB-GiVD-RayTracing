@@ -18,9 +18,10 @@ public:
     virtual void write(QJsonObject &json) const override;
     virtual void print(int indentation) const override;
 
+    vec3 point;
 private:
     vec3 normal;
-    vec3 point;
+
     vec2 minpoint;
     vec2 maxpoint;
 };

@@ -28,9 +28,10 @@ public:
     vec3  getCenter() { return center;}
     float getRadius() { return radius;}
 
-private:
     // Centre de l'esfera
     vec3 center;
+
+private:
     // Radi de l'esfera
     float radius;
     // Numero PI
