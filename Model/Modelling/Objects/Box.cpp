@@ -18,30 +18,111 @@ Box::Box(float data) :Object(data) {
     punt_max = vec3(-5,-1,5);
 }
 
-bool Box::hit(Ray& ray, float tmin, float tmax, HitInfo& info) const {
-    // Calculate inverse direction of the ray to avoid division by zero
-    vec3 invDir = 1.0f / ray.getDirection();
+bool Box::hit(Ray& ray, float t_min, float t_max, HitInfo& info) const {
+    /* Algoritme extret de: https://is.gd/LKGNN9 */
+    float tmin, tmax;
+    tmin = (punt_min.x - ray.getOrigin().x) / ray.getDirection().x;
+    tmax = (punt_max.x - ray.getOrigin().x) / ray.getDirection().x;
 
-    vec3 tMin = (punt_min - ray.getOrigin()) * invDir;
-    vec3 tMax = (punt_max - ray.getOrigin()) * invDir;
+    if(tmin > tmax) swap(tmin, tmax);
 
-    vec3 t1 = glm::min(tMin, tMax);
-    vec3 t2 = glm::max(tMin, tMax);
+    float tymin = (punt_min.y - ray.getOrigin().y) / ray.getDirection().y;
+    float tymax = (punt_max.y - ray.getOrigin().y) / ray.getDirection().y;
 
-    float tNear = glm::max(glm::max(t1.x, t1.y), t1.z);
-    float tFar = glm::min(glm::min(t2.x, t2.y), t2.z);
+    if(tymin > tymax) swap(tymin, tymax);
 
-    if (tNear > tFar || tFar < tmin || tNear > tmax) {
+    if ((tmin > tymax) || (tymin > tmax))
         return false;
+
+    if (tymin > tmin)
+        tmin = tymin;
+
+    if (tymax < tmax)
+        tmax = tymax;
+
+    float tzmin = (punt_min.z - ray.getOrigin().z) / ray.getDirection().z;
+    float tzmax = (punt_max.z - ray.getOrigin().z) / ray.getDirection().z;
+
+    if (tzmin > tzmax) swap(tzmin, tzmax);
+
+    if ((tmin > tzmax) || (tzmin > tmax))
+        return false;
+
+    if (tzmin > tmin)
+        tmin = tzmin;
+
+    if (tzmax < tmax)
+        tmax = tzmax;
+
+    if(tmin > t_min && tmax < t_max){
+        info.t = tmin;
+        info.p = ray.getOrigin() + (ray.getDirection() * tmin);
+        info.mat_ptr = material.get();
+
+        vec3 closest_normal;
+        float min_dist = numeric_limits<float>::max();
+
+        /* Check the intersection with each face of the box */
+        if(equals(info.p.x, punt_max.x, DBL_EPSILON)){
+            vec3 normal(1, 0, 0);
+            float dist = length(info.p - vec3(punt_max.x, (punt_min.y + punt_max.y) / 2.0f, (punt_min.z + punt_max.z) / 2.0f));
+            if(dist < min_dist){
+                closest_normal = normal;
+                min_dist = dist;
+            }
+        }
+
+        if(equals(info.p.y, punt_max.y, DBL_EPSILON)){
+            vec3 normal(0, 1, 0);
+            float dist = length(info.p - vec3((punt_min.x + punt_max.x) / 2.0f, punt_max.y, (punt_min.z + punt_max.z) / 2.0f));
+            if(dist < min_dist){
+                closest_normal = normal;
+                min_dist = dist;
+            }
+        }
+
+        if(equals(info.p.z, punt_max.z, DBL_EPSILON)){
+            vec3 normal(0, 0, 1);
+            float dist = length(info.p - vec3((punt_min.x + punt_max.x) / 2.0f, (punt_min.y + punt_max.y) / 2.0f, punt_max.z));
+            if(dist < min_dist){
+                closest_normal = normal;
+                min_dist = dist;
+            }
+        }
+
+        if(equals(info.p.x, punt_min.x, DBL_EPSILON)){
+            vec3 normal(-1, 0, 0);
+            float dist = length(info.p - vec3(punt_min.x, (punt_min.y + punt_max.y) / 2.0f, (punt_min.z + punt_max.z) / 2.0f));
+            if(dist < min_dist){
+                closest_normal = normal;
+                min_dist = dist;
+            }
+        }
+
+        if(equals(info.p.y, punt_min.y, DBL_EPSILON)){
+            vec3 normal(0, -1, 0);
+            float dist = length(info.p - vec3((punt_min.x + punt_max.x) / 2.0f, punt_min.y, (punt_min.z + punt_max.z) / 2.0f));
+            if(dist < min_dist){
+                closest_normal = normal;
+                min_dist = dist;
+            }
+        }
+
+        if(equals(info.p.z, punt_min.z, DBL_EPSILON)){
+            vec3 normal(0, 0, -1);
+            float dist = length(info.p - vec3((punt_min.x + punt_max.x) / 2.0f, (punt_min.y + punt_max.y) / 2.0f, punt_min.z));
+            if(dist < min_dist){
+                closest_normal = normal;
+                min_dist = dist;
+            }
+        }
+
+        info.normal = closest_normal;
+
+        return true;
     }
 
-    // Calculate intersection point and normal
-    info.t = tNear;
-    info.normal = getNormal(ray.pointAtParameter(info.t));
-    info.mat_ptr = material.get();
-    info.p = ray.pointAtParameter(info.t);
-
-    return true;
+    return false;
 }
 
 

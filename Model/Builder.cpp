@@ -14,7 +14,7 @@ void Builder::newSphere()
 
 void Builder::newBox()
 {
-    vec3 punt_min = vec3(-1,-1,1);
+    vec3 punt_min = vec3(-1,-1,-1);
     vec3 punt_max = vec3(1,1,1);
     QMessageBox msgBox;
     if (Controller::getInstance()->createScene(punt_min, punt_max))
