@@ -21,7 +21,7 @@ bool Scene::hit(Ray &raig, float tmin, float tmax, HitInfo& info) const {
     HitInfo temp_info;
 
     /* Hit del pla base o el "terra" */
-    if(ground->hit(raig, tmin, tmax, temp_info)) {
+    if(basePlane != nullptr && basePlane->hit(raig, tmin, tmax, temp_info)) {
         hit_sth = true;
 
         if(temp_info.t < closest_so_far) {

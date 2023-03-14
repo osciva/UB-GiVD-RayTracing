@@ -8,11 +8,13 @@ Sphere::Sphere() {
 Sphere::Sphere(vec3 cen, float r, float data) :Object(data) {
     center = cen;
     radius = r;
+    factor = data;
 }
 
 Sphere::Sphere(float data) :Object(data) {
     center = vec3(0,0,0);
     radius = 1.0f;
+    factor = data;
 }
 
 bool Sphere::hit(Ray &raig, float tmin, float tmax, HitInfo& info) const {
@@ -54,7 +56,10 @@ void Sphere::aplicaTG(shared_ptr<TG> t) {
         c = t->getTG() * c;
         center.x = c.x; center.y = c.y; center.z = c.z;
     }
-    //TODO: Cal ampliar-lo per a acceptar Escalats
+
+    if (dynamic_pointer_cast<ScaleTG>(t)) {
+        this->radius *= t.get()->getTG()[0][0];
+    }
 }
 
 void Sphere::read (const QJsonObject &json)

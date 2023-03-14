@@ -45,10 +45,7 @@ public:
     // TODO: Fase 1
     // Constructora a utilitzar quan s'inicialitza una escena amb un pla base o
     // una esfera base
-    Scene(shared_ptr<Object> base);
-
-    /* Terra de l'escena */
-    shared_ptr<Object> ground;
+    Scene(shared_ptr<Object> base) {basePlane = base;}
 
     virtual ~Scene() {};
 
@@ -63,7 +60,7 @@ public:
 
     void update(int nframe);
 
-    void setGround(shared_ptr<Object> ground) {this->ground = ground;}
+    void setGround(shared_ptr<Object> ground);
 
     void setDimensions(vec3 p1, vec3 p2);
 

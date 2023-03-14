@@ -32,7 +32,8 @@ vec3 MaterialTextura::getDiffuse(vec2 point) const {
 void MaterialTextura::read(const QJsonObject &json) {
     Material::read(json);
 
-    if (json.contains("textureFile") && json["textureFile"].isString()) {
-        this->image = new Texture(json["textureFile"].toString());
+    if (json.contains("textureFile") && json["textureFile"].isString()){
+        QString path = json["textureFile"].toString();
+        this->image = new Texture(path);
     }
 }

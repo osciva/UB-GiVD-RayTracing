@@ -1,16 +1,18 @@
 #include "Triangle.hh"
 
 Triangle::Triangle() {
-    this->A = vec3(0,0,0);
-    this->B = vec3(0,0,0);
-    this->C = vec3(0,0,0);
+    this->A = vec3(1,0,0);
+    this->B = vec3(0,1,0);
+    this->C = vec3(0,0,1);
 
     vertexs = vector<vec3>();
     vertexs.push_back(A);
     vertexs.push_back(B);
     vertexs.push_back(C);
 
-    //setPlane();
+    normal = normalize(cross(B - A, C - A));
+
+    setPlane();
 }
 
 /* Crear un triangle a partir de 3 punts */
@@ -110,7 +112,7 @@ void Triangle::aplicaTG(shared_ptr<TG> tg){
     }
 
     /* Escalem els vertexs */
-    if (dynamic_pointer_cast<TranslateTG>(tg)){
+    if (dynamic_pointer_cast<ScaleTG>(tg)){
         v1 = tg->getTG() * v1;
         v2 = tg->getTG() * v2;
         v3 = tg->getTG() * v3;

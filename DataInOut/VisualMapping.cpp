@@ -32,8 +32,6 @@ void VisualMapping::read(const QJsonObject &json)
             Vzmax = objectsArray[2].toDouble();
          }
     }
-
-
 }
 //! [0]
 
