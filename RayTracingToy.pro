@@ -25,6 +25,7 @@ SOURCES += \
     Model/Modelling/Materials/MaterialFactory.cpp \
     Model/Modelling/Materials/MaterialTextura.cpp \
     Model/Modelling/Materials/Texture.cpp \
+    Model/Modelling/Objects/Box.cpp \
     Model/Modelling/Objects/Face.cpp \
     Model/Modelling/Objects/FittedPlane.cpp \
     Model/Modelling/Objects/Mesh.cpp \
@@ -72,6 +73,7 @@ HEADERS += \
     Model/Modelling/Materials/MaterialFactory.h \
     Model/Modelling/Materials/MaterialTextura.hh \
     Model/Modelling/Materials/Texture.hh \
+    Model/Modelling/Objects/Box.hh \
     Model/Modelling/Objects/Face.hh \
     Model/Modelling/Objects/FittedPlane.hh \
     Model/Modelling/Objects/Mesh.hh \

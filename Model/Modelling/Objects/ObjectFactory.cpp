@@ -18,6 +18,9 @@ shared_ptr<Object> ObjectFactory::createObject(OBJECT_TYPES t)
     case TRIANGLE:
         o = make_shared<Triangle>();
         break;
+    case BOX:
+        o = make_shared<Box>();
+        break;
     case MESH:
         o = make_shared<Mesh>();
         break;
@@ -39,6 +42,9 @@ shared_ptr<Object> ObjectFactory::createObject( QString s, float data, OBJECT_TY
         break;
     case FITTEDPLANE:
         o = make_shared<FittedPlane>();
+        break;
+    case BOX:
+        o = make_shared<Box>(data);
         break;
     case TRIANGLE:
         o = make_shared<Triangle>(data);

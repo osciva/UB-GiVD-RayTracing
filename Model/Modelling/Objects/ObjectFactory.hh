@@ -5,6 +5,7 @@
 #include "Plane.hh"
 #include "Triangle.hh"
 #include "Mesh.hh"
+#include "Box.hh"
 #include "FittedPlane.hh"
 
 class ObjectFactory

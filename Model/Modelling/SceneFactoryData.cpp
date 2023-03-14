@@ -234,19 +234,33 @@ shared_ptr<Object> SceneFactoryData::objectMaps(int i, int j) {
     float valorMonReal = dades[i].second[j][2];
     AttributeMapping* attributeMapping = mapping->attributeMapping[0];
 
-    // a. Calcula primer l'escala
+    // a. Calcula primer l'escala (diferent per a una Box i a una Sphere)
     float valorMonVirtual;
-    float minVirtual = 0.1f, maxVirtual = (mapping->Vymax - mapping->Vymin) / 2;
-    float minReal = attributeMapping->minValue, maxReal = attributeMapping->maxValue;
+    shared_ptr<ScaleTG> sg;
 
-    valorMonVirtual = ((valorMonReal - minReal) / (maxReal - minReal));
-    valorMonVirtual = valorMonVirtual * (maxVirtual) + minVirtual;
+    if(dynamic_pointer_cast<Sphere>(o) != nullptr) {
+        float minVirtual = 0.1f, maxVirtual = (mapping->Vymax - mapping->Vymin) / 2;
+        float minReal = attributeMapping->minValue, maxReal = attributeMapping->maxValue;
 
-    shared_ptr<ScaleTG> sg = make_shared<ScaleTG>(vec3(valorMonVirtual, valorMonVirtual, -valorMonVirtual));
+        valorMonVirtual = ((valorMonReal - minReal) / (maxReal - minReal));
+        valorMonVirtual = valorMonVirtual * (maxVirtual) + minVirtual;
+
+        sg = make_shared<ScaleTG>(vec3(valorMonVirtual, valorMonVirtual, -valorMonVirtual));
+    } else if (dynamic_pointer_cast<Box>(o) != nullptr) {
+        float valorMonVirtual;
+        float minYVirtual = -1.0f, maxYVirtual = 1.0f;
+        float minReal = attributeMapping->minValue, maxReal = attributeMapping->maxValue;
+
+        valorMonVirtual = ((valorMonReal - minReal) / (maxReal - minReal));
+        valorMonVirtual = valorMonVirtual * (maxYVirtual - minYVirtual) + minYVirtual;
+
+        /* Escalem nomes les Y's per tenir ben representades les dades */
+        sg = make_shared<ScaleTG>(vec3(1.0f, valorMonVirtual, 1.0f));
+    }
 
     o->aplicaTG(sg);
 
-    // b. Calcula la translació
+    // b. Calcula la translació (El mateix per Sphere i per Box)
 
     float xVirtual, xReal = puntMonReal[0];
     float yVirtual = 0.0;
