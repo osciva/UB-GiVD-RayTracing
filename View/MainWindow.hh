@@ -64,5 +64,6 @@ private slots:
     void runAnimation();
     void setColorTop();
     void setColorBottom();
+    void on_actionNew_Box_triggered();
 };
 
