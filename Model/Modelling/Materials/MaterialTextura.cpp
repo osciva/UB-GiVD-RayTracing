@@ -26,7 +26,7 @@ MaterialTextura::MaterialTextura(vec3 a, vec3 d, vec3 s, float o, int sh) : Mate
 }
 
 vec3 MaterialTextura::getDiffuse(vec2 point) const {
-    return this->Kd;
+    return this->image->getColorPixel(point);
 }
 
 void MaterialTextura::read(const QJsonObject &json) {
