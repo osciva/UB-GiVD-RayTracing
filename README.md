@@ -101,9 +101,9 @@ En aquest fitxer cal que feu l'informe de la pràctica 1.
 Creació de nous objectes i interseccions (VIRTUALWORLD):
     - Hit Box:
     <p align="center">
-    <img src="https://user-images.githubusercontent.com/47271218/225109895-837a8781-fda8-4df5-b8cd-9cd0a6b75af2.png" alt="Hit Box" width="45%">
+    <img src="https://user-images.githubusercontent.com/47271218/225356939-2f105b69-60ba-42be-932c-e91e7f570248.png" alt="Hit Box" width="45%">
     </p>
-
+    
     - Hit Triangle:
     <p align="center">
     <img src="https://user-images.githubusercontent.com/47271218/224562781-9bcfbe5a-7f4b-492c-ac51-e4111786c3f4.png" alt="Hit Triangle" width="45%">
@@ -125,10 +125,13 @@ Creació de REAL DATA:
 
 - Fitted Plane & Transformacions (Translació i Escalat amb gizmos esferes):
     <p align="center">
-    <img src="https://user-images.githubusercontent.com/47271218/225163352-b813e93e-e98c-47c8-bd73-d05727760105.png" alt="Hit Mesh" width="45%">
+    <img src="https://user-images.githubusercontent.com/47271218/225163352-b813e93e-e98c-47c8-bd73-d05727760105.png" alt="FittedPlane & Gyzmo Sphere" width="45%">
     </p>
   
 - Gizmo de Box:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/225357133-9d220940-2203-487a-90dd-fec9dcc8efa0.png" alt="Gyzmo Box" width="45%">
+    </p>
 
 - Noves dades:
     <p align="center">
@@ -144,6 +147,8 @@ Fase 1:
 
 
 * **Més visualitzacions**:
+
+
 
    * Per totes les imatges, incluiu aqui la imatge obtinguda i els fitxers de dades i de configuració que heu fet servir
 
