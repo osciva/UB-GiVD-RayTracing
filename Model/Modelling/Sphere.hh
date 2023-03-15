@@ -8,29 +8,36 @@
 #include "Object.hh"
 #include "Model/Modelling/Animation.hh"
 #include "Model/Modelling/TG/TranslateTG.hh"
-#include "Model/Modelling/TG/ScaleTG.hh"
 
-class Box: public Object  {
+class Sphere: public Object  {
 public:
-    Box();
+    Sphere();
 
-    Box(vec3 min, vec3 max, float data);
-    //Crea un box unitari amb min al punt (0,0,0) i max al punt (1,1,1)
-    Box(float data);
-    virtual ~Box() {}
-    virtual bool hit(Ray& r, float t_min, float t_max, HitInfo& info) const override;
+    Sphere(vec3 cen, float r, float data);
+    //Crea una esfera unitaria centrada al punt (0,0,0) i de radi 1
+    Sphere(float data);
+    virtual ~Sphere() {}
+    virtual bool hit(Ray& r, float tmin, float tmax, HitInfo& info) const override;
     virtual void aplicaTG(shared_ptr<TG> tg) override;
 
     virtual void read (const QJsonObject &json) override;
     virtual void write(QJsonObject &json) const override;
     virtual void print(int indentation) const override;
 
-    // Vèrtex mínim del box
-    vec3 punt_min;
-    // Vèrtex màxim del box
-    vec3 punt_max;
+    vec3  getCenter() { return center;}
+    float getRadius() { return radius;}
 
-    vec3 boxCenter;
 private:
-    float data;
+    // Centre de l'esfera
+    vec3 center;
+    // Radi de l'esfera
+    float radius;
+    // Numero PI
+    const float PI = 3.141592653;
+
 };
+
+
+
+
+

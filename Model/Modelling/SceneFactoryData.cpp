@@ -84,9 +84,11 @@ void SceneFactoryData::read(const QJsonObject &json)
 
             // TO DO: Fase 1: PAS 5: Afegeix l'objecte base a l'escena.
             // En aquestes linies es crea però no s'afegeix
-            // o = ObjectFactory::getInstance().createObject(ObjectFactory::getInstance().getObjectType(objStr));
-            // o->read(jbase);
+            o = ObjectFactory::getInstance().createObject(ObjectFactory::getInstance().getObjectType(objStr));
+            o->read(jbase);
 
+            /* Afegim l'objecte base a l'escena */
+            scene->basePlane = o;
         }
     }
 
@@ -200,42 +202,82 @@ shared_ptr<Scene> SceneFactoryData::visualMaps() {
 
     // TO DO: Fase 1: PAS 5. Recorregut de les dades:
     for (unsigned int i=0; i< dades.size(); i++) {
-
         // Per cada valor de l'atribut, cal donar d'alta un objecte (gizmo) a l'escena
         for (unsigned int j=0; j<dades[i].second.size(); j++) {
-            auto o = objectMaps(i);
+            auto o = objectMaps(i, j);
             o->setMaterial(materialMaps(i, j));
 
-             // Afegir objecte a l'escena virtual ja amb el seu material corresponent
-             scene->objects.push_back(o);
+            // Afegir objecte a l'escena virtual ja amb el seu material corresponent
+            scene->objects.push_back(o);
          }
     }
     return scene;
 }
 
 
-
-
-
-
-shared_ptr<Object> SceneFactoryData::objectMaps(int i) {
+shared_ptr<Object> SceneFactoryData::objectMaps(int i, int j) {
 
     // Gyzmo és el tipus d'objecte
 
     shared_ptr<Object> o;
     // Crea Objecte unitari
-    o = ObjectFactory::getInstance().createObject(mapping->attributeMapping[i]->gyzmo);
+    QString s = ObjectFactory::getInstance().getNameType(mapping->attributeMapping[i]->gyzmo);
 
+    o = ObjectFactory::getInstance().createObject(s, dades[i].second[j][2], mapping->attributeMapping[i]->gyzmo);
+
+    vec3 y_plaBase = dynamic_pointer_cast<Plane>(scene->basePlane)->point;
     // TODO: Fase 1. Cal situar l'objecte unitari creat al (0,0,0) a escala proporcional
     // monReal-monVirtual (valors de mapping) i el valor de la dada, i a la posició corresponent segons
     // les coordenades donades a la dada (corresponen a x, z de mon virtual)
     // Dades (x, y, z) --> Escena Virtual (x_v, 0, z_v) i l'objecte escalat segons
     // la relació de y a escala amb el mon virtual
 
-    // a. Calcula primer l'escala
-    // b. Calcula la translació
-    // c. Aplica la TG a l'objecte usant
-    //        o->aplicaTG(transformacio)
+    /* Guardem el punt en el món real i el valor que té en el món real*/
+    vec3 puntMonReal = vec3(dades[i].second[j][0], -1.0, dades[i].second[j][1]);
+    float valorMonReal = dades[i].second[j][2];
+    AttributeMapping* attributeMapping = mapping->attributeMapping[0];
+
+    // a. Calcula primer l'escala (diferent per a una Box i a una Sphere)
+    float valorMonVirtual;
+    shared_ptr<ScaleTG> sg;
+
+    float minVirtual = 0.1f, maxVirtual = (mapping->Vymax - mapping->Vymin) / 2;
+    float minReal = attributeMapping->minValue, maxReal = attributeMapping->maxValue;
+
+    valorMonVirtual = ((valorMonReal - minReal) / (maxReal - minReal));
+    valorMonVirtual = valorMonVirtual * (maxVirtual) + minVirtual;
+
+    if(dynamic_pointer_cast<Sphere>(o) != nullptr) {
+        dynamic_pointer_cast<Sphere>(o)->center.y = y_plaBase.y;
+
+        sg = make_shared<ScaleTG>(vec3(valorMonVirtual, valorMonVirtual, -valorMonVirtual));
+    } else if (dynamic_pointer_cast<Box>(o) != nullptr) {
+        /* Primer situem la Box a les mateixes Y_axis que el FittedPlane */
+        float y_translation = y_plaBase.y - dynamic_pointer_cast<Box>(o)->boxCenter.y;
+        glm::vec3 translation(0.0f, y_translation, 0.0f);
+        dynamic_pointer_cast<Box>(o)->punt_min += translation;
+        dynamic_pointer_cast<Box>(o)->punt_max += translation;
+
+        /* Escalem nomes les Y's per tenir ben representades les dades */
+        sg = make_shared<ScaleTG>(vec3(1.0f, valorMonVirtual, 1.0f));
+    }
+
+    o->aplicaTG(sg);
+
+    // b. Calcula la translació (El mateix per Sphere i per Box)
+
+    float xVirtual, xReal = puntMonReal[0];
+    float yVirtual = 0.0;
+    float zVirtual, zReal = puntMonReal[2];
+
+    // Calculem x i z del punt virtual
+    xVirtual = (((xReal - mapping->Rxmin) * (mapping->Vxmax - mapping->Vxmin)) / (mapping->Rxmax - mapping->Rxmin)) + mapping->Vxmin;
+    zVirtual = (((zReal - mapping->Rzmin) * (mapping->Vzmax - mapping->Vzmin)) / (mapping->Rzmax - mapping->Rzmin)) + mapping->Vzmin;
+
+    vec3 puntVirtual = vec3(xVirtual, -yVirtual, -zVirtual);
+
+    shared_ptr<TranslateTG> tg = make_shared<TranslateTG>(puntVirtual);
+    o->aplicaTG(tg);
 
     return o;
 }

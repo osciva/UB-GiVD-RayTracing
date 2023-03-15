@@ -15,17 +15,14 @@
 
 #include "Object.hh"
 #include "Face.hh"
-#include "Triangle.hh"
-#include "Box.hh"
-#include "Sphere.hh"
+#include"Triangle.hh"
 
 using namespace std;
-using namespace glm;
 
 class Mesh : public Object
 {
 public:
-    Mesh() {}
+    Mesh() {};
     Mesh(const QString &fileName);
     Mesh(const QString &fileName, float data);
     virtual bool hit( Ray& r, float tmin, float tmax, HitInfo& info) const override;
@@ -41,15 +38,11 @@ public:
 private:
 
     QString nom;
-    vec3 centre;
-    vector<Face> cares; /* Faces de l'objecte */
-    vector<vec4> vertexs; /* Vertexs de l'objecte sense repetits */
+    vector<Face> cares; // facees o cares de l'objecte
+    vector<vec4> vertexs; // vertexs de l'objecte sense repetits
     vector<Triangle> triangles;
 
     void load(QString filename);
-    void makeTriangles();
-    void makeBoundingSphere();
-    Box* box;
-    Sphere* sphere;
+    void makeTriangles(float data);
 };
 

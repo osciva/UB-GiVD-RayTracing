@@ -18,16 +18,29 @@ bool Scene::hit(Ray &raig, float tmin, float tmax, HitInfo& info) const {
 
     bool hit_sth = false;
     float closest_so_far = tmax;
+    HitInfo temp_info;
+
+    /* Hit del pla base o el "terra" */
+    if(basePlane && basePlane->hit(raig, tmin, tmax, temp_info)) {
+        hit_sth = true;
+
+        if(temp_info.t < closest_so_far) {
+            closest_so_far = temp_info.t;
+            info = temp_info;
+        }
+    }
 
     for(const auto& object: objects){
-        HitInfo temp_info;
 
         /* Crida al mètode hit de cada objecte. Si hi ha hit entre els valors de tmin y tmax, i
            està més a prop que cap altre hit trobat, l'informació de HitInfo s'actualitza. */
         if(object->hit(raig, tmin, closest_so_far, temp_info)) {
             hit_sth = true;
-            closest_so_far = temp_info.t;
-            info = temp_info;
+
+            if(temp_info.t < closest_so_far) {
+                closest_so_far = temp_info.t;
+                info = temp_info;
+            }
         }
     }
 

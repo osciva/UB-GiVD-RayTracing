@@ -1,163 +1,83 @@
 #include "Box.hh"
 #include <glm/glm.hpp>
 
-const float EPSILON = 0.0001f;
-
 Box::Box() {
-    punt_min = vec3(-2,-2,2);
-    punt_max = vec3(-5,-1,5);
+    punt_min = vec3(-1,-1,-1);
+    punt_max = vec3(1,1,1);
+
+    boxCenter = (punt_min+punt_max) / 2.f;
 }
 
 Box::Box(vec3 min, vec3 max, float data) :Object(data) {
     punt_min=min;
     punt_max=max;
+    boxCenter = (min+max) / 2.f;
 }
 
 Box::Box(float data) :Object(data) {
-    punt_min = vec3(-2,-2,2);
-    punt_max = vec3(-5,-1,5);
+    punt_min = vec3(-1,-1,-1);
+    punt_max = vec3(1,1,1);
+    boxCenter = (punt_min+punt_max) / 2.f;
 }
 
 bool Box::hit(Ray& ray, float t_min, float t_max, HitInfo& info) const {
-    /* Algoritme extret de: https://is.gd/LKGNN9 */
-    float tmin, tmax;
-    tmin = (punt_min.x - ray.getOrigin().x) / ray.getDirection().x;
-    tmax = (punt_max.x - ray.getOrigin().x) / ray.getDirection().x;
+    // Calculate the inverse direction of the ray
+    glm::vec3 inv_dir = 1.0f / ray.getDirection();
 
-    if(tmin > tmax) swap(tmin, tmax);
+    // Calculate the sign of the inverse direction
+    glm::ivec3 sign = glm::ivec3(inv_dir.x < 0, inv_dir.y < 0, inv_dir.z < 0);
 
-    float tymin = (punt_min.y - ray.getOrigin().y) / ray.getDirection().y;
-    float tymax = (punt_max.y - ray.getOrigin().y) / ray.getDirection().y;
+    // Calculate the minimum and maximum values of t for each face of the box
+    glm::vec3 t_min_box = (punt_min - ray.getOrigin()) * inv_dir;
+    glm::vec3 t_max_box = (punt_max - ray.getOrigin()) * inv_dir;
 
-    if(tymin > tymax) swap(tymin, tymax);
+    // Calculate the minimum and maximum values of t for the box
+    float t_enter = glm::max(glm::max(glm::min(t_min_box.x, t_max_box.x), glm::min(t_min_box.y, t_max_box.y)), glm::min(t_min_box.z, t_max_box.z));
+    float t_exit = glm::min(glm::min(glm::max(t_min_box.x, t_max_box.x), glm::max(t_min_box.y, t_max_box.y)), glm::max(t_min_box.z, t_max_box.z));
 
-    if ((tmin > tymax) || (tymin > tmax))
-        return false;
+    // Check if the ray hits the box
+    if (t_enter <= t_exit && t_exit >= t_min && t_enter <= t_max) {
+        // Calculate the hit point and normal
+        glm::vec3 hit_point = ray.getOrigin() + t_enter * ray.getDirection();
+        glm::vec3 normal;
+        if (hit_point.x <= punt_min.x + DBL_EPSILON) normal = -glm::vec3(1, 0, 0);
+        else if (hit_point.x >= punt_max.x - DBL_EPSILON) normal = glm::vec3(1, 0, 0);
+        else if (hit_point.y <= punt_min.y + DBL_EPSILON) normal = -glm::vec3(0, 1, 0);
+        else if (hit_point.y >= punt_max.y - DBL_EPSILON) normal = glm::vec3(0, 1, 0);
+        else if (hit_point.z <= punt_min.z + DBL_EPSILON) normal = -glm::vec3(0, 0, 1);
+        else if (hit_point.z >= punt_max.z - DBL_EPSILON) normal = glm::vec3(0, 0, 1);
 
-    if (tymin > tmin)
-        tmin = tymin;
-
-    if (tymax < tmax)
-        tmax = tymax;
-
-    float tzmin = (punt_min.z - ray.getOrigin().z) / ray.getDirection().z;
-    float tzmax = (punt_max.z - ray.getOrigin().z) / ray.getDirection().z;
-
-    if (tzmin > tzmax) swap(tzmin, tzmax);
-
-    if ((tmin > tzmax) || (tzmin > tmax))
-        return false;
-
-    if (tzmin > tmin)
-        tmin = tzmin;
-
-    if (tzmax < tmax)
-        tmax = tzmax;
-
-    if(tmin > t_min && tmax < t_max){
-        info.t = tmin;
-        info.p = ray.getOrigin() + (ray.getDirection() * tmin);
+        // Set the hit info
+        info.t = t_enter;
+        info.p = hit_point;
+        info.normal = normal;
         info.mat_ptr = material.get();
-
-        vec3 closest_normal;
-        float min_dist = numeric_limits<float>::max();
-
-        /* Check the intersection with each face of the box */
-        if(equals(info.p.x, punt_max.x, DBL_EPSILON)){
-            vec3 normal(1, 0, 0);
-            float dist = length(info.p - vec3(punt_max.x, (punt_min.y + punt_max.y) / 2.0f, (punt_min.z + punt_max.z) / 2.0f));
-            if(dist < min_dist){
-                closest_normal = normal;
-                min_dist = dist;
-            }
-        }
-
-        if(equals(info.p.y, punt_max.y, DBL_EPSILON)){
-            vec3 normal(0, 1, 0);
-            float dist = length(info.p - vec3((punt_min.x + punt_max.x) / 2.0f, punt_max.y, (punt_min.z + punt_max.z) / 2.0f));
-            if(dist < min_dist){
-                closest_normal = normal;
-                min_dist = dist;
-            }
-        }
-
-        if(equals(info.p.z, punt_max.z, DBL_EPSILON)){
-            vec3 normal(0, 0, 1);
-            float dist = length(info.p - vec3((punt_min.x + punt_max.x) / 2.0f, (punt_min.y + punt_max.y) / 2.0f, punt_max.z));
-            if(dist < min_dist){
-                closest_normal = normal;
-                min_dist = dist;
-            }
-        }
-
-        if(equals(info.p.x, punt_min.x, DBL_EPSILON)){
-            vec3 normal(-1, 0, 0);
-            float dist = length(info.p - vec3(punt_min.x, (punt_min.y + punt_max.y) / 2.0f, (punt_min.z + punt_max.z) / 2.0f));
-            if(dist < min_dist){
-                closest_normal = normal;
-                min_dist = dist;
-            }
-        }
-
-        if(equals(info.p.y, punt_min.y, DBL_EPSILON)){
-            vec3 normal(0, -1, 0);
-            float dist = length(info.p - vec3((punt_min.x + punt_max.x) / 2.0f, punt_min.y, (punt_min.z + punt_max.z) / 2.0f));
-            if(dist < min_dist){
-                closest_normal = normal;
-                min_dist = dist;
-            }
-        }
-
-        if(equals(info.p.z, punt_min.z, DBL_EPSILON)){
-            vec3 normal(0, 0, -1);
-            float dist = length(info.p - vec3((punt_min.x + punt_max.x) / 2.0f, (punt_min.y + punt_max.y) / 2.0f, punt_min.z));
-            if(dist < min_dist){
-                closest_normal = normal;
-                min_dist = dist;
-            }
-        }
-
-        info.normal = closest_normal;
 
         return true;
     }
-
     return false;
 }
 
-
-// Calculate normal at intersection point
-vec3 Box::getNormal(const vec3& point) const {
-    // Find which face the intersection point is on
-    if (abs(point.x - punt_min.x) < EPSILON) {
-        return vec3(-1, 0, 0);
-    }
-    if (abs(point.x - punt_max.x) < EPSILON) {
-        return vec3(1, 0, 0);
-    }
-    if (abs(point.y - punt_min.y) < EPSILON) {
-        return vec3(0, -1, 0);
-    }
-    if (abs(point.y - punt_max.y) < EPSILON) {
-        return vec3(0, 1, 0);
-    }
-    if (abs(point.z - punt_min.z) < EPSILON) {
-        return vec3(0, 0, -1);
-    }
-    return vec3(0, 0, 1);
-}
-
-
-
 void Box::aplicaTG(shared_ptr<TG> t) {
-    /*if (dynamic_pointer_cast<TranslateTG>(t)) {
+    if (dynamic_pointer_cast<TranslateTG>(t)) {
         // Per ara només es fan les translacions
-        vec4 c(center, 1.0);
+        vec4 c(boxCenter, 1.0);
         c = t->getTG() * c;
-        center.x = c.x; center.y = c.y; center.z = c.z;
+        vec3 translation = dynamic_pointer_cast<TranslateTG>(t)->traslation;
+        punt_min += translation;
+        punt_max += translation;
+        boxCenter = (punt_min+punt_max) / 2.f;
     }
-    //TODO: Cal ampliar-lo per a acceptar Escalats
-    */
+
+    if (dynamic_pointer_cast<ScaleTG>(t)) {
+        vec3 scale = dynamic_pointer_cast<ScaleTG>(t)->scalation;
+        vec3 center = (punt_min+punt_max) / 2.0f;
+        vec3 half_size = (punt_min-punt_max) / 2.0f;
+        vec3 scaled_half_size = vec3(half_size.x*scale.x, half_size.y*scale.y, half_size.z*scale.z);
+        punt_min = center-scaled_half_size;
+        punt_max = center+scaled_half_size;
+        boxCenter = (punt_min+punt_max) / 2.f;
+    }
 }
 
 void Box::read (const QJsonObject &json)
@@ -203,4 +123,3 @@ void Box::print(int indentation) const
     QTextStream(stdout) << indent << "punt min:\t" << punt_min[0] << ", "<< punt_min[1] << ", "<< punt_min[2] << "\n";
     QTextStream(stdout) << indent << "punt max:\t" << punt_max[0] << ", "<< punt_max[1] << ", "<< punt_max[2] << "\n";
 }
-

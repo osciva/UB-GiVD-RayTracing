@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionNew_Box, SIGNAL(triggered()), builder, SLOT(newBox()));
     QObject::connect(ui->actionNew_Cylinder, SIGNAL(triggered()), builder, SLOT(newCylinder()));
     QObject::connect(ui->actionNew_Triangle, SIGNAL(triggered()), builder, SLOT(newTriangle()));
+    QObject::connect(ui->actionNew_Mesh, SIGNAL(triggered()), builder, SLOT(newVirtualScene()));
     QObject::connect(ui->actionGenerate_Scene, SIGNAL(triggered()), builder, SLOT(newSimulatedScene()));
     QObject::connect(ui->actionOpen_Virtual_Scene, SIGNAL(triggered()), builder, SLOT(newVirtualScene()));
     QObject::connect(ui->actionOpen_Data, SIGNAL(triggered()), builder, SLOT(newDataScene()));

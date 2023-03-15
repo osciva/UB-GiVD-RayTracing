@@ -8,6 +8,7 @@
 #include "Object.hh"
 #include "Model/Modelling/Animation.hh"
 #include "Model/Modelling/TG/TranslateTG.hh"
+#include "Model/Modelling/TG/ScaleTG.hh"
 
 class Sphere: public Object  {
 public:
@@ -27,13 +28,16 @@ public:
     vec3  getCenter() { return center;}
     float getRadius() { return radius;}
 
-private:
     // Centre de l'esfera
     vec3 center;
+
+private:
     // Radi de l'esfera
     float radius;
     // Numero PI
     const float PI = 3.141592653;
+
+    float factor;
 
 };
 

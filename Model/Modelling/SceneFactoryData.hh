@@ -5,6 +5,8 @@
 #include "Model/Modelling/SceneFactory.hh"
 #include "Model/Modelling/Materials/MaterialFactory.hh"
 #include "DataInOut/VisualMapping.hh"
+#include "Model/Modelling/TG/TranslateTG.hh"
+#include "Model/Modelling/TG/ScaleTG.hh"
 
 class SceneFactoryData : public SceneFactory
 {
@@ -13,7 +15,7 @@ class SceneFactoryData : public SceneFactory
     shared_ptr<VisualMapping> mapping;
 
 public:
-    SceneFactoryData() {};
+    SceneFactoryData() {}
     SceneFactoryData(shared_ptr<VisualMapping> mapping);
     virtual shared_ptr<Scene>  createScene(QString nomFitxer) override;
     virtual shared_ptr<Scene>  createScene() override;
@@ -31,7 +33,7 @@ public:
     void writeData (QJsonObject &json, int i) const ;
 
     shared_ptr<Scene>    visualMaps();
-    shared_ptr<Object>   objectMaps(int i);
+    shared_ptr<Object>   objectMaps(int i, int j);
     shared_ptr<Material> materialMaps(int i, int j);
 };
 

@@ -22,7 +22,7 @@ void Builder::newBox()
     else msgBox.setText("Not enough memory. Error.");
     msgBox.exec();
 }
-            
+
 void Builder::newCylinder()
 {
     vec3 center(0.0, 0.0, 0.0);
@@ -56,6 +56,7 @@ void Builder::newSimulatedScene()
    msgBox.exec();
 }
 
+
 void Builder::newVirtualScene()
 {
     QString fileName = QFileDialog::getOpenFileName();
@@ -67,6 +68,7 @@ void Builder::newVirtualScene()
         msgBox.exec();
     }
 }
+
 
 void Builder::newDataScene()
 {

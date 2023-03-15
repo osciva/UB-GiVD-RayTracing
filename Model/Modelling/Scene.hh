@@ -4,6 +4,7 @@
 #include "Hitable.hh"
 #include "Animation.hh"
 #include "Objects/Object.hh"
+#include "Objects/FittedPlane.hh"
 #include "Objects/Sphere.hh"
 
 #include "Materials/Material.hh"
@@ -44,7 +45,7 @@ public:
     // TODO: Fase 1
     // Constructora a utilitzar quan s'inicialitza una escena amb un pla base o
     // una esfera base
-    Scene(shared_ptr<Object> base);
+    Scene(shared_ptr<Object> base) {basePlane = base;}
 
     virtual ~Scene() {};
 
@@ -58,6 +59,8 @@ public:
     //    virtual bool allHits(const Ray& r, vector<shared_ptr<HitInfo> infos) const = 0;
 
     void update(int nframe);
+
+    void setGround(shared_ptr<Object> ground);
 
     void setDimensions(vec3 p1, vec3 p2);
 

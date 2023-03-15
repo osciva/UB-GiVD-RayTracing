@@ -3,5 +3,8 @@
         <file>resources/cube.obj</file>
         <file>resources/mapBCN.png</file>
         <file>resources/mapZoom.png</file>
+        <file>resources/teapot2.obj</file>
+        <file>resources/luigi.obj</file>
+        <file>resources/mario.obj</file>
     </qresource>
 </RCC>

@@ -10,103 +10,91 @@ Mesh::Mesh(const QString &fileName): Object()
 {
     nom = fileName;
     load(fileName);
-    makeTriangles();
 }
 
 Mesh::Mesh(const QString &fileName, float data): Object(data)
 {
     nom = fileName;
     load(nom);
-    makeTriangles();
+    makeTriangles(data);
 }
 
 Mesh::~Mesh() {
+    if (cares.size() > 0) cares.clear();
+    if (vertexs.size() > 0) vertexs.clear();
 }
 
-void Mesh::makeTriangles() {
+void Mesh::makeTriangles(float data) {
 
-    vec3 minX, maxX;
-    vec3 minY, maxY;
-    vec3 minZ, maxZ;
+    vec3 a;
+    vec3 b;
+    vec3 c;
 
-    /* Llegim totes les cares i creem els triangles de la mesh */
-    for (auto&& face : cares) {
-        /* Vertexs que formen la cara (triangle) */
-        int id0 = face.idxVertices[0];
-        int id1 = face.idxVertices[1];
-        int id2 = face.idxVertices[2];
+    for (Face face : cares) {
+        vector<int> idxVertices = face.getIdxVertices();
 
-        /* Obtenim màxims i mínims */
-        minX = min(vec3(vertexs[id0]),minX);
-        maxX = max(vec3(vertexs[id0]),maxX);
-        minY = min(vec3(vertexs[id1]),minY);
-        maxY = max(vec3(vertexs[id1]),maxY);
-        minZ = min(vec3(vertexs[id2]),minZ);
-        maxZ = max(vec3(vertexs[id2]),maxZ);
+        a.x= (vertexs[idxVertices[0]].x);
+        a.y= (vertexs[idxVertices[0]].y);
+        a.z= (vertexs[idxVertices[0]].z);
 
-        Triangle newTriangle = Triangle(vec3(vertexs[id0]), vec3(vertexs[id1]), vec3(vertexs[id2]),data);
-        newTriangle.setMaterial(make_shared<Lambertian>(vec3(0.5, 0.2, 0.7)));
+        b.x= (vertexs[idxVertices[1]].x);
+        b.y= (vertexs[idxVertices[1]].y);
+        b.z= (vertexs[idxVertices[1]].z);
 
-        /* Afegim la cara */
+        c.x= (vertexs[idxVertices[2]].x);
+        c.y= (vertexs[idxVertices[2]].y);
+        c.z= (vertexs[idxVertices[2]].z);
+
+        Triangle newTriangle = Triangle(a,b, c, data);
         triangles.push_back(newTriangle);
     }
-
-    box = new Box(minX, maxX, data);
-
-    makeBoundingSphere();
-}
-
-void Mesh::makeBoundingSphere() {
-    // Calculate center of bounding sphere
-    vec3 center(0.0f);
-    for (auto&& vertex : vertexs) {
-        center += vec3(vertex);
-    }
-    center /= vertexs.size();
-
-    // Calculate radius of bounding sphere
-    float radius = 0.0f;
-    for (auto&& vertex : vertexs) {
-        float distance = length(vec3(vertex) - center);
-        if (distance > radius) {
-            radius = distance;
-        }
-    }
-
-    // Create bounding sphere
-    sphere = new Sphere(center, radius, data);
 }
 
 bool Mesh::hit(Ray &r, float t_min, float t_max, HitInfo &info) const {
     bool hit_anything = false;
-    float closest_so_far(numeric_limits<float>::infinity());
+    float closest_so_far = t_max;
 
-    if(box->hit(r, t_min, t_max, info)) {
-        if(sphere->hit(r, t_min, t_max, info)) {
-            for (auto&& t : triangles) {
-                if (t.hit(r, t_min, t_max, info)) {
-
-                    if(info.t < closest_so_far){
-                        closest_so_far = info.t;
-                    }
-                    hit_anything = true;
-                }
-            }
+    for (const auto& triangle : triangles) {
+        HitInfo triangle_info;
+        if (triangle.hit(r, t_min, closest_so_far, triangle_info)) {
+            hit_anything = true;
+            closest_so_far = triangle_info.t;
+            info = triangle_info;
         }
     }
-
-    /* Actualitzem la informació */
-    info.t = closest_so_far;
-    info.p = r.pointAtParameter(info.t);
-    info.normal = vec3(info.p.x, 0, info.p.z);
-    info.mat_ptr = material.get();
-
     return hit_anything;
 }
 
+
 void Mesh::aplicaTG(shared_ptr<TG> tg) {
-    for (auto&& t : triangles) {
-        t.aplicaTG(tg);
+    for (Triangle t : triangles) {
+        vec4 v1(t.vertexs[0], 1.0);
+        vec4 v2(t.vertexs[1], 1.0);
+        vec4 v3(t.vertexs[2], 1.0);
+
+        if (dynamic_pointer_cast<TranslateTG>(tg)) {
+            v1 = tg->getTG() * v1;
+            v2 = tg->getTG() * v2;
+            v3 = tg->getTG() * v3;
+
+            t.vertexs[0].x = t.vertexs[0].x; t.vertexs[0].y = v1.y; t.vertexs[0].z = v1.z;
+            t.vertexs[1].x = t.vertexs[1].x; t.vertexs[1].y = t.vertexs[1].y; t.vertexs[1].z = v2.z;
+            t.vertexs[2].x = t.vertexs[2].x; t.vertexs[2].y = t.vertexs[2].y; t.vertexs[2].z = v3.z;
+        }
+
+         if (dynamic_pointer_cast<TranslateTG>(tg)) {
+            v1 = tg->getTG() * v1;
+            v2 = tg->getTG() * v2;
+            v3 = tg->getTG() * v3;
+
+            float factorA = t.vertexs[0].x/v1.x;
+            float factorB = t.vertexs[1].x/v2.x;
+            float factorC = t.vertexs[2].x/v3.x;
+
+            t.vertexs[0].x *= factorA; t.vertexs[0].y *= factorA; t.vertexs[0].z *= factorA;
+            t.vertexs[1].x *= factorB; t.vertexs[1].y *= factorB; t.vertexs[1].z *= factorB;
+            t.vertexs[2].x *= factorC; t.vertexs[2].y *= factorC; t.vertexs[2].z *= factorC;
+        }
     }
 }
 
@@ -171,7 +159,6 @@ void Mesh::read (const QJsonObject &json)
     if (json.contains("objFileName") && json["objFileName"].isString()) {
         nom = json["objFileName"].toString();
         load(nom);
-        makeTriangles();
     }
 }
 
