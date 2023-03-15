@@ -50,19 +50,23 @@ void Mesh::makeTriangles() {
         /* Afegim la cara */
         triangles.push_back(newTriangle);
     }
+
+    box = new Box(minX, maxX, data);
 }
 
 bool Mesh::hit(Ray &r, float t_min, float t_max, HitInfo &info) const {
     bool hit_anything = false;
     float closest_so_far(numeric_limits<float>::infinity());
 
-    for (auto&& t : triangles) {
-        if (t.hit(r, t_min, t_max, info)) {
+    if(box->hit(r, t_min, t_max, info)) {
+        for (auto&& t : triangles) {
+            if (t.hit(r, t_min, t_max, info)) {
 
-            if(info.t < closest_so_far){
-                closest_so_far = info.t;
+                if(info.t < closest_so_far){
+                    closest_so_far = info.t;
+                }
+                hit_anything = true;
             }
-            hit_anything = true;
         }
     }
 
@@ -75,7 +79,6 @@ bool Mesh::hit(Ray &r, float t_min, float t_max, HitInfo &info) const {
     return hit_anything;
 }
 
-/* CHECK THIS METHOD FOR BOUNDARY OBJECTS */
 void Mesh::aplicaTG(shared_ptr<TG> tg) {
     for (auto&& t : triangles) {
         t.aplicaTG(tg);

@@ -16,6 +16,7 @@
 #include "Object.hh"
 #include "Face.hh"
 #include "Triangle.hh"
+#include "Box.hh"
 
 using namespace std;
 using namespace glm;
@@ -46,5 +47,6 @@ private:
 
     void load(QString filename);
     void makeTriangles();
+    Box* box;
 };
 
