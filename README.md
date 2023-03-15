@@ -122,16 +122,19 @@ Creació de nous objectes i interseccions (VIRTUALWORLD):
 
 
 Creació de REAL DATA:
-    - Fitted Plane & Transformacions (Translació i Escalat amb gizmos esferes):
+
+- Fitted Plane & Transformacions (Translació i Escalat amb gizmos esferes):
     <p align="center">
     <img src="https://user-images.githubusercontent.com/47271218/225163352-b813e93e-e98c-47c8-bd73-d05727760105.png" alt="Hit Mesh" width="45%">
     </p>
-    
-    - Gizmo de Box:
-    
-    - Noves dades:
+  
+- Gizmo de Box:
 
-
+- Noves dades:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/225280337-75948158-caf4-4962-8a87-17cfb9233474.png" alt="Noves Dades" width="45%">
+    </p>
+    
 * **Opcionals**:
 Fase 1:
     - Hit Cilindre:
