@@ -232,3 +232,9 @@ void MainWindow::setColorBottom() {
 
 
 
+
+void MainWindow::on_actionNew_Box_triggered()
+{
+
+}
+

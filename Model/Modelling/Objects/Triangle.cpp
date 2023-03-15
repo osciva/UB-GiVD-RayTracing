@@ -10,9 +10,7 @@ Triangle::Triangle() {
     vertexs.push_back(B);
     vertexs.push_back(C);
 
-    normal = normalize(cross(B - A, C - A));
-
-    setPlane();
+    //setPlane();
 }
 
 /* Crear un triangle a partir de 3 punts */

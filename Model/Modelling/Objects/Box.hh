@@ -34,8 +34,3 @@ public:
 private:
     float data;
 };
-
-
-
-
-

@@ -1,8 +1,6 @@
 #include "Box.hh"
 #include <glm/glm.hpp>
 
-const float EPSILON = 0.0001f;
-
 Box::Box() {
     punt_min = vec3(-1,-1,-1);
     punt_max = vec3(1,1,1);
@@ -125,4 +123,3 @@ void Box::print(int indentation) const
     QTextStream(stdout) << indent << "punt min:\t" << punt_min[0] << ", "<< punt_min[1] << ", "<< punt_min[2] << "\n";
     QTextStream(stdout) << indent << "punt max:\t" << punt_max[0] << ", "<< punt_max[1] << ", "<< punt_max[2] << "\n";
 }
-

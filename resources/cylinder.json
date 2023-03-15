@@ -1,0 +1,22 @@
+{
+"scene": "un cilindre",
+"typeScene": "VIRTUAL",
+"objects": [
+{
+  "name": "Cilindre",
+  "type": "CYLINDER",
+  "radious": 2.0,
+  "h": 4.0,
+  "center": [0.0, 0.0, 0.0],
+  "material": {
+    "type": "lambertian",
+    "ka": [0.2, 0.2, 0.2],
+    "kd": [0.5, 0.5, 0.5],
+    "ks": [1.0, 1.0, 1.0],
+    "shininess": 10.0,
+    "kt": [0.0, 0.0, 0.0],
+    "nut": 0.0
+    }
+}
+]
+}
