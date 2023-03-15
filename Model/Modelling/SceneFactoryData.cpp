@@ -241,23 +241,17 @@ shared_ptr<Object> SceneFactoryData::objectMaps(int i, int j) {
     float valorMonVirtual;
     shared_ptr<ScaleTG> sg;
 
+    float minVirtual = 0.1f, maxVirtual = (mapping->Vymax - mapping->Vymin) / 2;
+    float minReal = attributeMapping->minValue, maxReal = attributeMapping->maxValue;
+
+    valorMonVirtual = ((valorMonReal - minReal) / (maxReal - minReal));
+    valorMonVirtual = valorMonVirtual * (maxVirtual) + minVirtual;
+
     if(dynamic_pointer_cast<Sphere>(o) != nullptr) {
         dynamic_pointer_cast<Sphere>(o)->center.y = y_plaBase.y;
-        float minVirtual = 0.1f, maxVirtual = (mapping->Vymax - mapping->Vymin) / 2;
-        float minReal = attributeMapping->minValue, maxReal = attributeMapping->maxValue;
-
-        valorMonVirtual = ((valorMonReal - minReal) / (maxReal - minReal));
-        valorMonVirtual = valorMonVirtual * (maxVirtual) + minVirtual;
 
         sg = make_shared<ScaleTG>(vec3(valorMonVirtual, valorMonVirtual, -valorMonVirtual));
     } else if (dynamic_pointer_cast<Box>(o) != nullptr) {
-        float valorMonVirtual;
-        float minYVirtual = -1.0f, maxYVirtual = 1.0f;
-        float minReal = attributeMapping->minValue, maxReal = attributeMapping->maxValue;
-
-        valorMonVirtual = ((valorMonReal - minReal) / (maxReal - minReal));
-        valorMonVirtual = valorMonVirtual * (maxYVirtual - minYVirtual) + minYVirtual;
-
         /* Escalem nomes les Y's per tenir ben representades les dades */
         sg = make_shared<ScaleTG>(vec3(1.0f, valorMonVirtual, 1.0f));
     }
