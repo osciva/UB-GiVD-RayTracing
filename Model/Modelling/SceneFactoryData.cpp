@@ -252,6 +252,12 @@ shared_ptr<Object> SceneFactoryData::objectMaps(int i, int j) {
 
         sg = make_shared<ScaleTG>(vec3(valorMonVirtual, valorMonVirtual, -valorMonVirtual));
     } else if (dynamic_pointer_cast<Box>(o) != nullptr) {
+        /* Primer situem la Box a les mateixes Y_axis que el FittedPlane */
+        float y_translation = y_plaBase.y - dynamic_pointer_cast<Box>(o)->boxCenter.y;
+        glm::vec3 translation(0.0f, y_translation, 0.0f);
+        dynamic_pointer_cast<Box>(o)->punt_min += translation;
+        dynamic_pointer_cast<Box>(o)->punt_max += translation;
+
         /* Escalem nomes les Y's per tenir ben representades les dades */
         sg = make_shared<ScaleTG>(vec3(1.0f, valorMonVirtual, 1.0f));
     }

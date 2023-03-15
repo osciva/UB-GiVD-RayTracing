@@ -65,13 +65,19 @@ void Box::aplicaTG(shared_ptr<TG> t) {
         // Per ara només es fan les translacions
         vec4 c(boxCenter, 1.0);
         c = t->getTG() * c;
-        boxCenter.x = c.x; boxCenter.y = c.y; boxCenter.z = c.z;
+        vec3 translation = dynamic_pointer_cast<TranslateTG>(t)->traslation;
+        punt_min += translation;
+        punt_max += translation;
+        boxCenter = (punt_min+punt_max) / 2.f;
     }
 
     if (dynamic_pointer_cast<ScaleTG>(t)) {
         vec3 scale = dynamic_pointer_cast<ScaleTG>(t)->scalation;
-        punt_min = (punt_min - boxCenter) * scale + boxCenter;
-        punt_max = (punt_max - boxCenter) * scale + boxCenter;
+        vec3 center = (punt_min+punt_max) / 2.0f;
+        vec3 half_size = (punt_min-punt_max) / 2.0f;
+        vec3 scaled_half_size = vec3(half_size.x*scale.x, half_size.y*scale.y, half_size.z*scale.z);
+        punt_min = center-scaled_half_size;
+        punt_max = center+scaled_half_size;
         boxCenter = (punt_min+punt_max) / 2.f;
     }
 }

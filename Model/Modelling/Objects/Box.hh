@@ -25,14 +25,13 @@ public:
     virtual void write(QJsonObject &json) const override;
     virtual void print(int indentation) const override;
 
-private:
     // Vèrtex mínim del box
     vec3 punt_min;
     // Vèrtex màxim del box
     vec3 punt_max;
 
     vec3 boxCenter;
-
+private:
     float data;
 };
 
