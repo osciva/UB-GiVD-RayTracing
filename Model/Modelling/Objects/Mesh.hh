@@ -17,6 +17,7 @@
 #include "Face.hh"
 #include "Triangle.hh"
 #include "Box.hh"
+#include "Sphere.hh"
 
 using namespace std;
 using namespace glm;
@@ -47,6 +48,8 @@ private:
 
     void load(QString filename);
     void makeTriangles();
+    void makeBoundingSphere();
     Box* box;
+    Sphere* sphere;
 };
 

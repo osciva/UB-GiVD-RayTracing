@@ -52,6 +52,29 @@ void Mesh::makeTriangles() {
     }
 
     box = new Box(minX, maxX, data);
+
+    makeBoundingSphere();
+}
+
+void Mesh::makeBoundingSphere() {
+    // Calculate center of bounding sphere
+    vec3 center(0.0f);
+    for (auto&& vertex : vertexs) {
+        center += vec3(vertex);
+    }
+    center /= vertexs.size();
+
+    // Calculate radius of bounding sphere
+    float radius = 0.0f;
+    for (auto&& vertex : vertexs) {
+        float distance = length(vec3(vertex) - center);
+        if (distance > radius) {
+            radius = distance;
+        }
+    }
+
+    // Create bounding sphere
+    sphere = new Sphere(center, radius, data);
 }
 
 bool Mesh::hit(Ray &r, float t_min, float t_max, HitInfo &info) const {
@@ -59,13 +82,15 @@ bool Mesh::hit(Ray &r, float t_min, float t_max, HitInfo &info) const {
     float closest_so_far(numeric_limits<float>::infinity());
 
     if(box->hit(r, t_min, t_max, info)) {
-        for (auto&& t : triangles) {
-            if (t.hit(r, t_min, t_max, info)) {
+        if(sphere->hit(r, t_min, t_max, info)) {
+            for (auto&& t : triangles) {
+                if (t.hit(r, t_min, t_max, info)) {
 
-                if(info.t < closest_so_far){
-                    closest_so_far = info.t;
+                    if(info.t < closest_so_far){
+                        closest_so_far = info.t;
+                    }
+                    hit_anything = true;
                 }
-                hit_anything = true;
             }
         }
     }
