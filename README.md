@@ -113,6 +113,12 @@ Creació de nous objectes i interseccions (VIRTUALWORLD):
     <p align="center">
     <img src="https://user-images.githubusercontent.com/47271218/225109807-a1d36b94-88f0-41d5-9eb8-3e6e7215e410.png" alt="Hit Mesh" width="45%">
     </p>
+    
+    - Bounding Box & Bounding Sphere:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/225279162-3210322c-a20e-41c0-8f28-ebc8bb6999a7.png" alt="Bounding Box" width="45%">
+     <img src="https://user-images.githubusercontent.com/47271218/225279307-dd3316db-a0af-4ce5-9c47-acef0d8eb1e5.png" alt="Bounding Sphere" width="45%">
+    </p>
 
 
 Creació de REAL DATA:
@@ -132,7 +138,7 @@ Fase 1:
     <p align="center">
     <img src="https://user-images.githubusercontent.com/47271218/224562896-ef66aff3-31af-4436-82c7-8d04bf7d23f2.png" alt="Hit Cilindre" width="45%">
     </p>
-    
+
 
 * **Més visualitzacions**:
 
