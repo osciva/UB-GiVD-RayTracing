@@ -6,7 +6,7 @@ void Builder::newSphere()
     vec3 position(0.0, 0.0, 0.0);
     float radius = 0.5;
     QMessageBox msgBox;
-    if (Controller::getInstance()->createScene(position, radius,"setupRenderOneSphere.json"))
+    if (Controller::getInstance()->createScene(position, radius))
             msgBox.setText("One Sphere is created.");
     else msgBox.setText("Not enough memory. Error.");
     msgBox.exec();
