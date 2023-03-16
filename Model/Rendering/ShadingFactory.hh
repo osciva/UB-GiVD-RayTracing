@@ -5,6 +5,7 @@
 #include "NormalShading.hh"
 #include "DepthShading.hh"
 #include "ColorShadow.hh"
+#include "BlinnPhongShading.hh"
 
 class ShadingFactory
 {

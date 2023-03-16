@@ -66,6 +66,7 @@ private:
     shared_ptr<ShadingStrategy> shade;
 
     // FASE 2: Afegir llums a l'escena
+
     // Vector de llums de l'escena
     std::vector<shared_ptr<Light>> lights;
     // Llum global
