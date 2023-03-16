@@ -6,7 +6,7 @@ void Builder::newSphere()
     vec3 position(0.0, 0.0, 0.0);
     float radius = 0.5;
     QMessageBox msgBox;
-    if (Controller::getInstance()->createScene(position, radius))
+    if (Controller::getInstance()->createScene(position, radius,"setupRenderOneSphere.json"))
             msgBox.setText("One Sphere is created.");
     else msgBox.setText("Not enough memory. Error.");
     msgBox.exec();
@@ -107,6 +107,14 @@ void Builder::activaNormalShading() {
     QMessageBox msgBox;
     if (Controller::getInstance()->createShading(ShadingFactory::SHADING_TYPES::NORMAL)) {
         msgBox.setText("Normal Shading created.");
+    } else msgBox.setText("Error creating shading");
+    msgBox.exec();
+}
+
+void Builder::activaBlinn_Phong() {
+    QMessageBox msgBox;
+    if (Controller::getInstance()->createShading(ShadingFactory::SHADING_TYPES::BLINNPHONG)) {
+        msgBox.setText("Blinn-Phong created.");
     } else msgBox.setText("Error creating shading");
     msgBox.exec();
 }
