@@ -43,7 +43,12 @@ En aquest fitxer cal que feu l'informe de la pràctica 1.
           - Noah (Reviewed by: Alejandro, Oscar & Adrià)
         - [✅] Noves dades
           - Noah (Reviewed by: Alejandro, Oscar & Adrià)
-       
+  - Fase 2
+    - Pas 1. Abans de començar la Fase 2
+        - [✅] Solucionar l'aliasing
+          - Noah (Reviewed by: Alejandro, Oscar & Adrià)
+        - [✅] Aplicar Gamma Correction
+          - Noah (Reviewed by: Alejandro, Oscar & Adrià)
 
 - Parts opcionals: 
   - [✅] Cilindres
@@ -54,7 +59,6 @@ En aquest fitxer cal que feu l'informe de la pràctica 1.
    
   - [ ] Mapeig de les dades reals en una esfera
   
-    
     
 ### Explicació de la pràctica    
   * **Organització de la pràctica**
@@ -144,7 +148,29 @@ Fase 1:
     <p align="center">
     <img src="https://user-images.githubusercontent.com/47271218/224562896-ef66aff3-31af-4436-82c7-8d04bf7d23f2.png" alt="Hit Cilindre" width="45%">
     </p>
+    
+    
+* **Fase 2**: 
+Pas 1. Abans de començar la Fase 2:
 
+- Aliasing (BEFORE):
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226004637-653efb17-54eb-4ecc-91d7-bf0e9e800adb.png" alt="Aliasing before" width="45%">
+    <img src="https://user-images.githubusercontent.com/47271218/226004989-f80dfe51-3897-4a73-95c6-da697d3683dc.png" alt="Aliasing before (zoom)" width="45%">
+    </p>
+
+
+- Aliasing (AFTER):
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226005206-3f0b4f10-9e6e-40f7-83cf-b1d1f24f8f8c.png" alt="Aliasing after" width="45%">
+    <img src="https://user-images.githubusercontent.com/47271218/226005763-caa344db-2c4b-4f79-a571-b8c304f9f9f9.png" alt="Aliasing after (zoom)" width="45%">
+    </p>
+
+
+- Gamma Correction:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226005206-3f0b4f10-9e6e-40f7-83cf-b1d1f24f8f8c.png" alt="Gamma Correction" width="45%">
+    </p>
 
 * **Més visualitzacions**:
 
