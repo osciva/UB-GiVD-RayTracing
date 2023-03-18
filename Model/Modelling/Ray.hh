@@ -1,5 +1,6 @@
 #pragma once
 #include "glm/glm.hpp"
+#include "glm/gtc/random.hpp"
 
 
 using namespace glm;
@@ -20,6 +21,10 @@ class Ray {
     /* retorna el punt del raig en en temps/lambda t */
     vec3 operator() (const float &t) const {
       return origin + direction*t;
+    }
+
+    double random (double const & Min, double const & Max){
+        return linearRand(Min, Max);
     }
 
     vec3 getOrigin() const       { return origin; }
