@@ -2,11 +2,9 @@
 
 #include "ShadingStrategy.hh"
 
-class DepthShading: public ShadingStrategy
-{
+class PhongShading: public ShadingStrategy {
 public:
-    DepthShading() {}
+    PhongShading() {}
     vec3 shading(shared_ptr<Scene> scene, HitInfo& info, vec3 lookFrom, vector<shared_ptr<Light>> lights, vec3 globalLight) override;
-    ~DepthShading(){}
+    ~PhongShading(){}
 };
-

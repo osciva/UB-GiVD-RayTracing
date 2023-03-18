@@ -21,6 +21,8 @@ public slots:
     void activaColorShading();
     void activaNormalShading();
     void activaDepthShading();
+    void activaBlinn_Phong();
+    void activaPhongShader();
 
 signals:
      void settingsChanged();

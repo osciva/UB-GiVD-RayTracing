@@ -96,7 +96,7 @@ vec3 RayTracer::RayPixel(Ray &ray) {
     if(shading_type != ShadingFactory::SHADING_TYPES::NOSHADING && scene->hit(ray, 0.001, numeric_limits<float>::infinity(), info)){
         /* L'expressió ray.getOrigin() + info.t * ray.getDirection() calcula el punt de l'espai 3D on el raig
         talla amb un objecte de l'escena */
-        color = s->shading(scene, info, ray.getOrigin());
+        color = s->shading(scene, info, ray.getOrigin(), setup->getLights(), setup->getGlobalLight());
     }
 
     return color;
