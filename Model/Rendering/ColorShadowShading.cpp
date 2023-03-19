@@ -5,7 +5,7 @@ vec3 BlinnPhongShadowShading::shading(shared_ptr<Scene> scene, HitInfo& info, ve
 
     vec3 total = vec3(0,0,0);
     vec3 diffuse, specular, H, L, V, ia, id, is, ka, kd, ks, N, ambient;
-    float beta, factor, dist, factorOmbra;
+    float beta, factor, dist, factorOmbra;;
     vec3 ambientGl = globalLight * info.mat_ptr->Ka;
 
     ka = info.mat_ptr->Ka; /* Component ambient */

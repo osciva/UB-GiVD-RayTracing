@@ -50,7 +50,9 @@ SOURCES += \
     Model/Rendering/ColorShadow.cpp \
     Model/Rendering/DepthShading.cpp \
     Model/Rendering/NormalShading.cpp \
+    Model/Rendering/NormalShadow.cpp \
     Model/Rendering/PhongShading.cpp \
+    Model/Rendering/PhongShadow.cpp \
     Model/Rendering/RayTracer.cc \
     Model/Rendering/SetUp.cpp \
     Model/Rendering/ShadingFactory.cpp \
@@ -105,7 +107,9 @@ HEADERS += \
     Model/Rendering/ColorShadow.hh \
     Model/Rendering/DepthShading.hh \
     Model/Rendering/NormalShading.hh \
+    Model/Rendering/NormalShadow.hh \
     Model/Rendering/PhongShading.hh \
+    Model/Rendering/PhongShadow.hh \
     Model/Rendering/RayTracer.hh \
     Model/Rendering/SetUp.hh \
     Model/Rendering/ShadingFactory.hh \
