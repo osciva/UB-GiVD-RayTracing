@@ -5,8 +5,11 @@
 #include "NormalShading.hh"
 #include "DepthShading.hh"
 #include "ColorShadow.hh"
+#include "NormalShadow.hh"
 #include "BlinnPhongShading.hh"
+#include "BlinnPhongShadowShading.hh"
 #include "PhongShading.hh"
+#include "PhongShadow.hh"
 #include "CellShading.hh"
 
 class ShadingFactory
@@ -18,8 +21,12 @@ public:
         COLOR,
         COLORSHADOW,
         NORMAL,
+        NORMALSHADOW,
         DEPTH,
         PHONG,
+        PHONGSHADOW,
+        BLINNPHONG,
+        BLINNPHONGSHADOW
         BLINNPHONG,
         CELL
     } SHADING_TYPES;

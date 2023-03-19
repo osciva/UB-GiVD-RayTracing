@@ -1,11 +1,11 @@
-#include "BlinnPhongShading.hh"
+#include "BlinnPhongShadowShading.hh"
 
-vec3 BlinnPhongShading::shading(shared_ptr<Scene> scene, HitInfo& info, vec3 lookFrom, vector<shared_ptr<Light>> lights, vec3 globalLight) {
+vec3 BlinnPhongShadowShading::shading(shared_ptr<Scene> scene, HitInfo& info, vec3 lookFrom, vector<shared_ptr<Light>> lights, vec3 globalLight) {
     //I = kaIa (ambient) + kdId cos( ⃗ L , ⃗ N ) (difosa) + ksIs cos( ⃗ N , ⃗ H)β (especular)
 
     vec3 total = vec3(0,0,0);
     vec3 diffuse, specular, H, L, V, ia, id, is, ka, kd, ks, N, ambient;
-    float beta, factor, dist;
+    float beta, factor, dist, factorOmbra;
     vec3 ambientGl = globalLight * info.mat_ptr->Ka;
 
     ka = info.mat_ptr->Ka; /* Component ambient */
@@ -29,10 +29,22 @@ vec3 BlinnPhongShading::shading(shared_ptr<Scene> scene, HitInfo& info, vec3 loo
         diffuse = id * info.mat_ptr->getDiffuse(info.uv) * glm::max(dot(L,N), 0.0f);
         specular = is * ks * pow(glm::max(dot(N, H), 0.0f), beta);
         ambient = ia * ka;
-
-        total += ((diffuse+specular)/factor) + ambient;
+        factorOmbra = this->computeShadow(scene, lights[i], info.p);
+        total += (factorOmbra*((diffuse+specular)/factor)) + ambient;
     }
 
     return total + ambientGl;
+}
+
+float BlinnPhongShadowShading::computeShadow(shared_ptr<Scene> scene, shared_ptr<Light> light, vec3 point) {
+    vec3 l;
+    l = normalize(light->vectorL(point));
+    point = point + (vec3(DBL_EPSILON,DBL_EPSILON,DBL_EPSILON)*l);
+    Ray p_llum(point, l);
+    HitInfo info;
+    if(scene->hit(p_llum, 0.001, numeric_limits<float>::infinity(), info)){
+        return 0;
+    }
+    return 1;
 }
 

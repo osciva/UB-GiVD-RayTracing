@@ -118,3 +118,5 @@ void Plane::print(int indentation) const
     QTextStream(stdout) << indent << "normal:\t" << normal[0] << ", "<< normal[1] << ", "<< normal[2] << "\n";
 
 }
+
+

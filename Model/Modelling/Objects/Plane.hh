@@ -18,7 +18,6 @@ public:
 
     virtual void aplicaTG(shared_ptr<TG> tg) override;
 
-
     virtual void read (const QJsonObject &json) override;
     virtual void write(QJsonObject &json) const override;
     virtual void print(int indentation) const override;

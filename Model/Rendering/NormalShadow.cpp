@@ -1,8 +1,9 @@
-#include "ColorShadow.hh"
+#include "NormalShadow.hh"
 
-vec3 ColorShadow::shading(shared_ptr<Scene> scene, HitInfo& info, vec3 lookFrom, vector<shared_ptr<Light>> lights, vec3 globalLight) {
+vec3 NormalShadow::shading(shared_ptr<Scene> scene, HitInfo& info, vec3 lookFrom, vector<shared_ptr<Light>> lights, vec3 globalLight) {
     //I = kaIa (ambient) + kdId cos( ⃗ L , ⃗ N ) (difosa) + ksIs cos( ⃗ N , ⃗ H)β (especular)
-    vec3 color = info.mat_ptr->Kd;
+    vec3 N = normalize(info.normal);
+    vec3 color = 0.5f * (N + vec3(1.0));
     vec3 total = vec3(0,0,0);
     vec3 diffuse, ambient;
     vec3 ka = info.mat_ptr->Ka; /* Component ambient */
@@ -38,7 +39,7 @@ vec3 ColorShadow::shading(shared_ptr<Scene> scene, HitInfo& info, vec3 lookFrom,
     return total;
  }
 
-float ColorShadow::computeShadow(shared_ptr<Scene> scene, shared_ptr<Light> light, vec3 point) {
+float NormalShadow::computeShadow(shared_ptr<Scene> scene, shared_ptr<Light> light, vec3 point) {
     vec3 l;
     l = normalize(light->vectorL(point));
     point = point + (vec3(DBL_EPSILON,DBL_EPSILON,DBL_EPSILON)*l);
@@ -49,4 +50,5 @@ float ColorShadow::computeShadow(shared_ptr<Scene> scene, shared_ptr<Light> ligh
     }
     return 1;
 }
+
 
