@@ -30,6 +30,9 @@ shared_ptr<ShadingStrategy> ShadingFactory::createShading(SHADING_TYPES t) {
     case PHONGSHADOW:
         s = make_shared<PhongShadow>();
         break;
+    case CELL:
+        s = make_shared<CellShading>();
+        break;
     default:
         s = nullptr;
     }
@@ -46,6 +49,7 @@ ShadingFactory::SHADING_TYPES ShadingFactory::getShadingType(QString name) {
     else if (name =="BLINNPHONGSHADOW") return SHADING_TYPES::BLINNPHONGSHADOW;
     else if (name == "PHONG") return SHADING_TYPES::PHONG;
     else if (name == "PHONGSHADOW") return SHADING_TYPES::PHONGSHADOW;
+    else if (name == "CELL") return SHADING_TYPES::CELL;
 }
 
 QString ShadingFactory::getNameType(SHADING_TYPES t) {
@@ -77,6 +81,9 @@ QString ShadingFactory::getNameType(SHADING_TYPES t) {
     case PHONGSHADOW:
         return (QString("PHONGSHADOW"));
         break;
+    case CELL:
+        return (QString("CELL"));
+        break;
     default:
         return(QString(""));
     }
@@ -100,6 +107,8 @@ ShadingFactory::SHADING_TYPES ShadingFactory::getIndexType(shared_ptr<ShadingStr
         return SHADING_TYPES::PHONG;
     } else if (dynamic_pointer_cast<PhongShadow>(m) != nullptr) {
         return SHADING_TYPES::PHONGSHADOW;
+    } else if (dynamic_pointer_cast<CellShading>(m) != nullptr) {
+        return SHADING_TYPES::CELL;
     } else
         return SHADING_TYPES::NOSHADING;
 }
@@ -130,6 +139,8 @@ shared_ptr<ShadingStrategy> ShadingFactory:: switchShading(shared_ptr<ShadingStr
             m_out = createShading(BLINNPHONG);
         } else if (dynamic_pointer_cast<PhongShading>(m) != nullptr) {
             m_out = createShading(PHONG);
+        } else if (dynamic_pointer_cast<CellShading>(m) != nullptr) {
+            m_out = createShading(CELL);
         }
     }
     return m_out;
