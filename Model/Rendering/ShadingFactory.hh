@@ -25,8 +25,7 @@ public:
         DEPTH,
         PHONG,
         PHONGSHADOW,
-        BLINNPHONG,
-        BLINNPHONGSHADOW
+        BLINNPHONGSHADOW,
         BLINNPHONG,
         CELL
     } SHADING_TYPES;
