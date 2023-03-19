@@ -98,7 +98,6 @@ vec3 RayTracer::RayPixel(Ray &ray) {
         talla amb un objecte de l'escena */
         color = s->shading(scene, info, ray.getOrigin(), setup->getLights(), setup->getGlobalLight());
     }
-
     return color;
 }
 
