@@ -43,7 +43,33 @@ En aquest fitxer cal que feu l'informe de la pràctica 1.
           - Noah (Reviewed by: Alejandro, Oscar & Adrià)
         - [✅] Noves dades
           - Noah (Reviewed by: Alejandro, Oscar & Adrià)
-       
+  - Fase 2
+    - Pas 1. Abans de començar la Fase 2
+        - [✅] Solucionar l'aliasing
+          - Noah (Reviewed by: Alejandro, Oscar & Adrià)
+        - [✅] Aplicar Gamma Correction
+          - Noah (Reviewed by: Alejandro, Oscar & Adrià)
+    - Pas 2. Implementació dels diferents shadings
+        - [✅] Blinn-Phong Shading
+          - Alejandro & Oscar & Noah & Adrià
+        - [✅] Phong Shading
+          - Noah (Reviewed by: Alejandro, Oscar & Adrià)
+        - [✅] Cel Shading
+          - Noah (Reviewed by: Alejandro, Oscar & Adrià)
+    - Pas 3. Afegir ombres
+        - [✅] Blinn-Phong Shadow
+          - Alejandro (Reviewed by: Noah, Oscar & Adrià)
+        - [✅] Phong Shadow
+          - Alejandro (Reviewed by: Noah, Oscar & Adrià)
+        - [✅] Color Shadow
+          - Alejandro (Reviewed by: Noah, Oscar & Adrià)
+        - [✅] Normal Shadow
+          - Alejandro (Reviewed by: Noah, Oscar & Adrià)
+        - [✅] Cel Shadow
+          - Alejandro (Reviewed by: Noah, Oscar & Adrià)
+        - [✅] Escena més complexa
+          - Noah (Reviewed by: Alejandro, Oscar & Adrià)
+        
 
 - Parts opcionals: 
   - [✅] Cilindres
@@ -54,7 +80,6 @@ En aquest fitxer cal que feu l'informe de la pràctica 1.
    
   - [ ] Mapeig de les dades reals en una esfera
   
-    
     
 ### Explicació de la pràctica    
   * **Organització de la pràctica**
@@ -144,7 +169,109 @@ Fase 1:
     <p align="center">
     <img src="https://user-images.githubusercontent.com/47271218/224562896-ef66aff3-31af-4436-82c7-8d04bf7d23f2.png" alt="Hit Cilindre" width="45%">
     </p>
+    
+    
+* **Fase 2**: 
+Pas 1. Abans de començar la Fase 2:
 
+- Aliasing (BEFORE):
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226004637-653efb17-54eb-4ecc-91d7-bf0e9e800adb.png" alt="Aliasing before" width="45%">
+    <img src="https://user-images.githubusercontent.com/47271218/226004989-f80dfe51-3897-4a73-95c6-da697d3683dc.png" alt="Aliasing before (zoom)" width="45%">
+    </p>
+
+
+- Aliasing (AFTER):
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226005206-3f0b4f10-9e6e-40f7-83cf-b1d1f24f8f8c.png" alt="Aliasing after" width="45%">
+    <img src="https://user-images.githubusercontent.com/47271218/226005763-caa344db-2c4b-4f79-a571-b8c304f9f9f9.png" alt="Aliasing after (zoom)" width="45%">
+    </p>
+
+
+- Gamma Correction:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226005206-3f0b4f10-9e6e-40f7-83cf-b1d1f24f8f8c.png" alt="Gamma Correction" width="45%">
+    </p>
+    
+Pas 2. Implementació dels diferents shadings:
+
+- Blinn-Phong Shading:
+
+    a. Només component ambient
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226171631-fa26adaf-36ad-4c2a-b870-eab2e09e6967.png" alt="Component ambient" width="45%">
+    </p>
+    
+    b. Només component difosa
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226171640-b79b1244-4649-4490-932e-1cb0879e0ed4.png" alt="Component difosa" width="45%">
+    </p>
+    
+    c. Només component especular
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226171660-1e67634a-aa8c-41bd-9837-b1527310f756.png" alt="Component especular" width="45%">
+    </p>
+    
+    d. Les tres juntes
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226171669-74b66a44-58e9-421c-8ddc-bfaa3957efaa.png" alt="Les tres components" width="45%">
+    </p>
+    
+    e. Afegint atenuació amb profunditat
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226171678-5499d916-5be5-4e8a-822e-90000247e597.png" alt="Atenuació amb profunditat" width="45%">
+    </p>
+    
+    f. Afegint ambient global
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226171686-de5b7df7-b7ab-4d90-8bc3-c8432c069430.png" alt="Ambient global" width="45%">
+    </p>
+    
+- Phong Shading:
+
+    a. Només component ambient
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226171799-c1853834-6e41-4f9a-910a-3051960c84e2.png" alt="Component ambient" width="45%">
+    </p>
+    
+    b. Només component difosa
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226171819-4b9f652b-b0bc-45c6-9245-bf9468cc3791.png" alt="Component difosa" width="45%">
+    </p>
+    
+    c. Només component especular
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226171835-abbd26f6-db5d-4d6d-a88c-d7c9c5e50d6c.png" alt="Component especular" width="45%">
+    </p>
+    
+    d. Les tres juntes
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226171855-fc13407c-0c1f-4a6e-afc9-23610685a457.png" alt="Les tres components" width="45%">
+    </p>
+    
+    e. Afegint atenuació amb profunditat
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226171874-faede113-ce06-437d-940f-fbe1d4a2c7c6.png" alt="Atenuació amb profunditat" width="45%">
+    </p>
+    
+    f. Afegint ambient global
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226171891-5a366c40-21e7-41c4-9724-c2d5e781df7d.png" alt="Ambient global" width="45%">
+    </p>
+    
+- Cel Shading:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226171985-8fe5c426-6ce9-45b1-a045-edfe460bed79.png" alt="Cel (Toon) Shading" width="45%">
+    </p>
+    
+    
+Pas 3. Afegir ombres:
+
+- Blinn-Phong Shadow:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226172095-4b4662c0-cee0-41ef-bfaa-494829a2a615.png" alt="Blinn-Phong Shadow 1" width="45%">
+    <img src="https://user-images.githubusercontent.com/47271218/226172123-5281bca7-c9a7-4498-a673-38ea3bc655b8.png" alt="Blinn-Phong Shadow 2" width="45%">
+    </p>
 
 * **Més visualitzacions**:
 
