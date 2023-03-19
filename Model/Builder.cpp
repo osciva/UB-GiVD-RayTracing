@@ -134,3 +134,11 @@ void Builder::activaDepthShading() {
     } else msgBox.setText("Error creating shading");
     msgBox.exec();
 }
+
+void Builder::activaCell_Shading() {
+    QMessageBox msgBox;
+    if (Controller::getInstance()->createShading(ShadingFactory::SHADING_TYPES::CELL)) {
+        msgBox.setText("Cell shading created.");
+    } else msgBox.setText("Error creating shading");
+    msgBox.exec();
+}
