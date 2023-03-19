@@ -278,4 +278,3 @@ Pas 3. Afegir ombres:
 
 
    * Per totes les imatges, incluiu aqui la imatge obtinguda i els fitxers de dades i de configuració que heu fet servir
-

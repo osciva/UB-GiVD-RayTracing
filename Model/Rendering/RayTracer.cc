@@ -19,21 +19,33 @@ void RayTracer::run() {
         for (int x = 0; x < width; x++) {
 
             //TODO FASE 2: mostrejar més rajos per pixel segons el valor de "samples"
+            vec3 color(0, 0, 0);
 
             float u = (float(x)) / float(width);
             float v = (float(height -y)) / float(height);
-            vec3 color(0, 0, 0);
 
-            Ray r = camera->getRay(u, v);
+            float i = (float(x+1)) / float(width);
+            float o = (float((height-y)-1)) / float(height);
 
-            color = this->RayPixel(r);
+            float final_x;
+            float final_y;
+
+            Ray r;
+
+            for (int k = 0; k < this->numSamples; k++) {
+                final_x = r.random(u, i);
+                final_y = r.random(o, v);
+                r = camera->getRay(final_x, final_y);
+                color += this->RayPixel(r);
+            }
 
             // TODO FASE 2: Gamma correction
-
+            color = vec3(sqrt(color.x/numSamples), sqrt(color.y/numSamples), sqrt(color.z/numSamples));
             color *= 255;
             setPixel(x, y, color);
         }
     }
+    std::cerr << "\nFinished.\n";
 }
 
 void RayTracer::setPixel(int x, int y, vec3 color) {
