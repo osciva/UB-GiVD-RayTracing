@@ -36,7 +36,7 @@ void RayTracer::run() {
                 final_x = r.random(u, i);
                 final_y = r.random(o, v);
                 r = camera->getRay(final_x, final_y);
-                color += this->RayPixel(r);
+                color += this->RayPixel(r, 0);
             }
 
             // TODO FASE 2: Gamma correction
@@ -72,7 +72,7 @@ void RayTracer::setPixel(int x, int y, vec3 color) {
 */
 
 // Funcio recursiva que calcula el color.
-vec3 RayTracer::RayPixel(Ray &ray) {
+vec3 RayTracer::RayPixel(Ray &ray, int depth) {
 
     vec3 color = vec3(0);
     vec3 unit_direction;
@@ -93,10 +93,19 @@ vec3 RayTracer::RayPixel(Ray &ray) {
 
     infinity() com a màxim valor de t per assegurar que la intersecció cobreix tot el rang possible
     de valors de t en la direcció del raig */
-    if(shading_type != ShadingFactory::SHADING_TYPES::NOSHADING && scene->hit(ray, 0.001, numeric_limits<float>::infinity(), info)){
-        /* L'expressió ray.getOrigin() + info.t * ray.getDirection() calcula el punt de l'espai 3D on el raig
-        talla amb un objecte de l'escena */
+
+    if (depth >= 10) { // profunditat màxima de recursió assolida
+        return color;
+    }
+
+    if (scene->hit(ray, 0.001f, numeric_limits<float>::infinity(), info)) { // el raig intersecta amb un objecte
         color = s->shading(scene, info, ray.getOrigin(), setup->getLights(), setup->getGlobalLight());
+        /* Calcul del raig reflectit
+        Ray reflected_ray;
+        if (info.mat_ptr->scatter(ray, info, color, reflected_ray)) {
+            //color += info.mat_ptr->albedo() * RayPixel(reflected_ray, depth + 1);
+        }
+        */
     }
     return color;
 }
@@ -107,4 +116,3 @@ void RayTracer::init() {
     auto s_out = ShadingFactory::getInstance().switchShading(s, setup->getShadows());
     if (s_out!=nullptr) setup->setShadingStrategy(s_out);
 }
-

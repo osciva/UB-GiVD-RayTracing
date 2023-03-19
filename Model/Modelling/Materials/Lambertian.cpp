@@ -17,11 +17,10 @@ Lambertian::~Lambertian()
 }
 
 bool Lambertian::scatter(const Ray& r_in, const HitInfo& rec, vec3& color, Ray & r_out) const  {
-    vec3 target = rec.p + rec.normal + Hitable::RandomInSphere();
-    r_out =  Ray(rec.p, target-rec.p);
+    vec3 target = rec.p + rec.normal + Hitable::RandomInSphere(); // new target to generate the reflected ray.
+    r_out =  Ray(rec.p, target-rec.p); // generate the reflected ray.
     color = Kd;
-    //return true;
-    return false;
+    return true;
 }
 
 vec3 Lambertian::getDiffuse(vec2 uv) const {
