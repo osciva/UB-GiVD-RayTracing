@@ -3,6 +3,7 @@
 #include "Material.hh"
 #include "Lambertian.hh"
 #include "MaterialTextura.hh"
+#include "Metal.hh"
 
 
 class MaterialFactory

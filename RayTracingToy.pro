@@ -24,6 +24,7 @@ SOURCES += \
     Model/Modelling/Materials/Material.cpp \
     Model/Modelling/Materials/MaterialFactory.cpp \
     Model/Modelling/Materials/MaterialTextura.cpp \
+    Model/Modelling/Materials/Metal.cpp \
     Model/Modelling/Materials/Texture.cpp \
     Model/Modelling/Objects/Box.cpp \
     Model/Modelling/Objects/Circle.cpp \
@@ -81,6 +82,7 @@ HEADERS += \
     Model/Modelling/Materials/Material.hh \
     Model/Modelling/Materials/MaterialFactory.h \
     Model/Modelling/Materials/MaterialTextura.hh \
+    Model/Modelling/Materials/Metal.hh \
     Model/Modelling/Materials/Texture.hh \
     Model/Modelling/Objects/Box.hh \
     Model/Modelling/Objects/Circle.hh \
