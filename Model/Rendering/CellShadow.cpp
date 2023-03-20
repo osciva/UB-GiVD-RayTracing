@@ -17,33 +17,17 @@ vec3 CellShadow::shading(shared_ptr<Scene> scene, HitInfo& info, vec3 lookFrom, 
         /* Les diferents intensitats estipulades a les diapositives */
         if (dotNL > 0.95) {
             intensity += vec3(1.0, 0.5, 0.5) * lights[i]->getId();
-
-            // Cálculo del factor de sombra
-            float shadowFactor = computeShadow(scene, lights[i], info.p);
-
-            intensity *= shadowFactor;
         } else if (dotNL > 0.5) {
             intensity += vec3(0.6, 0.3, 0.3) * lights[i]->getId();
-
-            // Cálculo del factor de sombra
-            float shadowFactor = computeShadow(scene, lights[i], info.p);
-
-            intensity *= shadowFactor;
         } else if (dotNL > 0.25) {
             intensity += vec3(0.4, 0.2, 0.2) * lights[i]->getId();
-
-            // Cálculo del factor de sombra
-            float shadowFactor = computeShadow(scene, lights[i], info.p);
-
-            intensity *= shadowFactor;
         } else {
             intensity += vec3(0.2, 0.1, 0.1) * lights[i]->getId();
-
-            // Cálculo del factor de sombra
-            float shadowFactor = computeShadow(scene, lights[i], info.p);
-
-            intensity *= shadowFactor;
         }
+        // Cálculo del factor de sombra
+        float shadowFactor = computeShadow(scene, lights[i], info.p);
+
+        intensity *= shadowFactor;
     }
     return intensity;
 }
