@@ -75,41 +75,28 @@ void RayTracer::setPixel(int x, int y, vec3 color) {
 vec3 RayTracer::RayPixel(Ray &ray, int depth) {
 
     vec3 color = vec3(0);
-    vec3 unit_direction;
+    vec3 recursiveRay = normalize(ray.getDirection());
     HitInfo info;
-
-    if (setup->getBackground()) {
-        vec3 ray2 = normalize(ray.getDirection());
-        float t = 0.5f*(ray2.y+1);
-        color = (1-t)*setup->getDownBackground() + t*setup->getTopBackground();
-    }
-
     auto s = setup->getShadingStrategy();
-    auto shading_type = ShadingFactory::getInstance().getIndexType(s);
 
-    /* Crida al mètode hit de l'Scene per veure si el raig intersecta amb algun objecte. */
-    /* 0.001 com a mínim valor de t per evitar el cas en que el punt d'intersecció és massa a prop
-    del raig d'origen.
-
-    infinity() com a màxim valor de t per assegurar que la intersecció cobreix tot el rang possible
-    de valors de t en la direcció del raig */
-
-    if (depth >= 10) { // profunditat màxima de recursió assolida
-        return color;
-    }
-
-    if (scene->hit(ray, 0.001f, numeric_limits<float>::infinity(), info)) { // el raig intersecta amb un objecte
+    if (scene->hit(ray, 0.000001f, numeric_limits<float>::infinity(), info)) { // el raig intersecta amb un objecte
         color = s->shading(scene, info, ray.getOrigin(), setup->getLights(), setup->getGlobalLight());
-        /* Calcul del raig reflectit
-        Ray reflected_ray;
-        if (info.mat_ptr->scatter(ray, info, color, reflected_ray)) {
-            //color += info.mat_ptr->albedo() * RayPixel(reflected_ray, depth + 1);
+
+        Ray scatteredRay;
+        vec3 emptyVector = vec3(0.0f);
+
+        if(depth < 5) {
+            if(info.mat_ptr->scatter(ray, info, emptyVector, scatteredRay)) {
+                color += info.mat_ptr->Kd*RayPixel(scatteredRay,depth+1)*emptyVector;
+            }
         }
-        */
+        color += setup->getGlobalLight() * info.mat_ptr->Ka;
+    }else{
+        float t = 0.5f * (recursiveRay.y+1);
+        color = vec3(t*setup->getDownBackground()+(1-t)*setup->getTopBackground());
     }
     return color;
 }
-
 
 void RayTracer::init() {
     auto s = setup->getShadingStrategy();
