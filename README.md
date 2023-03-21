@@ -33,7 +33,7 @@ En aquest fitxer cal que feu l'informe de la pràctica 1.
         - [✅] Bounding Box Malla
           - Oscar + Adrià + Alejandro (Reviewed by: Noah)
         - [✅] Bounding Sphere Malla
-          - Oscar + Adrià + Noah + Alejandro
+          - Noah (Reviewed by: Alejandro, Oscar & Adrià)
     - Creació de REAL DATA
         - [✅] FITTED PLANE: Pla de terra
           - Noah (Reviewed by: Alejandro, Oscar & Adrià)
@@ -68,7 +68,7 @@ En aquest fitxer cal que feu l'informe de la pràctica 1.
         - [✅] Cel Shadow
           - Alejandro (Reviewed by: Noah, Oscar & Adrià)
         - [✅] Escena més complexa
-          - Noah (Reviewed by: Alejandro, Oscar & Adrià)
+          - Alejandro (Reviewed by: Noah, Oscar & Adrià)
         
 
 - Parts opcionals: 
@@ -271,6 +271,30 @@ Pas 3. Afegir ombres:
     <p align="center">
     <img src="https://user-images.githubusercontent.com/47271218/226172095-4b4662c0-cee0-41ef-bfaa-494829a2a615.png" alt="Blinn-Phong Shadow 1" width="45%">
     <img src="https://user-images.githubusercontent.com/47271218/226172123-5281bca7-c9a7-4498-a673-38ea3bc655b8.png" alt="Blinn-Phong Shadow 2" width="45%">
+    </p>
+
+- Color Shadow:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226470091-5c9373fd-a771-4c57-bf64-8c927de1280c.png" alt="Color Shadow 1" width="45%">
+    <img src="https://user-images.githubusercontent.com/47271218/226470095-ad54b2fc-8dd1-4f50-975b-6ff10a210a08.png" alt="Color Shadow 2" width="45%">
+    </p>
+    
+- Normal Shadow:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226470291-e410bf3f-13bc-4d33-99b3-f32d44f45463.png" alt="Normal Shadow 1" width="45%">
+    <img src="https://user-images.githubusercontent.com/47271218/226470300-9db61d80-63f7-4f10-8ecc-65551e0c121f.png" alt="Normal Shadow 2" width="45%">
+    </p>
+    
+- Phong Shadow:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226470517-58d79bb0-8a57-4ba9-ad49-c2fcbc87071f.png" alt="Phong Shadow 1" width="45%">
+    <img src="https://user-images.githubusercontent.com/47271218/226470551-e1146e71-5dca-497f-811f-3fe038d7003f.png" alt="Phong Shadow 2" width="45%">
+    </p>
+      
+ - Cell Shadow:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/226470675-2bbb795a-3c4a-4695-96af-58416c3660f7.png" alt="Cell Shadow 1" width="45%">
+    <img src="https://user-images.githubusercontent.com/47271218/226470686-661df6d4-bd27-4f1a-b933-a2534b39e8f4.png" alt="Cell Shadow 2" width="45%">
     </p>
 
 * **Més visualitzacions**:
