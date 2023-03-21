@@ -18,9 +18,9 @@ Metal::~Metal()
 }
 
 bool Metal::scatter(const Ray& r_in, const HitInfo& rec, vec3& color, Ray & r_out) const  {
-    vec3 v = reflect(normalize(rec.p - r_in.getOrigin()), rec.normal);//vector reflexat
-    vec3 p0 = rec.p + vec3(DBL_EPSILON)*v;//evitem acné
-    r_out =  Ray(p0,v);//raig reflectit
-    color += Ks;//només especular
+    vec3 v = reflect(normalize(rec.p - r_in.getOrigin()), rec.normal); /* Vector reflexat */
+    vec3 p0 = rec.p + vec3(DBL_EPSILON)*v; /* Evitem acné */
+    r_out =  Ray(p0,v); /* Raig reflectit */
+    color += Ks; /* Només especular */
     return true;
 }

@@ -17,9 +17,10 @@ Lambertian::~Lambertian()
 }
 
 bool Lambertian::scatter(const Ray& r_in, const HitInfo& rec, vec3& color, Ray & r_out) const  {
-    vec3 target = rec.p + rec.normal + Hitable::RandomInSphere(); // new target to generate the reflected ray.
-    r_out =  Ray(rec.p, target-rec.p); // generate the reflected ray.
-    color = Kd;
+    /* Vector reflectit a la intersecció usant la normal i certa aletorietat */
+    vec3 target = rec.p + rec.normal + Hitable::RandomInSphere();
+    r_out =  Ray(rec.p, target-rec.p); /* Raig reflectit */
+    color = Kd; /* Només reflecteix la component difosa */
     return true;
 }
 
