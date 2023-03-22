@@ -4,7 +4,7 @@ SetUp::SetUp()
 {
   camera = make_shared<Camera>();
   shade = make_shared<ShadingStrategy>();
-  MAXDEPTH = 1;
+  MAXDEPTH = 25;
   numSamples = 1;
   background = true;
   downBackground = vec3(1.0, 1.0, 1.0);
@@ -193,6 +193,10 @@ std::vector<shared_ptr<Light>> SetUp::getLights() {
 
 bool SetUp::getBackground() {
     return background;
+}
+
+void SetUp::setMaxDepth(int value){
+    this->MAXDEPTH = value;
 }
 
 vec3 SetUp::getTopBackground(){ return topBackground; }

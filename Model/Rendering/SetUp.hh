@@ -46,6 +46,7 @@ public:
     void setRefractions(bool b);
     void setShadows(bool b);
     void setTextures(bool b);
+    void setMaxDepth(int value);
 
     virtual void read (const QJsonObject &json);
     virtual void write (QJsonObject &json) const;

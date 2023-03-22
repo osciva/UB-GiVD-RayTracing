@@ -85,7 +85,7 @@ vec3 RayTracer::RayPixel(Ray &ray, int depth) {
         Ray scatteredRay;
         vec3 emptyVector = vec3(0.0f);
 
-        if(depth < 5) {
+        if(depth < setup->getMAXDEPTH()) {
             if(info.mat_ptr->scatter(ray, info, emptyVector, scatteredRay)) {
                 color += info.mat_ptr->Kd*RayPixel(scatteredRay,depth+1)*emptyVector;
             }
