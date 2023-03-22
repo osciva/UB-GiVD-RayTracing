@@ -4,6 +4,7 @@
 #include "Lambertian.hh"
 #include "MaterialTextura.hh"
 #include "Metal.hh"
+#include "Transp.hh"
 
 
 class MaterialFactory
