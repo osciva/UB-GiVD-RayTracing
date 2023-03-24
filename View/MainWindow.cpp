@@ -97,6 +97,15 @@ void MainWindow::on_valWidth_valueChanged(int arg1)
 
 }
 
+void MainWindow::on_maxDepthRecursion_valueChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+
+    auto setup = Controller::getInstance()->getSetUp();
+    setup->setMaxDepth(ui->maxDepthRecursion->value());
+
+}
+
 void MainWindow::on_valHeight_valueChanged(int arg1)
 {
     Q_UNUSED(arg1);

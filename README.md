@@ -69,7 +69,9 @@ En aquest fitxer cal que feu l'informe de la pràctica 1.
           - Alejandro (Reviewed by: Noah, Oscar & Adrià)
         - [✅] Escena més complexa
           - Alejandro (Reviewed by: Noah, Oscar & Adrià)
-        
+     - Pas 4. Afegir recursió al mètode RayPixel
+        - [✅] Material metal + rajos reflectits
+          - Adrià & Noah (Reviewed by: Alejandro & Oscar)        
 
 - Parts opcionals: 
   - [✅] Cilindres
@@ -295,6 +297,24 @@ Pas 3. Afegir ombres:
     <p align="center">
     <img src="https://user-images.githubusercontent.com/47271218/226470675-2bbb795a-3c4a-4695-96af-58416c3660f7.png" alt="Cell Shadow 1" width="45%">
     <img src="https://user-images.githubusercontent.com/47271218/226470686-661df6d4-bd27-4f1a-b933-a2534b39e8f4.png" alt="Cell Shadow 2" width="45%">
+    </p>
+    
+    
+Pas 4. Afegir recursió al mètode RayPixel:
+
+- Material metal + rajos reflectits (maxdepth=1, maxdepth=3, maxdepth=10):
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/227644498-6e383ac4-7e7e-4368-b876-55be57714e69.png" alt="Metal (maxdepth=1)" width="25%">
+    <img src="https://user-images.githubusercontent.com/47271218/227644509-cdcc36df-dcb3-4b26-ba64-9b8205803d4f.png" alt="Metal (maxdepth=3)" width="25%">
+    <img src="https://user-images.githubusercontent.com/47271218/227644520-7fdc13d6-32f7-41b4-b13a-b38e5f544d74.png" alt="Metal (maxdepth=10)" width="25%">
+    </p>
+    
+- Altres tipus de shading per veure d'altres efectes en les reflexions (color shading, normal shading, phong shading, cell shading; maxdepth=10):
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/227645090-752debc8-d239-4621-8658-00e1121e8796.png" alt="Color metal (maxdepth=10)" width="25%">
+    <img src="https://user-images.githubusercontent.com/47271218/227645209-a3ed8a19-c759-4f90-9deb-9b98ca02b485.png" alt="Normal metal (maxdepth=10)" width="25%">
+    <img src="https://user-images.githubusercontent.com/47271218/227645265-de776caf-9527-4afe-98f6-06df052c173d.png" alt="Phong metal (maxdepth=10)" width="25%">
+    <img src="https://user-images.githubusercontent.com/47271218/227645338-cf974249-bd48-4979-9e2e-3e99f89456d3.png" alt="Cell metal (maxdepth=10)" width="25%">
     </p>
 
 * **Més visualitzacions**:

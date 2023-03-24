@@ -29,13 +29,15 @@ bool Controller::createScene(SceneFactory::SCENE_TYPES currentType, QString name
 }
 
 bool Controller::createScene(vec3 position, float radius) {
-    // Create a single Sphere
+    // Create a single metal Sphere
     scene = make_shared<Scene>();
     auto sphere = make_shared<Sphere>(position, radius, 1.0);
-    sphere->setMaterial(make_shared<Lambertian>(vec3(0.5, 0, 0.5))); /* Color lila en RGB */
+    /* sphere->setMaterial(make_shared<Lambertian>(vec3(0.5, 0, 0.5))); Color lila en RGB */
+    sphere->setMaterial(make_shared<Metal>(vec3(0.2,0.2, 0.2), vec3(0.7, 0.6, 0.5), vec3(0.7, 0.7, 0.7), 10));
     scene->objects.push_back(sphere);
     return true;
 }
+
 
 bool Controller::createScene(vec3 center, float radius, float height) {
     // Create a single Sphere

@@ -36,7 +36,7 @@ void RayTracer::run() {
                 final_x = r.random(u, i);
                 final_y = r.random(o, v);
                 r = camera->getRay(final_x, final_y);
-                color += this->RayPixel(r);
+                color += this->RayPixel(r, 0);
             }
 
             // TODO FASE 2: Gamma correction
@@ -72,39 +72,34 @@ void RayTracer::setPixel(int x, int y, vec3 color) {
 */
 
 // Funcio recursiva que calcula el color.
-vec3 RayTracer::RayPixel(Ray &ray) {
+vec3 RayTracer::RayPixel(Ray &ray, int depth) {
 
     vec3 color = vec3(0);
-    vec3 unit_direction;
+    vec3 recursiveRay = normalize(ray.getDirection());
     HitInfo info;
-
-    if (setup->getBackground()) {
-        vec3 ray2 = normalize(ray.getDirection());
-        float t = 0.5f*(ray2.y+1);
-        color = (1-t)*setup->getDownBackground() + t*setup->getTopBackground();
-    }
-
     auto s = setup->getShadingStrategy();
-    auto shading_type = ShadingFactory::getInstance().getIndexType(s);
 
-    /* Crida al mètode hit de l'Scene per veure si el raig intersecta amb algun objecte. */
-    /* 0.001 com a mínim valor de t per evitar el cas en que el punt d'intersecció és massa a prop
-    del raig d'origen.
-
-    infinity() com a màxim valor de t per assegurar que la intersecció cobreix tot el rang possible
-    de valors de t en la direcció del raig */
-    if(shading_type != ShadingFactory::SHADING_TYPES::NOSHADING && scene->hit(ray, 0.001, numeric_limits<float>::infinity(), info)){
-        /* L'expressió ray.getOrigin() + info.t * ray.getDirection() calcula el punt de l'espai 3D on el raig
-        talla amb un objecte de l'escena */
+    if (scene->hit(ray, 0.000001f, numeric_limits<float>::infinity(), info)) { // el raig intersecta amb un objecte
         color = s->shading(scene, info, ray.getOrigin(), setup->getLights(), setup->getGlobalLight());
+
+        Ray scatteredRay;
+        vec3 emptyVector = vec3(0.0f);
+
+        if(depth < setup->getMAXDEPTH()) {
+            if(info.mat_ptr->scatter(ray, info, emptyVector, scatteredRay)) {
+                color += info.mat_ptr->Kd*RayPixel(scatteredRay,depth+1)*emptyVector;
+            }
+        }
+        color += setup->getGlobalLight() * info.mat_ptr->Ka;
+    }else{
+        float t = 0.5f * (recursiveRay.y+1);
+        color = vec3((1-t) * setup->getDownBackground()+ t * setup->getTopBackground());
     }
     return color;
 }
-
 
 void RayTracer::init() {
     auto s = setup->getShadingStrategy();
     auto s_out = ShadingFactory::getInstance().switchShading(s, setup->getShadows());
     if (s_out!=nullptr) setup->setShadingStrategy(s_out);
 }
-
