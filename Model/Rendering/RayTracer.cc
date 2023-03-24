@@ -32,7 +32,7 @@ void RayTracer::run() {
 
             Ray r;
 
-            for (int k = 0; k < this->numSamples; k++) {
+            for (int k = 0; k < setup->getSamples(); k++) {
                 final_x = r.random(u, i);
                 final_y = r.random(o, v);
                 r = camera->getRay(final_x, final_y);
@@ -40,7 +40,7 @@ void RayTracer::run() {
             }
 
             // TODO FASE 2: Gamma correction
-            color = vec3(sqrt(color.x/numSamples), sqrt(color.y/numSamples), sqrt(color.z/numSamples));
+            color = vec3(sqrt(color.x/setup->getSamples()), sqrt(color.y/setup->getSamples()), sqrt(color.z/setup->getSamples()));
             color *= 255;
             setPixel(x, y, color);
         }
@@ -80,14 +80,14 @@ vec3 RayTracer::RayPixel(Ray &ray, int depth) {
     auto s = setup->getShadingStrategy();
 
     if (scene->hit(ray, 0.000001f, numeric_limits<float>::infinity(), info)) { // el raig intersecta amb un objecte
-        color = s->shading(scene, info, ray.getOrigin(), setup->getLights(), setup->getGlobalLight());
+        color = s->shading(scene, info, ray.getOrigin(), setup->getLights(), setup->getGlobalLight()) *(vec3(1.f)-info.mat_ptr->kt);
 
         Ray scatteredRay;
         vec3 emptyVector = vec3(0.0f);
 
         if(depth < setup->getMAXDEPTH()) {
             if(info.mat_ptr->scatter(ray, info, emptyVector, scatteredRay)) {
-                color += info.mat_ptr->Kd*RayPixel(scatteredRay,depth+1)*emptyVector;
+                color += RayPixel(scatteredRay,depth+1)*emptyVector;
             }
         }
         color += setup->getGlobalLight() * info.mat_ptr->Ka;
