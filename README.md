@@ -69,7 +69,7 @@ En aquest fitxer cal que feu l'informe de la pràctica 1.
           - Alejandro (Reviewed by: Noah, Oscar & Adrià)
         - [✅] Escena més complexa
           - Alejandro (Reviewed by: Noah, Oscar & Adrià)
-     - Pas 4. Afegor recursió al mètode RayPixel
+     - Pas 4. Afegir recursió al mètode RayPixel
         - [✅] Material metal + rajos reflectits
           - Adrià & Noah (Reviewed by: Alejandro & Oscar)        
 
@@ -300,7 +300,7 @@ Pas 3. Afegir ombres:
     </p>
     
     
-Pas 4. Afegor recursió al mètode RayPixel:
+Pas 4. Afegir recursió al mètode RayPixel:
 
 - Material metal + rajos reflectits (maxdepth=1, maxdepth=3, maxdepth=10):
     <p align="center">
