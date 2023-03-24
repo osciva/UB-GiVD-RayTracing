@@ -49,6 +49,7 @@ SOURCES += \
     Model/Rendering/BlinnPhongShadowShading.cpp \
     Model/Rendering/Camera.cpp \
     Model/Rendering/CellShading.cpp \
+    Model/Rendering/CellShadow.cpp \
     Model/Rendering/ColorShading.cpp \
     Model/Rendering/ColorShadow.cpp \
     Model/Rendering/DepthShading.cpp \
@@ -109,6 +110,7 @@ HEADERS += \
     Model/Rendering/BlinnPhongShadowShading.hh \
     Model/Rendering/Camera.hh \
     Model/Rendering/CellShading.hh \
+    Model/Rendering/CellShadow.hh \
     Model/Rendering/ColorShading.hh \
     Model/Rendering/ColorShadow.hh \
     Model/Rendering/DepthShading.hh \

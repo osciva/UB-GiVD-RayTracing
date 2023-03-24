@@ -85,7 +85,7 @@ vec3 RayTracer::RayPixel(Ray &ray, int depth) {
         Ray scatteredRay;
         vec3 emptyVector = vec3(0.0f);
 
-        if(depth < 5) {
+        if(depth < setup->getMAXDEPTH()) {
             if(info.mat_ptr->scatter(ray, info, emptyVector, scatteredRay)) {
                 color += info.mat_ptr->Kd*RayPixel(scatteredRay,depth+1)*emptyVector;
             }
@@ -93,7 +93,7 @@ vec3 RayTracer::RayPixel(Ray &ray, int depth) {
         color += setup->getGlobalLight() * info.mat_ptr->Ka;
     }else{
         float t = 0.5f * (recursiveRay.y+1);
-        color = vec3(t*setup->getDownBackground()+(1-t)*setup->getTopBackground());
+        color = vec3((1-t) * setup->getDownBackground()+ t * setup->getTopBackground());
     }
     return color;
 }
