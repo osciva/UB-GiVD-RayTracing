@@ -58,7 +58,7 @@ private slots:
     void on_valTextures_stateChanged();
     void on_valShadows_stateChanged();
     void on_backGround_stateChanged();
-    void on_valMaxDepthRecursion_valueChanged(int arg1);
+    void on_maxDepthRecursion_valueChanged(int arg1);
     void refreshWindow();
     void aboutMenu();
     void trace();

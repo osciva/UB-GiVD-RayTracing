@@ -97,7 +97,7 @@ void MainWindow::on_valWidth_valueChanged(int arg1)
 
 }
 
-void MainWindow::on_valMaxDepthRecursion_valueChanged(int arg1)
+void MainWindow::on_maxDepthRecursion_valueChanged(int arg1)
 {
     Q_UNUSED(arg1);
 
