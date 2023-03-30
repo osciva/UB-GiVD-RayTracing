@@ -141,21 +141,15 @@ al switchShading() en el cas que no hi hagi ombres i (dynamic_pointer_cast<Norma
             * Si hi ha materials transparents a l'escena, com ara vidres o superfícies d'aigua, aquests materials requereixen que els raigs es reflecteixin i refractin a través de la seva superfície per reproduir adequadament el seu aspecte visual. Però si la profunditat de seguiment de raigs està limitada a 1, els raigs que travessen aquests materials transparents no tindran suficient profunditat per calcular correctament la seva trajectòria, i per tant, aquests materials transparents no es mostraran correctament a la pantalla.
         * 4.3. Si assignes el color ambient global enlloc del de background en els rajos secundaris que no intersequen amb res. Com et canvia la visualització? Raona el per què?
             * Assignar el color ambient global en lloc del color de fons en els raigs secundaris que no intersequen amb cap objecte tindria com a conseqüència que aquests raigs que no intercepten cap objecte, tindrien un color ambient uniforme en lloc d'un color de fons o background. Això podria canviar la visualització, depenent de l'escena en qüestió.
-        
          * 5.1 Com faries el càlcul de les penombres?
 Per incloure penombres en la visualització, utilitzant llums amb àrea o simplificacions que permetin calcular penombres aproximades, podem utilitzar la tècnica de "soft shadows" (ombres suaus). Les ombres suaus són ombres que no tenen un límit dur entre la llum i l'ombra, sinó que es difuminen gradualment, el que produeix una aparença més realista.
-
 Una forma d'aconseguir això és utilitzar "penombres per mostra" (shadow sampling), que implica calcular múltiples mostres de llum per a cada punt d'intersecció. En lloc d'utilitzar una sola font de llum puntual, es pot modelar la font de llum com un àrea i calcular les mostres de llum des de diferents punts dins d'aquesta àrea. Això farà que les ombres siguin més suaus i realistes.
-
     * FASE 3
-    
         * Qui calcularà les coordenades (u, v) del punt d’intersecció amb el pla?
         Per calcular les coordenades (u, v) del punt d'intersecció amb el pla, caldria fer el següent:
-
         1. Trobar la intersecció del raig amb el pla base. Per fer-ho, caldria resoldre l'equació del pla i del raig, i trobar el punt d'intersecció (P).
         2. Calcular les coordenades (u, v) d'aquest punt d'intersecció. Es podria fer projectant el punt P al pla base i calculant les coordenades relatives a la               textura. Per fer-ho, es pot utilitzar la base ortonormal del pla i les dimensions de la textura.
         Per exemple, si el pla base està alineat amb l'eix X i Y, les coordenades (u, v) es podrien calcular com:
-
         u = (P.x - xmin) / (xmax - xmin)
         v = (P.y - ymin) / (ymax - ymin)
 
