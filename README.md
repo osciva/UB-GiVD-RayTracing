@@ -151,11 +151,11 @@ Una forma d'aconseguir això és utilitzar "penombres per mostra" (shadow sampli
             2. Calcular les coordenades (u, v) d'aquest punt d'intersecció. Es podria fer projectant el punt P al pla base i calculant les coordenades relatives a la               textura. Per fer-ho, es pot utilitzar la base ortonormal del pla i les dimensions de la textura.
             Per exemple, si el pla base està alineat amb l'eix X i Y, les coordenades (u, v) es podrien calcular com:
             <pre>
-```cpp
-u = (P.x - xmin) / (xmax - xmin)
-v = (P.y - ymin) / (ymax - ymin)
-```
-</pre>
+            ```cpp
+            u = (P.x - xmin) / (xmax - xmin)
+            v = (P.y - ymin) / (ymax - ymin)
+            ```
+            </pre>
             
 
        
