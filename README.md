@@ -146,12 +146,12 @@ Per incloure penombres en la visualització, utilitzant llums amb àrea o simpli
 Una forma d'aconseguir això és utilitzar "penombres per mostra" (shadow sampling), que implica calcular múltiples mostres de llum per a cada punt d'intersecció. En lloc d'utilitzar una sola font de llum puntual, es pot modelar la font de llum com un àrea i calcular les mostres de llum des de diferents punts dins d'aquesta àrea. Això farà que les ombres siguin més suaus i realistes.
     * FASE 3
         * Qui calcularà les coordenades (u, v) del punt d’intersecció amb el pla?
-Per calcular les coordenades (u, v) del punt d'intersecció amb el pla, caldria fer el següent:
-1. Trobar la intersecció del raig amb el pla base. Per fer-ho, caldria resoldre l'equació del pla i del raig, i trobar el punt d'intersecció (P).
-2. Calcular les coordenades (u, v) d'aquest punt d'intersecció. Es podria fer projectant el punt P al pla base i calculant les coordenades relatives a la               textura. Per fer-ho, es pot utilitzar la base ortonormal del pla i les dimensions de la textura.
-Per exemple, si el pla base està alineat amb l'eix X i Y, les coordenades (u, v) es podrien calcular com:
-u = (P.x - xmin) / (xmax - xmin)
-v = (P.y - ymin) / (ymax - ymin)
+            * Per calcular les coordenades (u, v) del punt d'intersecció amb el pla, caldria fer el següent:
+            1. Trobar la intersecció del raig amb el pla base. Per fer-ho, caldria resoldre l'equació del pla i del raig, i trobar el punt d'intersecció (P).
+            2. Calcular les coordenades (u, v) d'aquest punt d'intersecció. Es podria fer projectant el punt P al pla base i calculant les coordenades relatives a la               textura. Per fer-ho, es pot utilitzar la base ortonormal del pla i les dimensions de la textura.
+            Per exemple, si el pla base està alineat amb l'eix X i Y, les coordenades (u, v) es podrien calcular com:
+            u = (P.x - xmin) / (xmax - xmin)
+            v = (P.y - ymin) / (ymax - ymin)
 
        
 
