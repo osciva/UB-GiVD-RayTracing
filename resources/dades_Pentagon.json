@@ -1,0 +1,45 @@
+{
+"scene": "dadesBCNZoom",
+"typeScene": "REALDATA",
+"base" : {
+   "type": "FITTEDPLANE",
+   "normal": [0.0, 1.0, 0.0],
+   "point": [0.0, -1.0, 0.0],
+   "pmin": [-5.0, -5.0],
+   "pmax": [5.0, 5.0],
+   "material": {
+   "type": "MATERIALTEXTURA",
+   "ka": [0.1, 0.1, 0.1],
+   "kd": [0.7,0.4,0.4],
+   "ks": [1.0, 1.0, 1.0],
+   "shininess": 500.0,
+   "textureFile": "://resources/mapPentagon.png"
+    }
+},
+"Real": {
+  "minPoint": [-77.05896, 38.86898],
+  "maxPoint": [-77.05291, 38.87306]
+},
+"Virtual": {
+  "minPoint": [-5,  0, -5],
+  "maxPoint": [ 5,  5,  5]
+},"attributes": [
+{
+"name": "assistenciaConcerts",
+"gyzmo": "sphere",
+"minValue": 3000,
+"maxValue": 8000,
+"colorMap": "COLOR_MAP_TYPE_PLASMA",
+"material": {
+    "type": "metal",
+    "ka": [0.2, 0.2, 0.2],
+    "kd": [0.7,0.6,0.5],
+    "ks": [0.7, 0.7, 0.7],
+    "shininess": 10.0
+ },
+"data": [
+ [ -77.05610, 38.87107,  6100]
+ ]
+ }
+ ]
+}

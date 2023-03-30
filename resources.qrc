@@ -7,5 +7,7 @@
         <file>resources/luigi.obj</file>
         <file>resources/mario.obj</file>
         <file>resources/europa.png</file>
+        <file>resources/mapMurcia.png</file>
+        <file>resources/mapPentagon.png</file>
     </qresource>
 </RCC>
