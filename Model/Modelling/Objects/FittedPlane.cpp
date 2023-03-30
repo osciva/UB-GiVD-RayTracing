@@ -6,17 +6,20 @@ FittedPlane::FittedPlane(vec3 normal, vec3 pass_point, vec2 pass_min, vec2 pass_
 }
 
 bool FittedPlane::hit(Ray &r, float t_min, float t_max, HitInfo &info) const {
-      if (Plane::hit(r, t_min, t_max, info)){
-          float u = (info.p.x - this->minpoint.x) / (this->maxpoint.x - this->minpoint.x);
-          float v = (info.p.z - this->minpoint.y) / (this->maxpoint.y - this->minpoint.y);
-
-
-
-          info.uv = vec2(u, v);
-          return true;
-      }
-      return false;
+    if (Plane::hit(r, t_min, t_max, info)){
+        float u = (info.p.x - this->minpoint.x) / (this->maxpoint.x - this->minpoint.x);
+        float v = (info.p.z - this->minpoint.y) / (this->maxpoint.y - this->minpoint.y);
+        vec2 uv = glm::clamp(vec2(u, v), vec2(0.0f), vec2(1.0f));
+        if (uv.x <= 0 || uv.x >= 1 || uv.y <= 0 || uv.y >= 1) {
+            return false;
+        }
+        info.uv = uv;
+        return true;
     }
+    return false;
+}
+
+
 
 
 void FittedPlane::aplicaTG(shared_ptr<TG> tg) {
