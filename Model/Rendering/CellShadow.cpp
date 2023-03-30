@@ -24,7 +24,7 @@ vec3 CellShadow::shading(shared_ptr<Scene> scene, HitInfo& info, vec3 lookFrom, 
         } else {
             intensity += vec3(0.2, 0.1, 0.1) * lights[i]->getId();
         }
-        // Cálculo del factor de sombra
+        /* Càlcul del factor d'ombra */
         float shadowFactor = computeShadow(scene, lights[i], info.p);
 
         intensity *= shadowFactor;

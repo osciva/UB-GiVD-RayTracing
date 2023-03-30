@@ -26,5 +26,4 @@ bool Lambertian::scatter(const Ray& r_in, const HitInfo& rec, vec3& color, Ray &
 
 vec3 Lambertian::getDiffuse(vec2 uv) const {
     return Kd;
-
 }

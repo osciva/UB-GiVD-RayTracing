@@ -34,6 +34,15 @@ Material::Material(vec3 a, vec3 d, vec3 s, float shin, float opac) {
     opacity = opac;
 }
 
+Material::Material(vec3 a, vec3 d, vec3 s, float shin, float opac, float nut) {
+    //Fase 2
+    Ka = a;
+    Kd = d;
+    Ks = s;
+    shininess = shin;
+    opacity = opac;
+    this->nut = nut;
+}
 
 vec3 Material::getDiffuse(vec2 point) const {
     return Kd;
@@ -59,11 +68,19 @@ void Material::read (const QJsonObject &json)
         Ks[1] = auxVec[1].toDouble();
         Ks[2] = auxVec[2].toDouble();
     }
+    if (json.contains("kt") && json["kt"].isArray()) {
+        QJsonArray auxVec = json["kt"].toArray();
+        kt[0] = auxVec[0].toDouble();
+        kt[1] = auxVec[1].toDouble();
+        kt[2] = auxVec[2].toDouble();
+    }
     if (json.contains("shininess") && json["shininess"].isDouble())
         shininess = json["shininess"].toDouble();
     if (json.contains("opacity") && json["opacity"].isDouble())
         opacity = json["opacity"].toDouble();
-
+    if(json.contains("nut") && json["nut"].isDouble()){
+        nut = json["nut"].toDouble();
+    }
 }
 
 
@@ -83,6 +100,7 @@ void Material::write(QJsonObject &json) const
     json["ks"] = auxArray3;
     json["opacity"] = opacity;
     json["shininess"] = shininess;
+    json["nut"] = nut;
 }
 
 //! [1]
@@ -94,8 +112,10 @@ void Material::print(int indentation) const
     QTextStream(stdout) << indent << "Ka:\t" << Ka[0] << ", "<< Ka[1] << ", "<< Ka[2] << "\n";
     QTextStream(stdout) << indent << "Kd:\t" << Kd[0] << ", "<< Kd[1] << ", "<< Kd[2] << "\n";
     QTextStream(stdout) << indent << "Ks:\t" << Ks[0] << ", "<< Ks[1] << ", "<< Ks[2] << "\n";
+    QTextStream(stdout) << indent << "Kt:\t" << kt[0] << ", "<< kt[1] << ", "<< kt[2] << "\n";
     QTextStream(stdout) << indent << "shininess:\t" << shininess<< "\n";
     QTextStream(stdout) << indent << "opacity:\t" << opacity<< "\n";
+    QTextStream(stdout) << indent << "nut:\t" << nut<< "\n";
 }
 
 

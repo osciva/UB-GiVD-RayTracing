@@ -10,11 +10,11 @@ vec3 NormalShadow::shading(shared_ptr<Scene> scene, HitInfo& info, vec3 lookFrom
     vec3 kd = info.mat_ptr->Kd; /* Component difusa */
     vec3 ia = vec3(0, 0, 0);
 
-    // Suma de la iluminación ambiental global
+    /* Suma de la iluminació ambiental global */
     vec3 ambientGl = globalLight * ka;
     total += ambientGl;
 
-    // Cálculo de la iluminación de cada fuente de luz
+    /* Càlcul de la iluminaci de cada font de llum */
     for (int i = 0; i < (int)lights.size(); i++) {
         vec3 L = normalize(lights[i]->vectorL(info.p)); /* Vector del punt de la superfície a la llum */
         vec3 H = normalize((L + normalize(lookFrom - info.p)) / 2.0f); /* Vector del punt de la superfície al mig entre L i V */
@@ -22,17 +22,17 @@ vec3 NormalShadow::shading(shared_ptr<Scene> scene, HitInfo& info, vec3 lookFrom
         vec3 id = lights[i]->getId(); /* Intensitat difosa de la llum */
         vec3 is = lights[i]->getIs(); /* Intensitat especular de la llum */
 
-        // Cálculo del factor de sombra
+        /* Càlcul del factor d'ombra */
         float shadowFactor = computeShadow(scene, lights[i], info.p);
 
-        // Cálculo de la iluminación difusa y especular
+        /* Càlcul de la iluminació difosa i especular */
         diffuse = id * kd * glm::max(dot(L, info.normal), 0.0f);
         vec3 specular = is * info.mat_ptr->Ks * pow(glm::max(dot(info.normal, H), 0.0f), info.mat_ptr->shininess);
 
-        // Aplicación del factor de sombra
+        /* Aplicació del factor d'ombra */
         color *= shadowFactor;
 
-        // Acumulación de la iluminación
+        /* Acumulació de la iluminació */
         total += color;
     }
 

@@ -12,6 +12,9 @@ shared_ptr<Material> MaterialFactory::createMaterial(MATERIAL_TYPES t) {
     case METAL:
         m = make_shared<Metal>();
         break;
+    case TRANSPARENT:
+        m = make_shared<Transparent>();
+        break;
     default:
         break;
     }
@@ -30,6 +33,9 @@ shared_ptr<Material> MaterialFactory::createMaterial(vec3 a, vec3 d, vec3 s, flo
     case METAL:
         m = make_shared<Metal>(a, d, s, beta);
         break;
+    case TRANSPARENT:
+        m = make_shared<Transparent>(a, d, s, beta, opacity);
+        break;
     default:
         break;
     }
@@ -43,14 +49,17 @@ MaterialFactory::MATERIAL_TYPES MaterialFactory::getIndexType(shared_ptr<Materia
         return MATERIAL_TYPES::MATERIALTEXTURA;
     }else if (dynamic_pointer_cast<Metal>(m) != nullptr) {
         return MATERIAL_TYPES::METAL;
+    }else if (dynamic_pointer_cast<Transparent>(m) != nullptr) {
+        return MATERIAL_TYPES::TRANSPARENT;
     }
+
     return MATERIAL_TYPES::LAMBERTIAN;
 }
 
 MaterialFactory::MATERIAL_TYPES MaterialFactory::getMaterialType( QString name) {
     if (name=="LAMBERTIAN") return MATERIAL_TYPES::LAMBERTIAN;
     else if (name=="METAL") return MATERIAL_TYPES::METAL;
-    else if (name=="TRANSPARENT") return MATERIAL_TYPES::TRANSP;
+    else if (name=="TRANSPARENT") return MATERIAL_TYPES::TRANSPARENT;
     else if (name=="MATERIALTEXTURA") return MATERIAL_TYPES::MATERIALTEXTURA;
     else return  MATERIAL_TYPES::LAMBERTIAN;
 }
@@ -64,7 +73,7 @@ QString MaterialFactory::getNameType(MATERIAL_TYPES t)
     case METAL:
         return(QString("METAL"));
         break;
-    case TRANSP:
+    case TRANSPARENT:
         return(QString("TRANSPARENT"));
         break;
     case MATERIALTEXTURA:

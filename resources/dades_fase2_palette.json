@@ -30,7 +30,7 @@
 "gyzmo": "sphere",
 "minValue": 1800,
 "maxValue": 382703,
-"colorMap": "COLOR_MAP_TYPE_PLASMA",
+"colorMap": "COLOR_MAP_TYPE_CUSTOM",
 "material": {
     "type": "METAL",
     "ka": [0.2, 0.2, 0.2],

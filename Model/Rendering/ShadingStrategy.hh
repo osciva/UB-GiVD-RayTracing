@@ -2,6 +2,7 @@
 
 #include "Model/Modelling/Scene.hh"
 #include "Model/Modelling/Lights/Light.hh"
+#include "Model/Modelling/Lights/PointLight.hh"
 
 
 class ShadingStrategy {

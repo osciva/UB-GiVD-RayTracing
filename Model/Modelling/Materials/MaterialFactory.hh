@@ -4,6 +4,7 @@
 #include "Lambertian.hh"
 #include "MaterialTextura.hh"
 #include "Metal.hh"
+#include "Transparent.hh"
 
 
 class MaterialFactory
@@ -13,7 +14,7 @@ public:
     typedef enum  MATERIAL_TYPES{
         LAMBERTIAN,
         METAL,
-        TRANSP,
+        TRANSPARENT,
         MATERIALTEXTURA,
     } MATERIAL_TYPES;
 
