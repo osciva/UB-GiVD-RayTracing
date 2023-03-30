@@ -19,6 +19,9 @@ bool FittedPlane::hit(Ray &r, float t_min, float t_max, HitInfo &info) const {
     return false;
 }
 
+
+
+
 void FittedPlane::aplicaTG(shared_ptr<TG> tg) {
     if (dynamic_pointer_cast<TranslateTG>(tg)) {
         /* Movem el punt de pas del pla */

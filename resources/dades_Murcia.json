@@ -1,0 +1,45 @@
+{
+"scene": "dadesBCNZoom",
+"typeScene": "REALDATA",
+"base" : {
+   "type": "FITTEDPLANE",
+   "normal": [0.0, 1.0, 0.0],
+   "point": [0.0, -1.0, 0.0],
+   "pmin": [-5.0, -5.0],
+   "pmax": [5.0, 5.0],
+   "material": {
+   "type": "MATERIALTEXTURA",
+   "ka": [0.1, 0.1, 0.1],
+   "kd": [0.7,0.4,0.4],
+   "ks": [1.0, 1.0, 1.0],
+   "shininess": 500.0,
+   "textureFile": "://resources/mapMurcia.png"
+    }
+},
+"Real": {
+  "minPoint": [-1.2427, 37.9274],
+  "maxPoint": [-0.9829, 38.0500]
+},
+"Virtual": {
+  "minPoint": [-5,  0, -5],
+  "maxPoint": [ 5,  5,  5]
+},"attributes": [
+{
+"name": "assistenciaConcerts",
+"gyzmo": "sphere",
+"minValue": 3000,
+"maxValue": 8000,
+"colorMap": "COLOR_MAP_TYPE_PLASMA",
+"material": {
+    "type": "metal",
+    "ka": [0.2, 0.2, 0.2],
+    "kd": [0.7,0.6,0.5],
+    "ks": [0.7, 0.7, 0.7],
+    "shininess": 10.0
+ },
+"data": [
+ [ -1.1341, 37.9987,  6100]
+ ]
+ }
+ ]
+}
