@@ -85,10 +85,35 @@ En aquest fitxer cal que feu l'informe de la pràctica 1.
     
 ### Explicació de la pràctica    
   * **Organització de la pràctica**
-    * descriu com us heu organitzat
+    * Durant el nostre projecte de gràfics i visualització de dades, hem estat treballant de forma eficient i organitzada. Una de les nostres principals    estratègies ha estat dividir la feina entre els membres del grup, designant les tasques a fer a ClickUp i utilitzar la plataforma GitHub per compartir/revisar el nostre treball. Això ens ha permès mantenir-nos al dia amb els diferents aspectes del projecte i donar feedback als companys per a millorar i corregir errors. A més, també hem tingut una comunicació constant i efectiva entre nosaltres, utilitzant un xat per estar en contacte tots els dies. Això ha estat clau per a resoldre els dubtes i les preocupacions que han anat sorgint durant el desenvolupament del projecte, i per a prendre decisions de forma conjunta. 
+Hem seguit una dinàmica de treball excel·lent, creant branques individuals per al nostre treball i fusionant-les només quan estàvem segurs que tot funcionava bé. Això ha evitat errors i malentesos i ha garantit que el nostre treball fos coherent i consistent en tot moment.
+En resum, la nostra organització ha estat força bona, gràcies a la nostra dedicació i esforç conjunt, estem satisfets de la nostra feina.
   
   * **Decisions a destacar**
-    * Comenteu les decisions que heu pres 
+    * El nostre projecte va implicar la col·laboració de tots membres del grup, i per aconseguir completar-lo amb èxit, vam haver de prendre diverses decisions importants. Una d'aquestes decisions va ser utilitzar una eina de gestió de projectes com ClickUp. A través d'aquesta plataforma, vam poder mantenir un seguiment de les tasques que cada membre del grup havia de realitzar, així com de les dates límit per a la seva finalització. No obstant, el nostre projecte també va experimentar alguns imprevistos que vam haver de solucionar. En concret, dos membres del grup van experimentar problemes tècnics amb el Qt Creator. Per aquesta raó, van haver de treballar presencialment durant una setmana i mitja a les aules, fins que finalment van aconseguir solucionar el problema. És important destacar que, malgrat els imprevistos que vam haver de solucionar durant el nostre projecte, en general, va transcórrer sense problemes greus. Això significa que no vam haver de prendre decisions arriscades o molt compromeses per garantir la seva finalització. En general, vam aprendre la importància de la planificació adequada, la comunicació i la cooperació per aconseguir els objectius que ens havíem proposat.
+  
+  * **Preguntes a respondre (totes les fases)**
+    * FASE 0
+    * FASE 1
+        * 3a. Quan penses que és millor crear els triangles de la malla?
+            * Per aconseguir crear els triangles adequats per la creació de la malla, la funció maketriangles() s'haurà de cridar seguidament d'haver llegit el fitxer amb load(), així, un cop ja tenim la informació d'arestes i vertex, podem começar a generar els triangles en bucle.
+        * 3b. Quina creus que teòricament és millor? Com funcionen en la realitat?
+            * Una bounding sphere és una esfera que envolta un objecte 3D. Aquesta esfera es calcula a partir dels punts extrems de l'objecte, i té un radi que permet determinar la distància màxima entre el centre de l'esfera i qualsevol punt de l'objecte. De forma similar, una bounding box és un cub que envolta un objecte 3D i al igual que la bounding box ens ajuda a fer molt més eficaç un sistema de col·lisions. Quina és millor? En resum, depén del objecte 3D. La bounding sphere és millor utilitzada en situacions on els objectes són esfèrics o quasi-esfèrics, ja que ofereix una representació més senzilla i fàcil de calcular per a la detecció de col·lisions. D'altra banda, la bounding box és més eficaç en situacions on els objectes són rectangulars, ja que ofereix una representació més precisa de l'espai ocupat per l'objecte. En molts casos, es pot utilitzar una combinació de les dues tècniques per obtenir una detecció de col·lisions més precisa i eficient en escenes 3D complexes.
+    * FASE 2
+        * 1.2. On afegiries un atribut numSamples que defineixi el nombre de rajos per píxel i així controlar aquest fet?
+            * Aquest atribut es definirà a la classe Setup.hh
+        * 2.3. Què necessites canviar?
+        * 2.4. Necessites afegir informació en el material?
+        * 3.2. En el cas que hi hagi un objecte entre la llum i el punt on s'està calculant la il·luminació, quina component de la fórmula de Blinn-Phong s'haurà de tenir en compte?
+        * 4.3. Per què si tens el MAX_DEPTH a 1, l’esfera no es veu transparent?
+            * Si hi ha materials transparents a l'escena, com ara vidres o superfícies d'aigua, aquests materials requereixen que els raigs es reflecteixin i refractin a través de la seva superfície per reproduir adequadament el seu aspecte visual. Però si la profunditat de seguiment de raigs està limitada a 1, els raigs que travessen aquests materials transparents no tindran suficient profunditat per calcular correctament la seva trajectòria, i per tant, aquests materials transparents no es mostraran correctament a la pantalla.
+        * 4.3. Si assignes el color ambient global enlloc del de background en els rajos secundaris que no intersequen amb res. Com et canvia la visualització? Raona el per què?
+            * Assignar el color ambient global en lloc del color de fons en els raigs secundaris que no intersequen amb cap objecte tindria com a conseqüència que aquests raigs que no intercepten cap objecte, tindrien un color ambient uniforme en lloc d'un color de fons o background. Això podria canviar la visualització, depenent de l'escena en qüestió.
+
+    * FASE 3
+        * Qui calcularà les coordenades (u, v) del punt d’intersecció amb el pla?
+        * Com faries el càlcul de les penombres?
+
 
 ### Screenshots de cada fase
 * **Fase 0**: 
