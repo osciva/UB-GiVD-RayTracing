@@ -4,16 +4,15 @@
 "base" : {
    "type": "FITTEDPLANE",
    "normal": [0.0, 1.0, 0.0],
-   "point": [0.0, 0.5, 0.0],
+   "point": [0.0, -1.0, 0.0],
    "pmin": [-5.0, -5.0],
    "pmax": [5.0, 5.0],
    "material": {
-       "type": "MaterialTextura",
-       "ka": [0.2, 0.2, 0.2],
-       "kd": [0.7,0.6,0.5],
+       "type": "LAMBERTIAN",
+       "ka": [0.1, 0.1, 0.1],
+       "kd": [0.7,0.4,0.4],
        "ks": [0.7, 0.7, 0.7],
-       "shininess": 10.0,
-       "textureFile": "://resources/mapZoom.png"
+       "shininess": 50.0
     }
 },
 "Real": {
@@ -29,7 +28,7 @@
 "name": "concerts",
 "gyzmo": "sphere",
 "minValue": 1900,
-"maxValue": 1500000,
+"maxValue": 382703,
 "colorMap": "COLOR_MAP_TYPE_PLASMA",
 "material": {
     "type": "lambertian",

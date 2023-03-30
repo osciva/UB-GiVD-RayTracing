@@ -12,4 +12,5 @@ public:
     virtual ~Transparent();
 
     virtual bool scatter(const Ray& r_in, const HitInfo& rec, vec3& color, Ray & r_out) const;
+
 };

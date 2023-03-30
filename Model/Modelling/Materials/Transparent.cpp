@@ -16,33 +16,40 @@ Transparent::~Transparent(){
 }
 
 bool Transparent::scatter(const Ray& r_in, const HitInfo& rec, vec3& color, Ray& r_out) const  {
-    vec3 N = normalize(rec.normal); /* Normal a la intersecció */
-    vec3 V = normalize(r_in.getDirection()); /* Vector del raig incident */
+    /* Determine if the incident ray is inside the object or not by calculating the dot product
+    * of the incident ray's direction and the surface normal */
+    bool inside_or_not = dot (r_in.getDirection(), rec.normal) < 0;
 
-    float cos = dot(N, V); /* Cosinus de la Normal i el raig incident */
-    float snell = 1/rec.mat_ptr->nut; /* medi2 / medi1 */
+    /* If the ray is inside the object, use the surface normal; otherwise, use the opposite of the surface normal */
+    vec3 normal= inside_or_not ? rec. normal : -rec.normal;
 
-    vec3 p0 = rec.p; /* punt d'intersecció */
+    /* Calculate the ratio of the refractive indices based on whether the ray is inside or outside the object */
+    double ratio = inside_or_not ? (1.0003f/nut) : nut;
 
-    /* Fem el contrari */
-    if(cos > DBL_EPSILON){
-        N = -N;
-        snell = 1/snell;
-    }
+    /* Set the color based on whether the ray is inside or outside the object */
+    color = inside_or_not ? this->kt : this->Ks;
 
-    vec3 v_refract = glm::refract(V, N, snell); /* Vector refractat normalitzat */
+    /* Calculate the cosine of the angle between the negative incident ray direction and the surface normal */
+    double cos_theta = fmin(dot(-normalize(r_in.getDirection()), normal), 1.0);
 
+    /* Calculate the sine of the angle using the cosine value */
+    double sin_theta = sqrt(1.0 - cos_theta*cos_theta);
 
-    if(dot(v_refract,v_refract) < DBL_EPSILON){ /* No hi ha refracció sinó reflexió interna */
-        vec3 reflect = glm::reflect(V, N); /* Vector reflexat */
-        p0 = rec.p + vec3(DBL_EPSILON)*reflect; /* Evitem acné */
-        r_out = Ray(p0,reflect); /* Raig reflectit */
-        color = Ks;
+    /* Determine if total internal reflection occurs */
+    bool cannot_refract = ratio * sin_theta> 1.0;
+
+    /* Declare the direction vector for the refracted or reflected ray */
+    vec3 direction;
+
+    /* If total internal reflection occurs, calculate the reflected ray direction; otherwise, calculate the refracted ray direction */
+    if (cannot_refract) {
+        direction = reflect(normalize(r_in.getDirection()), normal);
     } else {
-        p0 = rec.p + vec3(DBL_EPSILON)*v_refract; /* Evitem acné */
-        r_out = Ray(p0,v_refract); /* Raig refactat */
-        color = kt;
+        direction = refract(normalize(r_in.getDirection()), normal, ratio);
     }
 
+    vec3 p_0;
+    p_0 = rec.p + vec3(DBL_EPSILON) * direction; /* Try to solve acné */
+    r_out = Ray(p_0, direction);
     return true;
 }

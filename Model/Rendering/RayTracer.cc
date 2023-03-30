@@ -73,24 +73,24 @@ void RayTracer::setPixel(int x, int y, vec3 color) {
 
 // Funcio recursiva que calcula el color.
 vec3 RayTracer::RayPixel(Ray &ray, int depth) {
-
-    vec3 color = vec3(0);
+    vec3 color;
     vec3 recursiveRay = normalize(ray.getDirection());
     HitInfo info;
     auto s = setup->getShadingStrategy();
 
     if (scene->hit(ray, 0.000001f, numeric_limits<float>::infinity(), info)) { // el raig intersecta amb un objecte
-        color = s->shading(scene, info, ray.getOrigin(), setup->getLights(), setup->getGlobalLight()) *(vec3(1.f)-info.mat_ptr->kt);
+        color = s->shading(scene, info, ray.getOrigin(), setup->getLights(), setup->getGlobalLight()) * (vec3(1.f)-info.mat_ptr->kt);
 
         Ray scatteredRay;
-        vec3 emptyVector = vec3(0.0f);
+        vec3 c = vec3(0.0f);
 
         if(depth < setup->getMAXDEPTH()) {
-            if(info.mat_ptr->scatter(ray, info, emptyVector, scatteredRay)) {
-                color += RayPixel(scatteredRay,depth+1)*emptyVector;
+            if(info.mat_ptr->scatter(ray, info, c, scatteredRay)) {
+                color += RayPixel(scatteredRay,depth+1) * c;
             }
+        } else {
+            color += setup->getGlobalLight() * info.mat_ptr->Ka;
         }
-        color += setup->getGlobalLight() * info.mat_ptr->Ka;
     }else{
         float t = 0.5f * (recursiveRay.y+1);
         color = vec3((1-t) * setup->getDownBackground()+ t * setup->getTopBackground());

@@ -23,14 +23,11 @@ vec3 BlinnPhongShadowShading::shading(shared_ptr<Scene> scene, HitInfo& info, ve
         id = lights[i]->getId(); /* Intensitat difosa de la llum */
         is = lights[i]->getIs(); /* Intensitat especular de la llum */
 
-        dist = lights[i]->distanceToLight(info.p); /* Distància de la superfície al focus de llum */
-        factor = 0.5 + 0.01 * pow(dist, 2); /* Coeficient d'atenuació */
-
         diffuse = id * info.mat_ptr->getDiffuse(info.uv) * glm::max(dot(L,N), 0.0f);
         specular = is * ks * pow(glm::max(dot(N, H), 0.0f), beta);
         ambient = ia * ka;
         factorOmbra = this->computeShadow(scene, lights[i], info.p);
-        total += (factorOmbra*((diffuse+specular)/factor)) + ambient;
+        total += (factorOmbra*((diffuse+specular) * lights[i]->attenuation(info.p))) + ambient;
     }
 
     return total + ambientGl;

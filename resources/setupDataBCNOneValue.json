@@ -15,7 +15,7 @@
 "lights" : [
 {
  "type": "pointLight",
-  "Ia": [0.1, 0.1, 0.1],
+  "Ia": [0.01, 0.01, 0.01],
   "Id": [0.7, 0.7, 0.7],
   "Is": [0.7, 0.7, 0.7],
   "a": 1.0,
@@ -31,7 +31,7 @@
    "a": 1.0,
    "b": 0.0,
    "c": 0.0,
-   "position": [-5, 20, 10]
+   "position": [-5, 10, 10]
    },
   {
   "type": "pointLight",
@@ -44,10 +44,11 @@
    "position": [2, 8, -50]
    }
  ],
-  "background": true,
-  "MAXDEPTH": 4,
+  "background": false,
+  "MAXDEPTH": 0,
   "colorTopBackground": [ 1, 1, 1],
-  "colorDownBackground": [0.5, 0.7, 1]
+  "colorDownBackground": [0.5, 0.7, 1],
+  "shading": "BlinnPhong"
  }
 
 
