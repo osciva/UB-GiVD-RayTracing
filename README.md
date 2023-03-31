@@ -1,5 +1,5 @@
 # RayTracingToy
-Pràctica 1 - GiVD 2022-23
+Pràctica 1 (RAYTRACING) - GiVD 2022-23
 
 En aquest fitxer cal que feu l'informe de la pràctica 1.
 
