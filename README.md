@@ -71,18 +71,16 @@ En aquest fitxer cal que feu l'informe de la pràctica 1.
           - Alejandro (Reviewed by: Noah, Oscar & Adrià)
      - Pas 4. Afegir recursió al mètode RayPixel
         - [✅] Material metal + rajos reflectits
-          - Adrià & Noah (Reviewed by: Alejandro & Oscar)        
-
+          - Adrià & Noah (Reviewed by: Alejandro & Oscar)
+        - [✅] Material transparent + rajos reflectits 
+          - Oscar & Noah (Reviewed by: Alejandro & Adrià)
+     - Pas 5. Visualization Mapping
+        - [✅] Diferents escenes i fitxers
+        - Noah (Reviewed by: Alejandro, Oscar & Adrià)
 - Parts opcionals: 
   - [✅] Cilindres
     - Noah (Reviewed by: Alejandro, Oscar & Adrià)
-  - [ ] Escena CSG 
   
-  - [ ] Més d'una propietat en les dades reals
-   
-  - [ ] Mapeig de les dades reals en una esfera
-  
-    
 ### Explicació de la pràctica    
   * **Organització de la pràctica**
     * Durant el nostre projecte de gràfics i visualització de dades, hem estat treballant de forma eficient i organitzada. Una de les nostres principals    estratègies ha estat dividir la feina entre els membres del grup, designant les tasques a fer a ClickUp i utilitzar la plataforma GitHub per compartir/revisar el nostre treball. Això ens ha permès mantenir-nos al dia amb els diferents aspectes del projecte i donar feedback als companys per a millorar i corregir errors. A més, també hem tingut una comunicació constant i efectiva entre nosaltres, utilitzant un xat per estar en contacte tots els dies. Això ha estat clau per a resoldre els dubtes i les preocupacions que han anat sorgint durant el desenvolupament del projecte, i per a prendre decisions de forma conjunta. 
@@ -155,9 +153,6 @@ Una forma d'aconseguir això és utilitzar "penombres per mostra" (shadow sampli
             ```
             
             
-
-       
-
 
 ### Screenshots de cada fase
 * **Fase 0**: 
@@ -378,6 +373,13 @@ Pas 4. Afegir recursió al mètode RayPixel:
     <img src="https://user-images.githubusercontent.com/47271218/227644520-7fdc13d6-32f7-41b4-b13a-b38e5f544d74.png" alt="Metal (maxdepth=10)" width="25%">
     </p>
     
+- Més exemples de metal + rajos reflectits (maxdepth=1, maxdepth=3, maxdepth=10):
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228989240-41c99af6-10ed-48c6-85cc-79e7788d9945.png" alt="Metal (maxdepth=1)" width="25%">
+    <img src="https://user-images.githubusercontent.com/47271218/228989243-a311ecf7-37ca-4c39-b46e-77e8af0e9719.png" alt="Metal (maxdepth=3)" width="25%">
+    <img src="https://user-images.githubusercontent.com/47271218/228989247-b7edc905-ce50-4ed5-ba23-ad27eba01fe0.png" alt="Metal (maxdepth=10)" width="25%">
+    </p>
+    
 - Altres tipus de shading per veure d'altres efectes en les reflexions (color shading, normal shading, phong shading, cell shading; maxdepth=10):
     <p align="center">
     <img src="https://user-images.githubusercontent.com/47271218/227645090-752debc8-d239-4621-8658-00e1121e8796.png" alt="Color metal (maxdepth=10)" width="25%">
@@ -385,7 +387,63 @@ Pas 4. Afegir recursió al mètode RayPixel:
     <img src="https://user-images.githubusercontent.com/47271218/227645265-de776caf-9527-4afe-98f6-06df052c173d.png" alt="Phong metal (maxdepth=10)" width="25%">
     <img src="https://user-images.githubusercontent.com/47271218/227645338-cf974249-bd48-4979-9e2e-3e99f89456d3.png" alt="Cell metal (maxdepth=10)" width="25%">
     </p>
+    
+- Material transparent + rajos reflectits (maxdepth=1, maxdepth=2, maxdepth=3):
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228989391-9c625898-45e1-4deb-91c8-3cf9cd22f917.png" alt="Transparent (maxdepth=1)" width="25%">
+    <img src="https://user-images.githubusercontent.com/47271218/228989394-9462a19b-d241-4006-b7ee-025b5c7bb64e.png" alt="Transparent (maxdepth=2)" width="25%">
+    <img src="https://user-images.githubusercontent.com/47271218/228989398-f49f9c2f-646f-4945-aea5-43623274aad2.png" alt="Transparent (maxdepth=3)" width="25%">
+    </p>
+    
+- Material transparent des d'un altre punt de vista:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228989530-7333e643-fdf6-43a0-83bc-73552a8b136c.png" alt="Transparent other view" width="45%">
+    </p>
 
+- Material transparent (four spheres) (maxdepth=1, maxdepth=2, maxdepth=4):
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228989756-a213c047-6543-4cc5-9e60-65da6c60c2d3.png" alt="Four Transparent (maxdepth=1)" width="25%">
+    <img src="https://user-images.githubusercontent.com/47271218/228989764-c5b3773d-4971-441b-9c63-20108be3362c.png" alt="Four Transparent (maxdepth=2)" width="25%">
+    <img src="https://user-images.githubusercontent.com/47271218/228989774-d177d34f-65a6-4b41-92fa-daa46453cc50.png" alt="Four Transparent (maxdepth=4)" width="25%">
+    </p>
+    
+
+Pas 5. Visualization Mapping:
+    
+- Diferents escenes i fitxers:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228990036-15795a7e-f8b4-47dc-97c9-c885bf3522b6.png" alt="Visualization Mapping 1" width="45%">
+    </p>
+    
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228990156-b72345e2-7e5c-4c4d-961e-6870882c0bbf.png" alt="Visualization Mapping 2" width="45%">
+    </p>
+    
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228990230-aea55a44-6bf1-4ecf-b627-e83923367061.png" alt="Visualization Mapping 3" width="45%">
+    </p>
+    
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228990261-9a60f88a-1b2e-4007-9619-6429e1cdf16f.png" alt="Visualization Mapping 4" width="45%">
+    </p>
+
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228990353-a7d9e298-0629-4903-9861-8dd022fc0dc7.png" alt="Visualization Mapping 5" width="45%">
+    </p>
+    
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228990473-65437b76-83df-42a8-8a19-c361c898abc5.png" alt="Visualization Mapping 6" width="45%">
+    </p>
+    
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228990491-189e9f98-0716-4246-9e8e-26e2014cfbf9.png" alt="Visualization Mapping 7" width="45%">
+    </p>
+ 
+- Fent servir una paleta de colors diferent:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228990583-5a47622c-2e0c-4833-9b30-460d5b9a7505.png" alt="Visualization Mapping 8" width="45%">
+    </p>
+    
 * **Més visualitzacions**:
 
 
