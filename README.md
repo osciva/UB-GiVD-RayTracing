@@ -77,6 +77,13 @@ En aquest fitxer cal que feu l'informe de la pràctica 1.
      - Pas 5. Visualization Mapping
         - [✅] Diferents escenes i fitxers
         - Noah (Reviewed by: Alejandro, Oscar & Adrià)
+   - Fase 3
+     - Pas 1. Afegeix un nou material
+        - [✅] Alejandro (Reviewed by: Noah, Oscar & Adrià)
+     - Pas 2. Prova amb diferents jocs de dades i mapes
+        - [✅] Alejandro (Reviewed by: Noah, Oscar & Adrià)
+     - Pas 3. Genera diferents jocs de dades i mapes
+        - [✅] Alejandro (Reviewed by: Noah, Oscar & Adrià)
 - Parts opcionals: 
   - [✅] Cilindres
     - Noah (Reviewed by: Alejandro, Oscar & Adrià)
@@ -442,6 +449,30 @@ Pas 5. Visualization Mapping:
 - Fent servir una paleta de colors diferent:
     <p align="center">
     <img src="https://user-images.githubusercontent.com/47271218/228990583-5a47622c-2e0c-4833-9b30-460d5b9a7505.png" alt="Visualization Mapping 8" width="45%">
+    </p>
+    
+* **Fase 3**: 
+- Pas 1. Afegeix un nou material:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228991154-b1de2734-20dd-4d63-86a9-c706c05631cd.png" alt="Nou material 1" width="45%">
+    </p>
+
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228991235-1df6b9f4-62d0-4627-83e7-287539c10b05.png" alt="Nou material 2" width="45%">
+    </p>
+   
+- Pas 2. Prova amb diferents jocs de dades i mapes:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228991320-6b93c8ac-3dfc-438a-8cde-16ceeaf39c26.png" alt="Diferents jocs de dades i mapes 1" width="45%">
+    </p>
+    
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228991373-8af66ed4-7eda-46ce-81de-912e864d4144.png" alt="Diferents jocs de dades i mapes 2" width="45%">
+    </p>
+
+- Pas 3. Genera diferents jocs de dades i mapes:
+    <p align="center">
+    <img src="https://user-images.githubusercontent.com/47271218/228991738-6c83e58d-9c08-4f57-9560-bd971ab94105.png" alt="Mapa Murcia" width="45%">
     </p>
     
 * **Més visualitzacions**:
